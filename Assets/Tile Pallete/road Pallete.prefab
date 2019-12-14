@@ -85,7 +85,7 @@ Tilemap:
   m_GameObject: {fileID: 8095721933764280447}
   m_Enabled: 1
   m_Tiles:
-  - first: {x: -2, y: 1, z: 0}
+  - first: {x: -1, y: 1, z: 0}
     second:
       m_TileIndex: 0
       m_TileSpriteIndex: 0
