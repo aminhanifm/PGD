@@ -1,16 +1,16 @@
 fileFormatVersion: 2
-guid: 2f9dcfff32954cd43b7acc3dedbb3485
+guid: 7be78a411278601498c7fe568d812283
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -4781274569916993736
-    second: Traffic Down Right_0
+      213: -1062976307557316003
+    second: Traffic Down Left NEW_0
   - first:
-      213: 4493248624017237791
-    second: Traffic Down Right_1
+      213: -3119489176160966762
+    second: Traffic Down Left NEW_1
   - first:
-      213: -3085421558777599356
-    second: Traffic Down Right_2
+      213: 8605554495560379766
+    second: Traffic Down Left NEW_2
   externalObjects: {}
   serializedVersion: 10
   mipmaps:
@@ -40,7 +40,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: -1
+    filterMode: 0
     aniso: -1
     mipBias: -100
     wrapU: 1
@@ -69,10 +69,10 @@ TextureImporter:
   platformSettings:
   - serializedVersion: 3
     buildTarget: DefaultTexturePlatform
-    maxTextureSize: 2048
+    maxTextureSize: 8192
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 1
+    textureCompression: 0
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -81,10 +81,10 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
     buildTarget: Standalone
-    maxTextureSize: 2048
+    maxTextureSize: 8192
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 1
+    textureCompression: 0
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -93,10 +93,10 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
     buildTarget: Android
-    maxTextureSize: 2048
+    maxTextureSize: 8192
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 1
+    textureCompression: 0
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -105,10 +105,10 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
     buildTarget: WebGL
-    maxTextureSize: 2048
+    maxTextureSize: 8192
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 1
+    textureCompression: 0
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -119,13 +119,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Traffic Down Right_0
+      name: Traffic Down Left NEW_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 60
-        height: 168
+        width: 144
+        height: 227
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -133,20 +133,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 3ce1ade1ab718c643a66daf5f40d1454
-      internalID: -4781274569916993736
+      spriteID: fb046e17022e5ec428d33b7221e5b836
+      internalID: -1062976307557316003
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Traffic Down Right_1
+      name: Traffic Down Left NEW_1
       rect:
         serializedVersion: 2
-        x: 60
+        x: 144
         y: 0
-        width: 60
-        height: 168
+        width: 144
+        height: 227
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -154,20 +154,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 1d5c8c9b83b3bdb42821b41dbc64953b
-      internalID: 4493248624017237791
+      spriteID: 389629d64c76d4c46a94ff4303fab667
+      internalID: -3119489176160966762
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Traffic Down Right_2
+      name: Traffic Down Left NEW_2
       rect:
         serializedVersion: 2
-        x: 120
+        x: 288
         y: 0
-        width: 60
-        height: 168
+        width: 144
+        height: 227
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -175,8 +175,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ac85900d2dbf5b644bac7abd1c7eeb04
-      internalID: -3085421558777599356
+      spriteID: d01e6bbb8cce8194f96ccab34aa918ee
+      internalID: 8605554495560379766
       vertices: []
       indices: 
       edges: []

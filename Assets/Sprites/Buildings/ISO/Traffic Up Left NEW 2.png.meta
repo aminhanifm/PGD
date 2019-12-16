@@ -1,16 +1,16 @@
 fileFormatVersion: 2
-guid: fe6cd9c4282b4224a8ac6b19a5032369
+guid: 8846fdae25d140b4eb2ff311be72ab23
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -379059150369600662
-    second: Traffic Down Left_0
+      213: 4486326021040743511
+    second: Traffic Up Left NEW 2_0
   - first:
-      213: 6128333273177718065
-    second: Traffic Down Left_1
+      213: 6314843567446409352
+    second: Traffic Up Left NEW 2_1
   - first:
-      213: -2729521771565456573
-    second: Traffic Down Left_2
+      213: 2117474373733714214
+    second: Traffic Up Left NEW 2_2
   externalObjects: {}
   serializedVersion: 10
   mipmaps:
@@ -40,7 +40,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: -1
+    filterMode: 0
     aniso: -1
     mipBias: -100
     wrapU: 1
@@ -69,7 +69,7 @@ TextureImporter:
   platformSettings:
   - serializedVersion: 3
     buildTarget: DefaultTexturePlatform
-    maxTextureSize: 2048
+    maxTextureSize: 8192
     resizeAlgorithm: 0
     textureFormat: -1
     textureCompression: 1
@@ -81,7 +81,7 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
     buildTarget: Standalone
-    maxTextureSize: 2048
+    maxTextureSize: 8192
     resizeAlgorithm: 0
     textureFormat: -1
     textureCompression: 1
@@ -93,7 +93,7 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
     buildTarget: Android
-    maxTextureSize: 2048
+    maxTextureSize: 8192
     resizeAlgorithm: 0
     textureFormat: -1
     textureCompression: 1
@@ -105,7 +105,7 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
     buildTarget: WebGL
-    maxTextureSize: 2048
+    maxTextureSize: 8192
     resizeAlgorithm: 0
     textureFormat: -1
     textureCompression: 1
@@ -119,13 +119,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Traffic Down Left_0
+      name: Traffic Up Left NEW 2_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 60
-        height: 168
+        width: 145
+        height: 234
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -133,20 +133,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 73f059043aa021049bd76ff43c437c94
-      internalID: -379059150369600662
+      spriteID: 43b3f7912968f9b43b0771a2ac21805a
+      internalID: 4486326021040743511
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Traffic Down Left_1
+      name: Traffic Up Left NEW 2_1
       rect:
         serializedVersion: 2
-        x: 60
+        x: 145
         y: 0
-        width: 60
-        height: 168
+        width: 145
+        height: 234
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -154,20 +154,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 7dba3cc835a6f6c44b45f4faf6a332ad
-      internalID: 6128333273177718065
+      spriteID: c9c53058670965d4c9adf2b869e8e604
+      internalID: 6314843567446409352
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Traffic Down Left_2
+      name: Traffic Up Left NEW 2_2
       rect:
         serializedVersion: 2
-        x: 120
+        x: 290
         y: 0
-        width: 60
-        height: 168
+        width: 145
+        height: 234
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -175,8 +175,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 38e47db74cb10e44b8f99b93668cf18b
-      internalID: -2729521771565456573
+      spriteID: 7ad6d1198ecd0604199ca78080cf39eb
+      internalID: 2117474373733714214
       vertices: []
       indices: 
       edges: []

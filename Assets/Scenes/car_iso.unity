@@ -1028,6 +1028,7 @@ GameObject:
   - component: {fileID: 165769040}
   - component: {fileID: 165769042}
   - component: {fileID: 165769041}
+  - component: {fileID: 165769043}
   m_Layer: 0
   m_Name: Traffic Down Left_0 (1)
   m_TagString: Untagged
@@ -1106,7 +1107,7 @@ SpriteRenderer:
   m_SortingLayerID: -918761229
   m_SortingLayer: 4
   m_SortingOrder: 0
-  m_Sprite: {fileID: -379059150369600662, guid: fe6cd9c4282b4224a8ac6b19a5032369,
+  m_Sprite: {fileID: -1062976307557316003, guid: 7be78a411278601498c7fe568d812283,
     type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -1118,6 +1119,26 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &165769043
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 165769039}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1abaa0bda5ae79e4b8621253f34266d9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  traffictoyellow: 0
+  traffictogreen: 0
+  trafficanimator: {fileID: 0}
+  type: 2
+  trafficname: Traffic Down Right_0 (2)
+  isCounting: 0
+  ismanytraffic: 1
+  firstcondition: 0
 --- !u!1 &180065672
 GameObject:
   m_ObjectHideFlags: 0
@@ -1380,6 +1401,128 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &231967019
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 231967020}
+  - component: {fileID: 231967021}
+  - component: {fileID: 231967022}
+  - component: {fileID: 231967023}
+  m_Layer: 0
+  m_Name: Traffic Up Left (7)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &231967020
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 231967019}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 111.92, y: -11.14, z: 242.90625}
+  m_LocalScale: {x: 3.03363, y: 3.03363, z: 3.03363}
+  m_Children: []
+  m_Father: {fileID: 1221752172}
+  m_RootOrder: 25
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!212 &231967021
+SpriteRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 231967019}
+  m_Enabled: 1
+  m_CastShadows: 0
+  m_ReceiveShadows: 0
+  m_DynamicOccludee: 1
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 0
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: -918761229
+  m_SortingLayer: 4
+  m_SortingOrder: 0
+  m_Sprite: {fileID: 4486326021040743511, guid: 8846fdae25d140b4eb2ff311be72ab23,
+    type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_FlipX: 0
+  m_FlipY: 0
+  m_DrawMode: 0
+  m_Size: {x: 0.6, y: 1.74}
+  m_AdaptiveModeThreshold: 0.5
+  m_SpriteTileMode: 0
+  m_WasSpriteAssigned: 1
+  m_MaskInteraction: 0
+  m_SpriteSortPoint: 0
+--- !u!95 &231967022
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 231967019}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: ce6cb7c554141f948a6f02d2b3378812, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &231967023
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 231967019}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1abaa0bda5ae79e4b8621253f34266d9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  traffictoyellow: 0
+  traffictogreen: 0
+  trafficanimator: {fileID: 0}
+  type: 2
+  trafficname: 
+  isCounting: 1
+  ismanytraffic: 0
+  firstcondition: 1
 --- !u!1 &236745521
 GameObject:
   m_ObjectHideFlags: 0
@@ -1390,6 +1533,8 @@ GameObject:
   m_Component:
   - component: {fileID: 236745522}
   - component: {fileID: 236745523}
+  - component: {fileID: 236745524}
+  - component: {fileID: 236745525}
   m_Layer: 0
   m_Name: Traffic Up Left (3)
   m_TagString: Untagged
@@ -1449,7 +1594,8 @@ SpriteRenderer:
   m_SortingLayerID: -918761229
   m_SortingLayer: 4
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: ea920f93554a8e8458867e18db86f084, type: 3}
+  m_Sprite: {fileID: 4486326021040743511, guid: 8846fdae25d140b4eb2ff311be72ab23,
+    type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -1460,6 +1606,45 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!95 &236745524
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 236745521}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: ce6cb7c554141f948a6f02d2b3378812, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &236745525
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 236745521}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1abaa0bda5ae79e4b8621253f34266d9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  traffictoyellow: 0
+  traffictogreen: 0
+  trafficanimator: {fileID: 0}
+  type: 1
+  trafficname: 
+  isCounting: 1
+  ismanytraffic: 0
+  firstcondition: 1
 --- !u!1 &238159021
 GameObject:
   m_ObjectHideFlags: 0
@@ -1550,6 +1735,8 @@ GameObject:
   m_Component:
   - component: {fileID: 257563513}
   - component: {fileID: 257563514}
+  - component: {fileID: 257563515}
+  - component: {fileID: 257563516}
   m_Layer: 0
   m_Name: Traffic Up Right (2)
   m_TagString: Untagged
@@ -1609,7 +1796,8 @@ SpriteRenderer:
   m_SortingLayerID: -918761229
   m_SortingLayer: 4
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: a5a654ea9b7cd384dba4ed7affd5038f, type: 3}
+  m_Sprite: {fileID: -192785466614861487, guid: 69994a75f690ace459551ab2e19d0cc2,
+    type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -1620,6 +1808,45 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!95 &257563515
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 257563512}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 0d92a8bbca6909647995c6336d301a50, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &257563516
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 257563512}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1abaa0bda5ae79e4b8621253f34266d9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  traffictoyellow: 0
+  traffictogreen: 0
+  trafficanimator: {fileID: 0}
+  type: 3
+  trafficname: 
+  isCounting: 1
+  ismanytraffic: 0
+  firstcondition: 1
 --- !u!1 &262353012
 GameObject:
   m_ObjectHideFlags: 0
@@ -1838,6 +2065,7 @@ GameObject:
   - component: {fileID: 296653552}
   - component: {fileID: 296653551}
   - component: {fileID: 296653550}
+  - component: {fileID: 296653553}
   m_Layer: 0
   m_Name: Traffic Down Right_0
   m_TagString: Untagged
@@ -1902,7 +2130,7 @@ SpriteRenderer:
   m_SortingLayerID: -918761229
   m_SortingLayer: 4
   m_SortingOrder: 0
-  m_Sprite: {fileID: -4781274569916993736, guid: 2f9dcfff32954cd43b7acc3dedbb3485,
+  m_Sprite: {fileID: -5723940376999085963, guid: 09646f7c68d56d74292ac1c6cc3e0d55,
     type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -1928,6 +2156,26 @@ Transform:
   m_Father: {fileID: 1221752172}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &296653553
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 296653549}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1abaa0bda5ae79e4b8621253f34266d9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  traffictoyellow: 0
+  traffictogreen: 0
+  trafficanimator: {fileID: 0}
+  type: 1
+  trafficname: 
+  isCounting: 1
+  ismanytraffic: 0
+  firstcondition: 1
 --- !u!1 &317653099
 GameObject:
   m_ObjectHideFlags: 0
@@ -2375,6 +2623,7 @@ GameObject:
   - component: {fileID: 348589710}
   - component: {fileID: 348589712}
   - component: {fileID: 348589711}
+  - component: {fileID: 348589713}
   m_Layer: 0
   m_Name: Traffic Down Left_0 (5)
   m_TagString: Untagged
@@ -2453,7 +2702,7 @@ SpriteRenderer:
   m_SortingLayerID: -918761229
   m_SortingLayer: 4
   m_SortingOrder: 0
-  m_Sprite: {fileID: -379059150369600662, guid: fe6cd9c4282b4224a8ac6b19a5032369,
+  m_Sprite: {fileID: -1062976307557316003, guid: 7be78a411278601498c7fe568d812283,
     type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -2465,6 +2714,26 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &348589713
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 348589709}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1abaa0bda5ae79e4b8621253f34266d9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  traffictoyellow: 0
+  traffictogreen: 0
+  trafficanimator: {fileID: 0}
+  type: 4
+  trafficname: Traffic Up Right (4)
+  isCounting: 1
+  ismanytraffic: 1
+  firstcondition: 1
 --- !u!1 &350443410
 GameObject:
   m_ObjectHideFlags: 0
@@ -2774,11 +3043,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2079923368, guid: 54decd70d292cde45bc39a06ea4a0efc, type: 3}
       propertyPath: m_SortingLayer
-      value: 0
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 2079923368, guid: 54decd70d292cde45bc39a06ea4a0efc, type: 3}
       propertyPath: m_SortingLayerID
-      value: 0
+      value: -918761229
       objectReference: {fileID: 0}
     - target: {fileID: 2079923368, guid: 54decd70d292cde45bc39a06ea4a0efc, type: 3}
       propertyPath: m_SortingOrder
@@ -3184,6 +3453,7 @@ GameObject:
   - component: {fileID: 491758756}
   - component: {fileID: 491758755}
   - component: {fileID: 491758754}
+  - component: {fileID: 491758757}
   m_Layer: 0
   m_Name: Traffic Down Left_0
   m_TagString: Untagged
@@ -3248,7 +3518,7 @@ SpriteRenderer:
   m_SortingLayerID: -918761229
   m_SortingLayer: 4
   m_SortingOrder: 0
-  m_Sprite: {fileID: -379059150369600662, guid: fe6cd9c4282b4224a8ac6b19a5032369,
+  m_Sprite: {fileID: -1062976307557316003, guid: 7be78a411278601498c7fe568d812283,
     type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -3274,6 +3544,26 @@ Transform:
   m_Father: {fileID: 1221752172}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &491758757
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 491758753}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1abaa0bda5ae79e4b8621253f34266d9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  traffictoyellow: 0
+  traffictogreen: 0
+  trafficanimator: {fileID: 0}
+  type: 1
+  trafficname: 
+  isCounting: 1
+  ismanytraffic: 0
+  firstcondition: 1
 --- !u!1 &492937680
 GameObject:
   m_ObjectHideFlags: 0
@@ -3554,6 +3844,8 @@ GameObject:
   m_Component:
   - component: {fileID: 512414951}
   - component: {fileID: 512414952}
+  - component: {fileID: 512414953}
+  - component: {fileID: 512414954}
   m_Layer: 0
   m_Name: Traffic Up Left (1)
   m_TagString: Untagged
@@ -3613,7 +3905,8 @@ SpriteRenderer:
   m_SortingLayerID: -918761229
   m_SortingLayer: 4
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: ea920f93554a8e8458867e18db86f084, type: 3}
+  m_Sprite: {fileID: 4486326021040743511, guid: 8846fdae25d140b4eb2ff311be72ab23,
+    type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -3624,6 +3917,45 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!95 &512414953
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 512414950}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: ce6cb7c554141f948a6f02d2b3378812, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &512414954
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 512414950}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1abaa0bda5ae79e4b8621253f34266d9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  traffictoyellow: 0
+  traffictogreen: 0
+  trafficanimator: {fileID: 0}
+  type: 1
+  trafficname: 
+  isCounting: 1
+  ismanytraffic: 0
+  firstcondition: 1
 --- !u!1 &534507851
 GameObject:
   m_ObjectHideFlags: 0
@@ -3954,6 +4286,8 @@ GameObject:
   m_Component:
   - component: {fileID: 590509522}
   - component: {fileID: 590509523}
+  - component: {fileID: 590509524}
+  - component: {fileID: 590509525}
   m_Layer: 0
   m_Name: Traffic Up Left (4)
   m_TagString: Untagged
@@ -4013,7 +4347,8 @@ SpriteRenderer:
   m_SortingLayerID: -918761229
   m_SortingLayer: 4
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: ea920f93554a8e8458867e18db86f084, type: 3}
+  m_Sprite: {fileID: 4486326021040743511, guid: 8846fdae25d140b4eb2ff311be72ab23,
+    type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -4024,6 +4359,45 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!95 &590509524
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 590509521}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: ce6cb7c554141f948a6f02d2b3378812, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &590509525
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 590509521}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1abaa0bda5ae79e4b8621253f34266d9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  traffictoyellow: 0
+  traffictogreen: 0
+  trafficanimator: {fileID: 0}
+  type: 4
+  trafficname: Traffic Down Left_0 (2)
+  isCounting: 0
+  ismanytraffic: 1
+  firstcondition: 0
 --- !u!1 &614079631
 GameObject:
   m_ObjectHideFlags: 0
@@ -5067,6 +5441,7 @@ GameObject:
   - component: {fileID: 782270374}
   - component: {fileID: 782270376}
   - component: {fileID: 782270375}
+  - component: {fileID: 782270377}
   m_Layer: 0
   m_Name: Traffic Down Left_0 (3)
   m_TagString: Untagged
@@ -5145,7 +5520,7 @@ SpriteRenderer:
   m_SortingLayerID: -918761229
   m_SortingLayer: 4
   m_SortingOrder: 0
-  m_Sprite: {fileID: -379059150369600662, guid: fe6cd9c4282b4224a8ac6b19a5032369,
+  m_Sprite: {fileID: -1062976307557316003, guid: 7be78a411278601498c7fe568d812283,
     type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -5157,6 +5532,26 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &782270377
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 782270373}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1abaa0bda5ae79e4b8621253f34266d9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  traffictoyellow: 0
+  traffictogreen: 0
+  trafficanimator: {fileID: 0}
+  type: 3
+  trafficname: 
+  isCounting: 1
+  ismanytraffic: 0
+  firstcondition: 1
 --- !u!1 &801837484
 GameObject:
   m_ObjectHideFlags: 0
@@ -5524,6 +5919,7 @@ GameObject:
   - component: {fileID: 842627462}
   - component: {fileID: 842627464}
   - component: {fileID: 842627463}
+  - component: {fileID: 842627465}
   m_Layer: 0
   m_Name: Traffic Down Left_0 (4)
   m_TagString: Untagged
@@ -5602,7 +5998,7 @@ SpriteRenderer:
   m_SortingLayerID: -918761229
   m_SortingLayer: 4
   m_SortingOrder: 0
-  m_Sprite: {fileID: -379059150369600662, guid: fe6cd9c4282b4224a8ac6b19a5032369,
+  m_Sprite: {fileID: -1062976307557316003, guid: 7be78a411278601498c7fe568d812283,
     type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -5614,6 +6010,26 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &842627465
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 842627461}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1abaa0bda5ae79e4b8621253f34266d9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  traffictoyellow: 0
+  traffictogreen: 0
+  trafficanimator: {fileID: 0}
+  type: 1
+  trafficname: Traffic Down Right_0 (1)
+  isCounting: 1
+  ismanytraffic: 1
+  firstcondition: 1
 --- !u!1 &848652431
 GameObject:
   m_ObjectHideFlags: 0
@@ -5784,6 +6200,8 @@ GameObject:
   m_Component:
   - component: {fileID: 870834974}
   - component: {fileID: 870834975}
+  - component: {fileID: 870834976}
+  - component: {fileID: 870834977}
   m_Layer: 0
   m_Name: Traffic Up Right (5)
   m_TagString: Untagged
@@ -5799,7 +6217,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 870834973}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 224.89, y: -6.61, z: 242.90625}
+  m_LocalPosition: {x: 225.42, y: -6.57, z: 242.90625}
   m_LocalScale: {x: 3.03363, y: 3.03363, z: 3.03363}
   m_Children: []
   m_Father: {fileID: 1221752172}
@@ -5842,8 +6260,9 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -918761229
   m_SortingLayer: 4
-  m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: a5a654ea9b7cd384dba4ed7affd5038f, type: 3}
+  m_SortingOrder: 10
+  m_Sprite: {fileID: -192785466614861487, guid: 69994a75f690ace459551ab2e19d0cc2,
+    type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -5854,6 +6273,45 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!95 &870834976
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 870834973}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 0d92a8bbca6909647995c6336d301a50, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &870834977
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 870834973}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1abaa0bda5ae79e4b8621253f34266d9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  traffictoyellow: 0
+  traffictogreen: 0
+  trafficanimator: {fileID: 0}
+  type: 2
+  trafficname: 
+  isCounting: 1
+  ismanytraffic: 0
+  firstcondition: 1
 --- !u!1 &904358230
 GameObject:
   m_ObjectHideFlags: 0
@@ -6774,6 +7232,8 @@ GameObject:
   m_Component:
   - component: {fileID: 1094878351}
   - component: {fileID: 1094878352}
+  - component: {fileID: 1094878353}
+  - component: {fileID: 1094878354}
   m_Layer: 0
   m_Name: Traffic Up Right (3)
   m_TagString: Untagged
@@ -6833,7 +7293,8 @@ SpriteRenderer:
   m_SortingLayerID: -918761229
   m_SortingLayer: 4
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: a5a654ea9b7cd384dba4ed7affd5038f, type: 3}
+  m_Sprite: {fileID: -192785466614861487, guid: 69994a75f690ace459551ab2e19d0cc2,
+    type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -6844,6 +7305,45 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!95 &1094878353
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1094878350}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 0d92a8bbca6909647995c6336d301a50, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &1094878354
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1094878350}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1abaa0bda5ae79e4b8621253f34266d9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  traffictoyellow: 0
+  traffictogreen: 0
+  trafficanimator: {fileID: 0}
+  type: 4
+  trafficname: Traffic Down Right_0 (3)
+  isCounting: 0
+  ismanytraffic: 1
+  firstcondition: 0
 --- !u!1 &1097871320
 GameObject:
   m_ObjectHideFlags: 0
@@ -7061,7 +7561,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -918761229
   m_SortingLayer: 4
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_Sprite: {fileID: 21300000, guid: 031ad9b055d432b42859a7f720bacbb0, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -7576,6 +8076,8 @@ GameObject:
   m_Component:
   - component: {fileID: 1194909146}
   - component: {fileID: 1194909145}
+  - component: {fileID: 1194909147}
+  - component: {fileID: 1194909148}
   m_Layer: 0
   m_Name: Traffic Up Left
   m_TagString: Untagged
@@ -7621,7 +8123,8 @@ SpriteRenderer:
   m_SortingLayerID: -918761229
   m_SortingLayer: 4
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: ea920f93554a8e8458867e18db86f084, type: 3}
+  m_Sprite: {fileID: 4486326021040743511, guid: 8846fdae25d140b4eb2ff311be72ab23,
+    type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -7646,6 +8149,45 @@ Transform:
   m_Father: {fileID: 1221752172}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!95 &1194909147
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1194909144}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: ce6cb7c554141f948a6f02d2b3378812, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &1194909148
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1194909144}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1abaa0bda5ae79e4b8621253f34266d9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  traffictoyellow: 0
+  traffictogreen: 0
+  trafficanimator: {fileID: 0}
+  type: 2
+  trafficname: 
+  isCounting: 1
+  ismanytraffic: 0
+  firstcondition: 1
 --- !u!1 &1199407090
 GameObject:
   m_ObjectHideFlags: 0
@@ -7656,6 +8198,8 @@ GameObject:
   m_Component:
   - component: {fileID: 1199407091}
   - component: {fileID: 1199407092}
+  - component: {fileID: 1199407093}
+  - component: {fileID: 1199407094}
   m_Layer: 0
   m_Name: Traffic Up Left (2)
   m_TagString: Untagged
@@ -7715,7 +8259,8 @@ SpriteRenderer:
   m_SortingLayerID: -918761229
   m_SortingLayer: 4
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: ea920f93554a8e8458867e18db86f084, type: 3}
+  m_Sprite: {fileID: 4486326021040743511, guid: 8846fdae25d140b4eb2ff311be72ab23,
+    type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -7726,6 +8271,45 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!95 &1199407093
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1199407090}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: ce6cb7c554141f948a6f02d2b3378812, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &1199407094
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1199407090}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1abaa0bda5ae79e4b8621253f34266d9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  traffictoyellow: 0
+  traffictogreen: 0
+  trafficanimator: {fileID: 0}
+  type: 1
+  trafficname: 
+  isCounting: 1
+  ismanytraffic: 0
+  firstcondition: 1
 --- !u!1 &1200048209
 GameObject:
   m_ObjectHideFlags: 0
@@ -7858,6 +8442,7 @@ Transform:
   - {fileID: 1803878143}
   - {fileID: 1631196396}
   - {fileID: 870834974}
+  - {fileID: 231967020}
   m_Father: {fileID: 1410802722}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -8070,6 +8655,7 @@ GameObject:
   - component: {fileID: 1256839591}
   - component: {fileID: 1256839593}
   - component: {fileID: 1256839592}
+  - component: {fileID: 1256839594}
   m_Layer: 0
   m_Name: Traffic Down Right_0 (1)
   m_TagString: Untagged
@@ -8148,7 +8734,7 @@ SpriteRenderer:
   m_SortingLayerID: -918761229
   m_SortingLayer: 4
   m_SortingOrder: 0
-  m_Sprite: {fileID: -4781274569916993736, guid: 2f9dcfff32954cd43b7acc3dedbb3485,
+  m_Sprite: {fileID: -5723940376999085963, guid: 09646f7c68d56d74292ac1c6cc3e0d55,
     type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -8160,6 +8746,26 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &1256839594
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1256839590}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1abaa0bda5ae79e4b8621253f34266d9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  traffictoyellow: 0
+  traffictogreen: 0
+  trafficanimator: {fileID: 0}
+  type: 1
+  trafficname: Traffic Down Left_0 (4)
+  isCounting: 0
+  ismanytraffic: 1
+  firstcondition: 0
 --- !u!1 &1268841601
 GameObject:
   m_ObjectHideFlags: 0
@@ -8411,6 +9017,7 @@ GameObject:
   - component: {fileID: 1302021825}
   - component: {fileID: 1302021827}
   - component: {fileID: 1302021826}
+  - component: {fileID: 1302021828}
   m_Layer: 0
   m_Name: Traffic Down Right_0 (2)
   m_TagString: Untagged
@@ -8489,7 +9096,7 @@ SpriteRenderer:
   m_SortingLayerID: -918761229
   m_SortingLayer: 4
   m_SortingOrder: 0
-  m_Sprite: {fileID: -4781274569916993736, guid: 2f9dcfff32954cd43b7acc3dedbb3485,
+  m_Sprite: {fileID: -5723940376999085963, guid: 09646f7c68d56d74292ac1c6cc3e0d55,
     type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -8501,6 +9108,26 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &1302021828
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1302021824}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1abaa0bda5ae79e4b8621253f34266d9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  traffictoyellow: 0
+  traffictogreen: 0
+  trafficanimator: {fileID: 0}
+  type: 2
+  trafficname: Traffic Down Left_0 (1)
+  isCounting: 1
+  ismanytraffic: 1
+  firstcondition: 1
 --- !u!1 &1329973222
 GameObject:
   m_ObjectHideFlags: 0
@@ -8511,6 +9138,8 @@ GameObject:
   m_Component:
   - component: {fileID: 1329973224}
   - component: {fileID: 1329973223}
+  - component: {fileID: 1329973225}
+  - component: {fileID: 1329973226}
   m_Layer: 0
   m_Name: Traffic Up Right
   m_TagString: Untagged
@@ -8556,7 +9185,8 @@ SpriteRenderer:
   m_SortingLayerID: -918761229
   m_SortingLayer: 4
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: a5a654ea9b7cd384dba4ed7affd5038f, type: 3}
+  m_Sprite: {fileID: -192785466614861487, guid: 69994a75f690ace459551ab2e19d0cc2,
+    type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -8581,6 +9211,45 @@ Transform:
   m_Father: {fileID: 1221752172}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!95 &1329973225
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1329973222}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 0d92a8bbca6909647995c6336d301a50, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &1329973226
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1329973222}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1abaa0bda5ae79e4b8621253f34266d9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  traffictoyellow: 0
+  traffictogreen: 0
+  trafficanimator: {fileID: 0}
+  type: 3
+  trafficname: 
+  isCounting: 1
+  ismanytraffic: 0
+  firstcondition: 1
 --- !u!1 &1330562690
 GameObject:
   m_ObjectHideFlags: 0
@@ -8741,7 +9410,7 @@ PrefabInstance:
     - target: {fileID: 886031103182508492, guid: 81ff034c8feef9746af2a839954492a8,
         type: 3}
       propertyPath: orthographic size
-      value: 4.617044
+      value: 8.404594
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 8422213676754690966, guid: 81ff034c8feef9746af2a839954492a8, type: 3}
@@ -9485,6 +10154,8 @@ GameObject:
   m_Component:
   - component: {fileID: 1452487476}
   - component: {fileID: 1452487477}
+  - component: {fileID: 1452487478}
+  - component: {fileID: 1452487479}
   m_Layer: 0
   m_Name: Traffic Up Right (4)
   m_TagString: Untagged
@@ -9544,7 +10215,8 @@ SpriteRenderer:
   m_SortingLayerID: -918761229
   m_SortingLayer: 4
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: a5a654ea9b7cd384dba4ed7affd5038f, type: 3}
+  m_Sprite: {fileID: -192785466614861487, guid: 69994a75f690ace459551ab2e19d0cc2,
+    type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -9555,6 +10227,45 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!95 &1452487478
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1452487475}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 0d92a8bbca6909647995c6336d301a50, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &1452487479
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1452487475}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1abaa0bda5ae79e4b8621253f34266d9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  traffictoyellow: 0
+  traffictogreen: 0
+  trafficanimator: {fileID: 0}
+  type: 4
+  trafficname: Traffic Down Right_0 (5)
+  isCounting: 0
+  ismanytraffic: 1
+  firstcondition: 0
 --- !u!1 &1457126936
 GameObject:
   m_ObjectHideFlags: 0
@@ -9806,6 +10517,7 @@ GameObject:
   - component: {fileID: 1476845343}
   - component: {fileID: 1476845345}
   - component: {fileID: 1476845344}
+  - component: {fileID: 1476845346}
   m_Layer: 0
   m_Name: Traffic Down Left_0 (2)
   m_TagString: Untagged
@@ -9884,7 +10596,7 @@ SpriteRenderer:
   m_SortingLayerID: -918761229
   m_SortingLayer: 4
   m_SortingOrder: 0
-  m_Sprite: {fileID: -379059150369600662, guid: fe6cd9c4282b4224a8ac6b19a5032369,
+  m_Sprite: {fileID: -1062976307557316003, guid: 7be78a411278601498c7fe568d812283,
     type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -9896,6 +10608,26 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &1476845346
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1476845342}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1abaa0bda5ae79e4b8621253f34266d9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  traffictoyellow: 0
+  traffictogreen: 0
+  trafficanimator: {fileID: 0}
+  type: 4
+  trafficname: Traffic Up Right (3)
+  isCounting: 1
+  ismanytraffic: 1
+  firstcondition: 1
 --- !u!1 &1496610119
 GameObject:
   m_ObjectHideFlags: 0
@@ -10227,6 +10959,7 @@ GameObject:
   - component: {fileID: 1574243848}
   - component: {fileID: 1574243850}
   - component: {fileID: 1574243849}
+  - component: {fileID: 1574243851}
   m_Layer: 0
   m_Name: Traffic Down Right_0 (4)
   m_TagString: Untagged
@@ -10305,7 +11038,7 @@ SpriteRenderer:
   m_SortingLayerID: -918761229
   m_SortingLayer: 4
   m_SortingOrder: 0
-  m_Sprite: {fileID: -4781274569916993736, guid: 2f9dcfff32954cd43b7acc3dedbb3485,
+  m_Sprite: {fileID: -5723940376999085963, guid: 09646f7c68d56d74292ac1c6cc3e0d55,
     type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -10317,6 +11050,26 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &1574243851
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1574243847}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1abaa0bda5ae79e4b8621253f34266d9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  traffictoyellow: 0
+  traffictogreen: 0
+  trafficanimator: {fileID: 0}
+  type: 2
+  trafficname: 
+  isCounting: 1
+  ismanytraffic: 0
+  firstcondition: 1
 --- !u!1 &1593047654
 GameObject:
   m_ObjectHideFlags: 0
@@ -10328,6 +11081,7 @@ GameObject:
   - component: {fileID: 1593047655}
   - component: {fileID: 1593047657}
   - component: {fileID: 1593047656}
+  - component: {fileID: 1593047658}
   m_Layer: 0
   m_Name: Traffic Down Right_0 (5)
   m_TagString: Untagged
@@ -10406,7 +11160,7 @@ SpriteRenderer:
   m_SortingLayerID: -918761229
   m_SortingLayer: 4
   m_SortingOrder: 0
-  m_Sprite: {fileID: -4781274569916993736, guid: 2f9dcfff32954cd43b7acc3dedbb3485,
+  m_Sprite: {fileID: -5723940376999085963, guid: 09646f7c68d56d74292ac1c6cc3e0d55,
     type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -10418,6 +11172,26 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &1593047658
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1593047654}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1abaa0bda5ae79e4b8621253f34266d9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  traffictoyellow: 0
+  traffictogreen: 0
+  trafficanimator: {fileID: 0}
+  type: 4
+  trafficname: Traffic Up Left (5)
+  isCounting: 0
+  ismanytraffic: 1
+  firstcondition: 0
 --- !u!4 &1597162999 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3339481645408498932, guid: 54decd70d292cde45bc39a06ea4a0efc,
@@ -10560,6 +11334,8 @@ GameObject:
   m_Component:
   - component: {fileID: 1631196396}
   - component: {fileID: 1631196397}
+  - component: {fileID: 1631196398}
+  - component: {fileID: 1631196399}
   m_Layer: 0
   m_Name: Traffic Up Left (6)
   m_TagString: Untagged
@@ -10619,7 +11395,8 @@ SpriteRenderer:
   m_SortingLayerID: -918761229
   m_SortingLayer: 4
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: ea920f93554a8e8458867e18db86f084, type: 3}
+  m_Sprite: {fileID: 4486326021040743511, guid: 8846fdae25d140b4eb2ff311be72ab23,
+    type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -10630,6 +11407,45 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!95 &1631196398
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1631196395}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: ce6cb7c554141f948a6f02d2b3378812, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &1631196399
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1631196395}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1abaa0bda5ae79e4b8621253f34266d9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  traffictoyellow: 0
+  traffictogreen: 0
+  trafficanimator: {fileID: 0}
+  type: 2
+  trafficname: 
+  isCounting: 1
+  ismanytraffic: 0
+  firstcondition: 1
 --- !u!1 &1644090800
 GameObject:
   m_ObjectHideFlags: 0
@@ -11742,6 +12558,7 @@ GameObject:
   - component: {fileID: 1761185665}
   - component: {fileID: 1761185667}
   - component: {fileID: 1761185666}
+  - component: {fileID: 1761185668}
   m_Layer: 0
   m_Name: Traffic Down Right_0 (3)
   m_TagString: Untagged
@@ -11820,7 +12637,7 @@ SpriteRenderer:
   m_SortingLayerID: -918761229
   m_SortingLayer: 4
   m_SortingOrder: 0
-  m_Sprite: {fileID: -4781274569916993736, guid: 2f9dcfff32954cd43b7acc3dedbb3485,
+  m_Sprite: {fileID: -5723940376999085963, guid: 09646f7c68d56d74292ac1c6cc3e0d55,
     type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -11832,6 +12649,26 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &1761185668
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1761185664}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1abaa0bda5ae79e4b8621253f34266d9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  traffictoyellow: 0
+  traffictogreen: 0
+  trafficanimator: {fileID: 0}
+  type: 4
+  trafficname: Traffic Up Left (4)
+  isCounting: 0
+  ismanytraffic: 1
+  firstcondition: 0
 --- !u!1 &1787471346
 GameObject:
   m_ObjectHideFlags: 0
@@ -11842,6 +12679,8 @@ GameObject:
   m_Component:
   - component: {fileID: 1787471347}
   - component: {fileID: 1787471348}
+  - component: {fileID: 1787471349}
+  - component: {fileID: 1787471350}
   m_Layer: 0
   m_Name: Traffic Up Right (1)
   m_TagString: Untagged
@@ -11901,7 +12740,8 @@ SpriteRenderer:
   m_SortingLayerID: -918761229
   m_SortingLayer: 4
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: a5a654ea9b7cd384dba4ed7affd5038f, type: 3}
+  m_Sprite: {fileID: -192785466614861487, guid: 69994a75f690ace459551ab2e19d0cc2,
+    type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -11912,6 +12752,45 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!95 &1787471349
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1787471346}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 0d92a8bbca6909647995c6336d301a50, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &1787471350
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1787471346}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1abaa0bda5ae79e4b8621253f34266d9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  traffictoyellow: 0
+  traffictogreen: 0
+  trafficanimator: {fileID: 0}
+  type: 3
+  trafficname: 
+  isCounting: 1
+  ismanytraffic: 0
+  firstcondition: 1
 --- !u!1 &1794126086
 GameObject:
   m_ObjectHideFlags: 0
@@ -12082,6 +12961,8 @@ GameObject:
   m_Component:
   - component: {fileID: 1803878143}
   - component: {fileID: 1803878144}
+  - component: {fileID: 1803878145}
+  - component: {fileID: 1803878146}
   m_Layer: 0
   m_Name: Traffic Up Left (5)
   m_TagString: Untagged
@@ -12141,7 +13022,8 @@ SpriteRenderer:
   m_SortingLayerID: -918761229
   m_SortingLayer: 4
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: ea920f93554a8e8458867e18db86f084, type: 3}
+  m_Sprite: {fileID: 4486326021040743511, guid: 8846fdae25d140b4eb2ff311be72ab23,
+    type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -12152,6 +13034,45 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!95 &1803878145
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1803878142}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: ce6cb7c554141f948a6f02d2b3378812, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &1803878146
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1803878142}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1abaa0bda5ae79e4b8621253f34266d9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  traffictoyellow: 0
+  traffictogreen: 0
+  trafficanimator: {fileID: 0}
+  type: 4
+  trafficname: Traffic Down Left_0 (5)
+  isCounting: 0
+  ismanytraffic: 1
+  firstcondition: 0
 --- !u!1 &1806434361
 GameObject:
   m_ObjectHideFlags: 0
