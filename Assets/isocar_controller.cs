@@ -6,7 +6,6 @@ public class isocar_controller : MonoBehaviour
 {
     // Start is called before the first frame update
     Vector2 carLocation;  //car center location
-    float carHeading;
     Vector2 velocity;
     Vector2 carForward;
 
@@ -14,26 +13,24 @@ public class isocar_controller : MonoBehaviour
     private float steerAngle;
     private Vector2 acceleration;
 
-    private float curCarSpeed = 0f;
-
     float braking = -5f;
     float max_speed_reverse = 5f;
 
-    [SerializeField] private float  steering_angle = 5f;
-    [SerializeField] private float carSpeed = 15.0f;
+    private float  steering_angle = 15f;
     private float wheelBase = 1.5f;  //wheel base distance 
     private float friction = -0.1f;
     private float drag = -0.01f;
     private float enginePower = 5.0f;
 
     Rigidbody2D rb2d;
+    isometricCarRenderer renderer;
 
     void Start()
     {
         rb2d = this.GetComponent<Rigidbody2D>();
+        renderer = this.GetComponentInChildren<isometricCarRenderer>();
         carLocation = this.transform.position;
         velocity = Vector2.zero;
-        carHeading = 0f;    // in degree 0-360
         carForward = Vector2.right;        
     }
         
@@ -53,6 +50,7 @@ public class isocar_controller : MonoBehaviour
     void FixedUpdate()
     {
         rb2d.velocity = velocity;
+        renderer.setDirection(carForward);
     }
 
     private void get_input()
@@ -86,10 +84,10 @@ public class isocar_controller : MonoBehaviour
         Vector2 rearWheel = new Vector2(transform.position.x, transform.position.y) - wheelLen;
 
         rearWheel += delta * velocity;
-        frontWheel += delta * Rotate(velocity, steerAngle);
+        velocity = Rotate(velocity, steerAngle);
+        frontWheel += velocity * delta;
 
         // debug line
-        Vector3 st = Vector3.zero;
         Vector3 ls = Vector3.zero;
         Debug.DrawLine( transform.position, ls=frontWheel, Color.green);
         Debug.DrawLine( transform.position, ls=rearWheel, Color.red);

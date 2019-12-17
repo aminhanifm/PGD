@@ -410,6 +410,7 @@ GameObject:
   - component: {fileID: 1697199658}
   - component: {fileID: 1697199660}
   - component: {fileID: 1697199661}
+  - component: {fileID: 1697199662}
   m_Layer: 0
   m_Name: car yellow
   m_TagString: Untagged
@@ -521,8 +522,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1735fc2c33b05c24b967b6b0b2a2062b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  steering_angle: 0.05
-  carSpeed: 15
 --- !u!50 &1697199659
 Rigidbody2D:
   serializedVersion: 4
@@ -531,7 +530,7 @@ Rigidbody2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1697199654}
-  m_BodyType: 1
+  m_BodyType: 0
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
@@ -575,5 +574,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1735fc2c33b05c24b967b6b0b2a2062b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  steering_angle: 5
-  carSpeed: 15
+--- !u!114 &1697199662
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1697199654}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: be6ebc16e9ab687419d7a87b124757d2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
