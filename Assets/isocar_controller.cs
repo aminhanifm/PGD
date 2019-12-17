@@ -7,18 +7,24 @@ public class isocar_controller : MonoBehaviour
     // Start is called before the first frame update
     Vector2 carLocation;  //car center location
     float carHeading;
-    float steerAngle;
     Vector2 velocity;
+    Vector2 carForward;
 
 
-    private float steering_angle;
+    private float steerAngle;
     private Vector2 acceleration;
 
-    [SerializeField] private float carSpeed = 1.0f;
-    [SerializeField]  private float wheelBase = 70f;  //wheel base distance 
-    [SerializeField] private float friction = -0.9f;
-    [SerializeField] private float drag = -0.0015f;
-    [SerializeField] private float enginePower = 10.0f;
+    private float curCarSpeed = 0f;
+
+    float braking = -5f;
+    float max_speed_reverse = 5f;
+
+    [SerializeField] private float  steering_angle = 5f;
+    [SerializeField] private float carSpeed = 15.0f;
+    private float wheelBase = 1.5f;  //wheel base distance 
+    private float friction = -0.1f;
+    private float drag = -0.01f;
+    private float enginePower = 5.0f;
 
     Rigidbody2D rb2d;
 
@@ -27,49 +33,82 @@ public class isocar_controller : MonoBehaviour
         rb2d = this.GetComponent<Rigidbody2D>();
         carLocation = this.transform.position;
         velocity = Vector2.zero;
-        steering_angle = 15f; // amount of wheel to turn
-        carHeading = 0f;        // in degree 0-360
+        carHeading = 0f;    // in degree 0-360
+        carForward = Vector2.right;        
     }
         
     // Update is called once per frame
     void Update()
     {
-        Debug.Log(velocity);
+        // Debug.Log(velocity);
         acceleration = Vector2.zero;
         get_input();
         apply_friction();
         calculate_steering(Time.deltaTime);
-        velocity += acceleration * Time.deltaTime;
-        move_and_slide();
+    }
+
+    /// <summary>
+    /// This function is called every fixed framerate frame, if the MonoBehaviour is enabled.
+    /// </summary>
+    void FixedUpdate()
+    {
+        rb2d.velocity = velocity;
     }
 
     private void get_input()
     {
         float turn = 0;
         if (Input.GetKey(KeyCode.RightArrow))
-            turn +=1 ;
+            turn -=1 ;
         else if (Input.GetKey(KeyCode.LeftArrow))
-            turn -= 1;
+            turn += 1;
         steerAngle = turn * steering_angle;
 
         //accelerate
         if (Input.GetKey(KeyCode.UpArrow)) 
-            acceleration = new Vector2(Mathf.Cos(carHeading), Mathf.Sin(carHeading)) * enginePower;
+            acceleration = carForward * enginePower;
+        else if (Input.GetKey(KeyCode.DownArrow)) 
+            acceleration = carForward * braking;
+    }
+
+    Vector2 Rotate(Vector2 aPoint, float aDegree)
+    {
+        return Quaternion.Euler(0,0,aDegree) * aPoint;
     }
 
     private void calculate_steering(float delta) {
-        Vector2 carHeadingAngle = new Vector2(Mathf.Cos(carHeading), Mathf.Sin(carHeading));
-        Vector2 frontWheel = carLocation + wheelBase / 2 * carHeadingAngle;
-        Vector2 rearWheel = carLocation - wheelBase / 2 * carHeadingAngle;
+        velocity += acceleration * delta;
+       
+        Vector2 wheelLen = carForward*wheelBase / 2;
+        // print(wheelBase * carForward);
+        // Vector2 carHeadingAngle = new Vector2(Mathf.Cos(carHeading), Mathf.Sin(carHeading));
+        Vector2 frontWheel = new Vector2(transform.position.x, transform.position.y) + wheelLen  ;
+        Vector2 rearWheel = new Vector2(transform.position.x, transform.position.y) - wheelLen;
 
-        rearWheel += carSpeed * delta * carHeadingAngle;
-        frontWheel += carSpeed * delta * new Vector2(Mathf.Cos(carHeading + steerAngle ), Mathf.Sin(carHeading + steerAngle));
+        rearWheel += delta * velocity;
+        frontWheel += delta * Rotate(velocity, steerAngle);
 
-        Vector2 newHeading = frontWheel - rearWheel ;
-        newHeading.Normalize();
+        // debug line
+        Vector3 st = Vector3.zero;
+        Vector3 ls = Vector3.zero;
+        Debug.DrawLine( transform.position, ls=frontWheel, Color.green);
+        Debug.DrawLine( transform.position, ls=rearWheel, Color.red);
 
-        carHeading = Mathf.Atan2(newHeading.y, newHeading.x);
-        carLocation = (frontWheel - rearWheel) / 2;
+        carForward = frontWheel - rearWheel;
+
+        // carHeading = Mathf.Atan2(newHeading.y, newHeading.x);
+        carForward.Normalize();
+        // transform.position = new_position; 
+
+        float d = Vector2.Dot(carForward, velocity);
+
+        if(d < 0){
+            velocity = -carForward * Mathf.Min(velocity.magnitude, max_speed_reverse);
+        }
+        else if(d>0){
+            velocity = carForward * velocity.magnitude;
+        }
+        
     }
 
     private void apply_friction()
@@ -89,6 +128,7 @@ public class isocar_controller : MonoBehaviour
 
     void move_and_slide()
     {
+        Debug.Log(velocity);
         rb2d.velocity = velocity;
     }
 }

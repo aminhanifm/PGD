@@ -173,7 +173,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 23.32
+  orthographic size: 3
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -408,8 +408,10 @@ GameObject:
   - component: {fileID: 1697199659}
   - component: {fileID: 1697199655}
   - component: {fileID: 1697199658}
+  - component: {fileID: 1697199660}
+  - component: {fileID: 1697199661}
   m_Layer: 0
-  m_Name: car_yellow_001
+  m_Name: car yellow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -440,10 +442,10 @@ PolygonCollider2D:
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: 4.053668, y: -1.6459092}
-      - {x: -3.5752032, y: -1.6821488}
-      - {x: -3.594666, y: 0.5471452}
-      - {x: 4.042517, y: 0.56660753}
+    - - {x: 4.0036693, y: -1.6339443}
+      - {x: -3.5651207, y: -1.6228771}
+      - {x: -3.6168416, y: 0.77213866}
+      - {x: 3.9509835, y: 0.517549}
 --- !u!212 &1697199656
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -501,7 +503,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1697199654}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -6.95, y: 0, z: 0}
+  m_LocalPosition: {x: -4.02, y: 0.12, z: 0}
   m_LocalScale: {x: 0.3, y: 0.3, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -516,14 +518,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 1697199654}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bebd100e028a2cd41bfef71a6ba9887b, type: 3}
+  m_Script: {fileID: 11500000, guid: 1735fc2c33b05c24b967b6b0b2a2062b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  carSpeed: 30
-  wheelBase: 10
-  friction: -0.9
-  drag: -0.0015
-  enginePower: 30
+  steering_angle: 0.05
+  carSpeed: 15
 --- !u!50 &1697199659
 Rigidbody2D:
   serializedVersion: 4
@@ -545,3 +544,36 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!95 &1697199660
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1697199654}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: d929c5c5f0b8bd045b24956cef134770, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &1697199661
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1697199654}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1735fc2c33b05c24b967b6b0b2a2062b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  steering_angle: 5
+  carSpeed: 15
