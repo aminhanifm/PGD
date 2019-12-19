@@ -45,7 +45,7 @@ public class TrafficLight : MonoBehaviour
         {
             trafficanimator.SetInteger("Color", 1);
             StartCoroutine(startlight());
-            Debug.Log("Succed");
+            //Debug.Log("Succed");
         }
     }
 
@@ -55,7 +55,7 @@ public class TrafficLight : MonoBehaviour
         {
             StartCoroutine(startlight());
             triggeronce = true;
-            Debug.Log("Succed");
+            //Debug.Log("Succed");
         }
     }
 
@@ -122,7 +122,7 @@ public class TrafficLight : MonoBehaviour
 
             yield return new WaitForSeconds(0.5f);
             GameObject.Find(trafficname).GetComponent<TrafficLight>().isCounting = true;
-            Debug.Log(GameObject.Find(trafficname).GetComponent<TrafficLight>().name);
+            //Debug.Log(GameObject.Find(trafficname).GetComponent<TrafficLight>().name);
 
             //to yellow
             if (trafficanimator.GetInteger("Color") == 1)

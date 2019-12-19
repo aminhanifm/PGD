@@ -1,0 +1,20 @@
+[
+	{
+		'id': 0,
+		'title': null,
+		'persons': { 
+			'person1': 'Player',
+			'person2': 'Penjahat'
+		},
+		'sprites': { 
+			'person1': 'dialogue/Player Face',
+			'person2': 'dialogue/Penjahat Face'
+		},
+		'dialogue': [
+			{'person1,LEFT': 'Tempat apa lagi ini ?! Pasti tempat para koruptor berada'},
+			{'person2,RIGHT': 'Lagi-lagi kau ! masih belum resah dengan kami ?!'},
+			{'person1,LEFT': 'Tentu tidak ! aku akan mendatangimu penjahat !'},
+			{'person2,RIGHT': 'Boleh saja kalau kau bisa, akan kuhajar kau !'}
+		]
+	}
+]

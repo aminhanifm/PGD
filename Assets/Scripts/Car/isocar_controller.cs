@@ -16,7 +16,7 @@ public class isocar_controller : MonoBehaviour
     float braking = -5f;
     float max_speed_reverse = 5f;
 
-    private float  steering_angle = 15f;
+    private float  steering_angle = 25f;
     private float wheelBase = 1.5f;  //wheel base distance 
     private float friction = -0.1f;
     private float drag = -0.01f;
