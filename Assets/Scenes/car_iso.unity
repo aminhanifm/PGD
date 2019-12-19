@@ -67675,8 +67675,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a72038cc6bcf75344b79a03f7272b666, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Level: 5
-  BaseDamage: 0.37
+  Level: 0
+  BaseDamage: 0
+  values: []
+  locs:
+  - {x: 0, y: 0, z: 0}
+  - {x: 18.45, y: 0, z: 0}
+  - {x: 23.13, y: 10, z: 0}
+  - {x: 0.57, y: 20.83, z: 0}
 --- !u!1 &2023695990
 GameObject:
   m_ObjectHideFlags: 0
