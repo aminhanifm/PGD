@@ -96,69 +96,7 @@ public class WayPoints : MonoBehaviour
         return mesh;
     }
 
-    Mesh createCone(){
-        int numVertices = 10;
-        bool outside = true;
-	    bool inside = false;
-        float radiusTop = 0f;
-	    float radiusBottom = 1f;
-	    float length = 1f;
-        // Mesh mesh = GetComponent<MeshFilter>().mesh;
-        Mesh mesh=new Mesh();
-
-        int multiplier=(outside?1:0)+(inside?1:0);
-        int offset=(outside&&inside?2*numVertices:0);
-        Vector3[] vertices=new Vector3[2*multiplier*numVertices]; // 0..n-1: top, n..2n-1: bottom
-        Vector3[] normals=new Vector3[2*multiplier*numVertices];
-        Vector2[] uvs=new Vector2[2*multiplier*numVertices];
-        // int[] tris;
-        float slope=Mathf.Atan((radiusBottom-radiusTop)/length); // (rad difference)/height
-        float slopeSin=Mathf.Sin(slope);
-        float slopeCos=Mathf.Cos(slope);
-        int i;
-
-        for(i=0;i<numVertices;i++){
-            float angle=2*Mathf.PI*i/numVertices;
-            float angleSin=Mathf.Sin(angle);
-            float angleCos=Mathf.Cos(angle);
-            float angleHalf=2*Mathf.PI*(i+0.5f)/numVertices; // for degenerated normals at cone tips
-            float angleHalfSin=Mathf.Sin(angleHalf);
-            float angleHalfCos=Mathf.Cos(angleHalf);
-
-            vertices[i]=new Vector3(radiusTop*angleCos,radiusTop*angleSin,0);
-            vertices[i+numVertices]=new Vector3(radiusBottom*angleCos,radiusBottom*angleSin,length);
-
-            if(radiusTop==0)
-                normals[i]=new Vector3(angleHalfCos*slopeCos,angleHalfSin*slopeCos,-slopeSin);
-            else
-                normals[i]=new Vector3(angleCos*slopeCos,angleSin*slopeCos,-slopeSin);
-            if(radiusBottom==0)
-                normals[i+numVertices]=new Vector3(angleHalfCos*slopeCos,angleHalfSin*slopeCos,-slopeSin);
-            else
-                normals[i+numVertices]=new Vector3(angleCos*slopeCos,angleSin*slopeCos,-slopeSin);
-
-            uvs[i]=new Vector2(1.0f*i/numVertices,1);
-            uvs[i+numVertices]=new Vector2(1.0f*i/numVertices,0);
-
-            if(outside&&inside){
-                // vertices and uvs are identical on inside and outside, so just copy
-                vertices[i+2*numVertices]=vertices[i];
-                vertices[i+3*numVertices]=vertices[i+numVertices];
-                uvs[i+2*numVertices]=uvs[i];
-                uvs[i+3*numVertices]=uvs[i+numVertices];
-            }
-            if(inside){
-                // invert normals
-                normals[i+offset]=-normals[i];
-                normals[i+numVertices+offset]=-normals[i+numVertices];
-            }
-        }
-        mesh.vertices = vertices;
-        mesh.normals = normals;		
-        mesh.uv = uvs;
-
-        return mesh;
-    }
+   
 }
 
 

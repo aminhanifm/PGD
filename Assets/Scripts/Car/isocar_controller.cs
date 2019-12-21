@@ -16,19 +16,19 @@ public class isocar_controller : MonoBehaviour
     float braking = -5f;
     float max_speed_reverse = 5f;
 
-    private float  steering_angle = 15f;
+    private float  steering_angle = 25f;
     private float wheelBase = 1.5f;  //wheel base distance 
     private float friction = -0.1f;
     private float drag = -0.01f;
     private float enginePower = 5.0f;
 
     Rigidbody2D rb2d;
-    isometricCarRenderer renderer;
+    IsometricCarRenderer renderer;
 
     void Start()
     {
         rb2d = this.GetComponent<Rigidbody2D>();
-        renderer = this.GetComponentInChildren<isometricCarRenderer>();
+        renderer = this.GetComponentInChildren<IsometricCarRenderer>();
         carLocation = this.transform.position;
         velocity = Vector2.zero;
         carForward = Vector2.right;        
@@ -100,7 +100,7 @@ public class isocar_controller : MonoBehaviour
 
         float d = Vector2.Dot(carForward, velocity);
 
-        if(d < 0){
+        if(d <= 0){
             velocity = -carForward * Mathf.Min(velocity.magnitude, max_speed_reverse);
         }
         else if(d>0){
@@ -112,8 +112,8 @@ public class isocar_controller : MonoBehaviour
     private void apply_friction()
     {
         float v_magnitude = velocity.magnitude;
-        if (v_magnitude < 0.1f)
-            velocity = Vector2.zero;
+        //if (v_magnitude < 0.1f)
+        //    velocity = Vector2.zero;
 
         Vector2 friction_force = velocity * friction;
         Vector2 drag_force = velocity * v_magnitude * drag;

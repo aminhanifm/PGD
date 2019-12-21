@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class isometricCarRenderer : MonoBehaviour
+public class IsometricCarRenderer : MonoBehaviour
 {
     private readonly string[] staticAnimations = {"car_8", "car_7", "car_6", "car_5", "car_4", "car_3", "car_2", "car_1",
                                                     "car_9", "car_10", "car_11", "car_12", "car_13", "car_14", "car_15"};
