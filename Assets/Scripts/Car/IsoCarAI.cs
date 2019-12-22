@@ -12,6 +12,10 @@ public class IsoCarAI : CarGeneric
     private new IsometricCarRenderer renderer;
 
     int cur = 0;
+    float cast_forward_len = 3.5f;
+    float lastDistRelative = Mathf.Infinity;
+    float maintain_velocity = 0;
+    bool needToMaintain = false;
 
     protected override void Start()
     {
@@ -35,12 +39,42 @@ public class IsoCarAI : CarGeneric
             cur = (cur + 1)% locs.Length;
             target = locs[cur];
         }
-        print("target: " + target);
+        //print("target: " + target);
         acceleration = Vector2.zero;
         SteerControl();
-        DriveForward();        
+        ObserveEnvirontment();   
         base.Update();
+
         renderer.setDirection(carForward);
+    }
+
+    protected override void calculate_steering(float delta)
+    {
+        base.calculate_steering(delta);
+
+        float d = Vector2.Dot(carForward, rb2d.velocity);
+        float s = Vector2.Dot(carForward, velocity);
+
+        if (s < 0)
+        {
+            if (d <= 0)
+            {
+                velocity = carForward * 0;
+                rb2d.velocity = Vector2.zero;
+            }
+            else
+            {
+                velocity = -carForward * Mathf.Min(velocity.magnitude, max_speed_reverse);
+            }
+        }
+        else if (s >= 0)
+        {
+            velocity = carForward * velocity.magnitude;
+        }
+        
+           
+        if (needToMaintain)
+            velocity = Mathf.Min(velocity.magnitude, maintain_velocity) * carForward;
     }
 
     protected override void FixedUpdate()
@@ -54,6 +88,45 @@ public class IsoCarAI : CarGeneric
         acceleration = carForward * enginePower;
     }
 
+    void DriveBackward()
+    {
+        acceleration = carForward * braking;
+    }
+
+    void ObserveEnvirontment()
+    {
+        needToMaintain = false;
+
+        //check if there is a car ahead
+        Vector2 st = Vector2.zero;
+        st = transform.position;
+        RaycastHit2D hit = Physics2D.Raycast(st, carForward, cast_forward_len);
+        if(hit.collider != null)
+        {
+            float distRelative = Vector3.Distance(hit.transform.position, transform.position);
+            if(distRelative < lastDistRelative)
+            {
+                DriveBackward();        //decelerate
+            }
+            else if(distRelative > lastDistRelative)
+            {
+                DriveForward();
+            }
+            else
+            {
+                maintain_velocity = velocity.magnitude;
+                needToMaintain = true;
+            }
+
+        }
+        else
+        {
+            DriveForward();
+        }
+
+        print(needToMaintain+"  maintain: "+maintain_velocity);
+    }
+
     void SteerControl()
     {
         float turn = 0;
@@ -61,7 +134,7 @@ public class IsoCarAI : CarGeneric
         Vector2 myTarget = new Vector2(target.x - transform.position.x, target.y - transform.position.y).normalized;
         float myangle = Vector2.SignedAngle(myTarget, carForward);
 
-        print(myangle);
+        //print(myangle);
 
         if (myangle < -1)
             turn += 1;
@@ -71,7 +144,7 @@ public class IsoCarAI : CarGeneric
         steerAngle = turn * steering_angle;
     }
 
-#if UNITY_EDITOR
+//#if UNITY_EDITOR
     protected override void OnDrawGizmos()
     {
         HandleUtility.Repaint();
@@ -89,5 +162,5 @@ public class IsoCarAI : CarGeneric
         
         Gizmos.color = Color.green;
     }
-    #endif
+    //#endif
 }

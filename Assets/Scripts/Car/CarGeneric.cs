@@ -4,7 +4,7 @@ using UnityEngine;
 
 public abstract class CarGeneric : MonoBehaviour
 {
-    private Vector2 velocity;
+    protected Vector2 velocity;
     protected Vector2 carForward;
     protected Vector2 acceleration;
     protected float steerAngle;
@@ -17,7 +17,7 @@ public abstract class CarGeneric : MonoBehaviour
     protected float drag = -0.01f;
     protected float enginePower = 5.0f;
 
-    private Rigidbody2D rb2d;
+    protected Rigidbody2D rb2d;
 
     protected virtual void Start()
     {
@@ -45,7 +45,7 @@ public abstract class CarGeneric : MonoBehaviour
         return Quaternion.Euler(0, 0, aDegree) * aPoint;
     }
 
-    private void calculate_steering(float delta)
+    protected virtual void calculate_steering(float delta)
     {
         velocity += acceleration * delta;
 
@@ -64,17 +64,6 @@ public abstract class CarGeneric : MonoBehaviour
 
         carForward = frontWheel - rearWheel;
         carForward.Normalize();
-
-        float d = Vector2.Dot(carForward, velocity);
-
-        if (d <= 0)
-        {
-            velocity = -carForward * Mathf.Min(velocity.magnitude, max_speed_reverse);
-        }
-        else if (d > 0)
-        {
-            velocity = carForward * velocity.magnitude;
-        }
 
     }
 

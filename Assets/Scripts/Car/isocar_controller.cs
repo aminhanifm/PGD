@@ -20,7 +20,7 @@ public class isocar_controller : MonoBehaviour
     private float wheelBase = 1.5f;  //wheel base distance 
     private float friction = -0.1f;
     private float drag = -0.01f;
-    private float enginePower = 5.0f;
+    private float enginePower = 1.0f;
 
     Rigidbody2D rb2d;
     IsometricCarRenderer renderer;
