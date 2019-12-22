@@ -34,7 +34,6 @@ public class DialogueManager : MonoBehaviour
         dialogLine = dialogBox.GetComponentInChildren<TextMeshProUGUI>();
         dt = gameObject.transform.GetComponentInChildren<dialogueTemplate>();
         person_image = new Dictionary<string, Sprite>();
-
         initScenario(0);
     }
 
@@ -48,7 +47,6 @@ public class DialogueManager : MonoBehaviour
         foreach(KeyValuePair<string,string> path in spritesPath)
         {
             Sprite image = Resources.Load<Sprite>(path.Value);
-            Debug.Log(path.Value);
             person_image.Add(path.Key, image);
         }
         
