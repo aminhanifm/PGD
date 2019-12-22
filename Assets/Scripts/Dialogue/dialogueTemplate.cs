@@ -23,9 +23,11 @@ namespace KoganeUnityLib
     {
         private Scene scenename;
         
-        const String dialoguePath1 = "Assets/Files/dialogue1.json";
-        const String dialoguePath2 = "Assets/Files/dialogue2.json";
-        const String dialoguePath3 = "Assets/Files/dialogue3.json";
+        const String introduction = "Assets/Files/intro.json";
+        const String tilang = "Assets/Files/tilang.json";
+        const String mission_1 = "Assets/Files/mission_1.json";
+        const String mission_2 = "Assets/Files/mission_2.json";
+        const String mission_3 = "Assets/Files/mission_3.json";
 
         string dialogue;
 
@@ -44,7 +46,7 @@ namespace KoganeUnityLib
         {
             scenename = SceneManager.GetActiveScene();
 
-            StreamReader stream = new StreamReader(dialoguePath1);
+            StreamReader stream = new StreamReader(introduction);
             dialogue = stream.ReadToEnd();
             scenario = JsonConvert.DeserializeObject<IList<Dialog>>(dialogue);
 

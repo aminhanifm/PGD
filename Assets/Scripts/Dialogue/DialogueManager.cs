@@ -29,7 +29,6 @@ public class DialogueManager : MonoBehaviour
 
     void Start()
     {
-
         dialogMaster = gameObject;
         dialogLine = dialogBox.GetComponentInChildren<TextMeshProUGUI>();
         dt = gameObject.transform.GetComponentInChildren<dialogueTemplate>();
@@ -64,6 +63,7 @@ public class DialogueManager : MonoBehaviour
             speed: m_speed,
             onComplete: () => complete = true
         );
+        
     }
 
     public void continueLine()
@@ -79,14 +79,16 @@ public class DialogueManager : MonoBehaviour
             if (string.IsNullOrEmpty(line) && dialoguecomplete == false)
             {
                 showHide("dialog", false);
-                //Debug.Log("DONE");
                 dialoguecomplete = true;
+                m_typewriter.nextobj.SetActive(false);
                 return;
             }
 
             changePerson();
             showDialogLine(line);
+            
         }
+
     }
 
     private void changePerson()
@@ -134,6 +136,7 @@ public class DialogueManager : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Return))
         {
             continueLine();
+
         }
     }
 }
