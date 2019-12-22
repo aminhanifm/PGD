@@ -50,6 +50,9 @@ TagManager:
   - name: Collider
     uniqueID: 1893890445
     locked: 0
+  - name: Car
+    uniqueID: 914494509
+    locked: 0
   - name: Objects
     uniqueID: 3376206067
     locked: 0
