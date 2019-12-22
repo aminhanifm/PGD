@@ -23,12 +23,12 @@ public class isocar_controller : MonoBehaviour
     private float enginePower = 5.0f;
 
     Rigidbody2D rb2d;
-    isometricCarRenderer renderer;
+    isometricCarRenderer scriptrenderer;
 
     void Start()
     {
         rb2d = this.GetComponent<Rigidbody2D>();
-        renderer = this.GetComponentInChildren<isometricCarRenderer>();
+        scriptrenderer = this.GetComponentInChildren<isometricCarRenderer>();
         carLocation = this.transform.position;
         velocity = Vector2.zero;
         carForward = Vector2.right;        
@@ -50,7 +50,7 @@ public class isocar_controller : MonoBehaviour
     void FixedUpdate()
     {
         rb2d.velocity = velocity;
-        renderer.setDirection(carForward);
+        scriptrenderer.setDirection(carForward);
     }
 
     private void get_input()

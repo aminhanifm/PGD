@@ -1,0 +1,28 @@
+[
+	{
+		'id': 0,
+		'title': null,
+		'persons': { 
+			'person1': 'Player',
+			'person2': 'Agus',
+			'person3': 'Yunita'
+		},
+		'sprites': { 
+			'person1': 'Characters/Laki_1',
+			'person2': 'Characters/Laki_4',
+			'person3': 'Characters/Perempuan_3'
+		},
+		'dialogue': [
+			{'person1,LEFT': 'Permisi.. Apakah ada Agus dirumah ?'},
+			{'person3,RIGHT': 'Agus? Dia masih di kamar mandi.. tunggu sebentar ya.'},
+			{'person1,LEFT': 'Baik..'},
+			{'person2,RIGHT': 'Siapa disana ? (membuka pintu)'},
+			{'person2,RIGHT': 'Oh hei ! kok tumben datang kesini ?'},
+			{'person1,LEFT': 'Iya dong, mau nonton Deltras FC lawan Persik Kediri nggak ?'},
+			{'person2,RIGHT': 'Wah siap dong, bentar ya ijin istri dulu.'},
+			{'person1,LEFT':'Oke kalau gitu..'},
+			{'person2,RIGHT':'Yok..'},
+			{'person1,LEFT':'Siap.'}
+		]
+	}
+]

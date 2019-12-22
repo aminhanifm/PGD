@@ -1,0 +1,25 @@
+[
+	{
+		'id': 0,
+		'title': null,
+		'persons': { 
+			'person1': 'Player',
+			'person2': 'Petugas'
+		},
+		'sprites': { 
+			'person1': 'Characters/Laki_1',
+			'person2': 'Characters/Laki_2'
+		},
+		'dialogue': [
+			{'person2,RIGHT': 'Selamat datang dipermainan ini, saya adalah petugas polrestabes Sidoarjo.'},
+			{'person2,RIGHT': 'Disini anda akan diberi sedikit penjelasan tentang aturan permainan.'},
+			{'person2,RIGHT': 'Langsung saja, peraturan pertama : Patuhi rambu - rambu lalu lintas.'},
+			{'person2,RIGHT': 'Peraturan kedua : untuk awal masuk permainan, pastikan untuk selalu memakai sabuk pengaman.'},
+			{'person2,RIGHT': 'Peraturan ketiga : jika ada simbol perbaikan, maka segera perbaiki mobil anda ke bengkel terdekat.'},
+			{'person2,RIGHT': 'Jika anda melanggar aturan yang telah saya jelaskan tadi, maka wanted level akan bertambah.'},
+			{'person2,RIGHT': 'Dan jika wanted level penuh, maka anda akan dikenakan denda, dan jika anda tidak dapat membayar denda tersebut maka game akan berakhir'},
+			{'person2,RIGHT': 'Dan sebaliknya, jika wanted level kecil, uang anda akan terus bertambah.'},			
+			{'person2,RIGHT': 'Mungkin itu saja penjelasan dari saya, kalau ingin bertanya silahkan datang ke tempat polrestabes Sidoarjo langsung. Selamat Bermain !'}
+		]
+	}
+]
