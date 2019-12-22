@@ -42,14 +42,14 @@ public class IsoCarAI : CarGeneric
         //print("target: " + target);
         acceleration = Vector2.zero;
         SteerControl();
-        //ObserveEnvirontment();   
+        ObserveEnvirontment();
         //DriveForward();
-        tesajah();
+        //tesajah();
         base.Update();
         renderer.setDirection(carForward);
     }
 
-    void tesajah()
+    void ObserveEnvirontment()
     {
         Vector2 st = Vector2.zero;
         st = transform.position;
@@ -57,12 +57,12 @@ public class IsoCarAI : CarGeneric
         if (hit.collider != null)
         {
             //ambil jarak sekarang
-            float distRelative = Vector3.Distance(hit.transform.position, transform.position) - wheelBase*2;
+            float distRelative = Vector3.Distance(hit.transform.position, transform.position) - wheelBase*1.5f;
 
             //cari jarak minim
             float minimumDist = Vector2.SqrMagnitude(velocity) / (-1 * 2 * braking);
 
-            print("relative: "+distRelative+"    minimum: "+minimumDist);
+            //print("relative: "+distRelative+"    minimum: "+minimumDist);
 
             if (distRelative <= minimumDist) DriveBackward();
             else DriveForward();
@@ -119,7 +119,7 @@ public class IsoCarAI : CarGeneric
         acceleration = carForward * braking;
     }
 
-    void ObserveEnvirontment()
+    void tesajah()
     {
         //needToMaintain = false;
 
