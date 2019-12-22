@@ -13,14 +13,14 @@ public class isocar_controller : MonoBehaviour
     private float steerAngle;
     private Vector2 acceleration;
 
-    float braking = -5f;
+    float braking = -1f;
     float max_speed_reverse = 5f;
 
     private float  steering_angle = 25f;
     private float wheelBase = 1.5f;  //wheel base distance 
     private float friction = -0.1f;
     private float drag = -0.01f;
-    private float enginePower = 1.0f;
+    private float enginePower = 1f;
 
     Rigidbody2D rb2d;
     IsometricCarRenderer renderer;

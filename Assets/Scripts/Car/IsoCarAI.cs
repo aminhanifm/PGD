@@ -12,7 +12,7 @@ public class IsoCarAI : CarGeneric
     private new IsometricCarRenderer renderer;
 
     int cur = 0;
-    float cast_forward_len = 3.5f;
+    float cast_forward_len = 10f;
     float lastDistRelative = Mathf.Infinity;
     float maintain_velocity = 0;
     bool needToMaintain = false;
@@ -21,7 +21,7 @@ public class IsoCarAI : CarGeneric
     {
         base.Start();
         renderer = this.GetComponent<IsometricCarRenderer>();
-        braking = -5f;
+        braking = -2f;
         max_speed_reverse = 5f;
         steering_angle = 45f;
         wheelBase = 1.5f;         //wheel base distance 
@@ -42,10 +42,35 @@ public class IsoCarAI : CarGeneric
         //print("target: " + target);
         acceleration = Vector2.zero;
         SteerControl();
-        ObserveEnvirontment();   
+        //ObserveEnvirontment();   
+        //DriveForward();
+        tesajah();
         base.Update();
-
         renderer.setDirection(carForward);
+    }
+
+    void tesajah()
+    {
+        Vector2 st = Vector2.zero;
+        st = transform.position;
+        RaycastHit2D hit = Physics2D.Raycast(st, carForward, cast_forward_len);
+        if (hit.collider != null)
+        {
+            //ambil jarak sekarang
+            float distRelative = Vector3.Distance(hit.transform.position, transform.position) - wheelBase*2;
+
+            //cari jarak minim
+            float minimumDist = Vector2.SqrMagnitude(velocity) / (-1 * 2 * braking);
+
+            print("relative: "+distRelative+"    minimum: "+minimumDist);
+
+            if (distRelative <= minimumDist) DriveBackward();
+            else DriveForward();
+        }
+        else
+        {
+            DriveForward();
+        }
     }
 
     protected override void calculate_steering(float delta)
@@ -71,10 +96,11 @@ public class IsoCarAI : CarGeneric
         {
             velocity = carForward * velocity.magnitude;
         }
-        
-           
+
+        //print(needToMaintain +" "+ maintain_velocity);
         if (needToMaintain)
-            velocity = Mathf.Min(velocity.magnitude, maintain_velocity) * carForward;
+            velocity = maintain_velocity * carForward;
+            //velocity = Mathf.Min(velocity.magnitude, maintain_velocity) * carForward;
     }
 
     protected override void FixedUpdate()
@@ -95,7 +121,7 @@ public class IsoCarAI : CarGeneric
 
     void ObserveEnvirontment()
     {
-        needToMaintain = false;
+        //needToMaintain = false;
 
         //check if there is a car ahead
         Vector2 st = Vector2.zero;
@@ -104,19 +130,26 @@ public class IsoCarAI : CarGeneric
         if(hit.collider != null)
         {
             float distRelative = Vector3.Distance(hit.transform.position, transform.position);
-            if(distRelative < lastDistRelative)
+
+            //print("last: " + lastDistRelative + "  now: "+ distRelative+ "  time: "+ Time.deltaTime);
+            if (distRelative < lastDistRelative && rb2d.velocity!= Vector2.zero)
             {
+                needToMaintain = false;
                 DriveBackward();        //decelerate
             }
             else if(distRelative > lastDistRelative)
             {
+                needToMaintain = false;
                 DriveForward();
             }
             else
             {
-                maintain_velocity = velocity.magnitude;
+                if(needToMaintain ==false)
+                    maintain_velocity = velocity.magnitude;
                 needToMaintain = true;
             }
+
+            lastDistRelative = distRelative;
 
         }
         else
@@ -124,7 +157,7 @@ public class IsoCarAI : CarGeneric
             DriveForward();
         }
 
-        print(needToMaintain+"  maintain: "+maintain_velocity);
+        //print(needToMaintain+"  maintain: "+maintain_velocity);
     }
 
     void SteerControl()
