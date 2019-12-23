@@ -2,39 +2,55 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
+using System;
 
 public class thePoint
 {
-    public thePoint next;
-    public string val;
+    public List<thePoint> next;
+    public Vector2 location;
 
-    public thePoint(string val)
+    public thePoint(Vector2 location)
     {
-        this.val = val;
+        this.location = location;
+        this.next = new List<thePoint>();
     }
 }
 
-public class Points : MonoBehaviour
+public class Points
 {
-    public void Start()
+    public List<thePoint> myPoints = new List<thePoint>();
+    
+    public thePoint createPoint(Vector2 loc)
     {
-        thePoint one = new thePoint("one");
-        thePoint two = new thePoint("one");
-
-        one.next = two;
-        print(one.next.val);
-
-        two.val = "two";
-        print(one.next.val);
+        thePoint point = new thePoint(loc);
+        myPoints.Add(point);
+        return point;
     }
 
-    public void OnDrawGizmos()
+    public void addNextPoint(thePoint point, thePoint[] lsPoint)
     {
-        //HandleUtility.Repaint();
+        foreach(var pt in lsPoint)
+        {
+            point.next.Add(pt);
+        }
+    }
 
-        Gizmos.matrix = Matrix4x4.TRS(transform.position, transform.rotation, transform.lossyScale);
-        Gizmos.color = Color.green;
+    public thePoint getNextPoint(thePoint point, int idx=0)
+    {
+        thePoint nextPoint;
+        try
+        {
+            nextPoint = point.next[idx];
+        }catch(Exception e)
+        {
+            return null;
+        }
 
-        Gizmos.DrawSphere(Vector3.zero, 1);
+        return nextPoint;
+    }
+
+    public int getPointsCount()
+    {
+        return myPoints.Count;
     }
 }

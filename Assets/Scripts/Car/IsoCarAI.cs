@@ -17,6 +17,8 @@ public class IsoCarAI : CarGeneric
     float maintain_velocity = 0;
     bool needToMaintain = false;
 
+    private CarPointsManager carPM;
+
     protected override void Start()
     {
         base.Start();
@@ -28,7 +30,10 @@ public class IsoCarAI : CarGeneric
         friction = -0.1f;
         drag = -0.01f;
         enginePower = 2.0f;
-        target = (Vector2)transform.position;
+
+        carPM = GameObject.Find("Car Way Points").GetComponent<CarPointsManager>();
+        //print(carPM.curPoint.location);
+        target = carPM.getCurLocation();
     }
 
     protected override void Update()
@@ -36,8 +41,8 @@ public class IsoCarAI : CarGeneric
         float distance = (target - (Vector2)transform.position).magnitude;
         if (distance < wheelBase / 2)
         {
-            cur = (cur + 1)% locs.Length;
-            target = locs[cur];
+            carPM.getNext();
+            target = carPM.getCurLocation();
         }
         //print("target: " + target);
         acceleration = Vector2.zero;
@@ -176,24 +181,4 @@ public class IsoCarAI : CarGeneric
 
         steerAngle = turn * steering_angle;
     }
-
-//#if UNITY_EDITOR
-    protected override void OnDrawGizmos()
-    {
-        HandleUtility.Repaint();
-
-        Gizmos.matrix = Matrix4x4.TRS(transform.position, transform.rotation, transform.lossyScale);
-        
-        
-        for (int i = 0; i < locs.Length; i++)
-        {
-            int next = (i + 1) % locs.Length;
-            Gizmos.DrawLine(locs[i], locs[next]);
-
-            Gizmos.DrawSphere(locs[i], 1);
-        }
-        
-        Gizmos.color = Color.green;
-    }
-    //#endif
 }
