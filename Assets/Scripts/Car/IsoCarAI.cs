@@ -9,13 +9,15 @@ public class IsoCarAI : CarGeneric
 {
     public Vector2[] locs;
     private Vector2 target;
+    private Vector2 lastTarget;
     private new IsometricCarRenderer renderer;
 
-    int cur = 0;
     float cast_forward_len = 10f;
     float lastDistRelative = Mathf.Infinity;
     float maintain_velocity = 0;
     bool needToMaintain = false;
+
+    private int lane;            //in which lane this car will drive , start from 0 for the left most
 
     private CarPointsManager carPM;
 
@@ -32,8 +34,10 @@ public class IsoCarAI : CarGeneric
         enginePower = 2.0f;
 
         carPM = GameObject.Find("Car Way Points").GetComponent<CarPointsManager>();
-        //print(carPM.curPoint.location);
-        target = carPM.getCurLocation();
+
+        lane = 0;
+        target = carPM.getCurLocation(lane);
+        lastTarget = rb2d.position;
     }
 
     protected override void Update()
@@ -41,10 +45,10 @@ public class IsoCarAI : CarGeneric
         float distance = (target - (Vector2)transform.position).magnitude;
         if (distance < wheelBase / 2)
         {
-            carPM.getNext();
-            target = carPM.getCurLocation();
+            carPM.getNext(lane);
+            target = carPM.getCurLocation(lane);
         }
-        //print("target: " + target);
+        
         acceleration = Vector2.zero;
         SteerControl();
         ObserveEnvirontment();
