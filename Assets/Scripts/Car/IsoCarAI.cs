@@ -33,7 +33,7 @@ public class IsoCarAI : CarGeneric
         drag = -0.01f;
         enginePower = 2.0f;
 
-        carPM = GameObject.Find("Car Way Points").GetComponent<CarPointsManager>();
+        carPM = this.gameObject.GetComponent<CarPointsManager>();
 
         lane = 0;
         target = carPM.getCurLocation(lane);
@@ -51,22 +51,23 @@ public class IsoCarAI : CarGeneric
         {
             target = tempTarget[0];
         }
-            
+
         float distance = (target - (Vector2)transform.position).magnitude;
 
         if (distance < wheelBase / 2)
         {
-            if (tempTarget.Count > 0) {
+            if (tempTarget.Count > 0)
+            {
                 tempTarget.RemoveAt(0);
                 target = carPM.getCurLocation(lane);
-            } 
+            }
             else
             {
                 carPM.getNext(lane);
                 target = carPM.getCurLocation(lane);
             }
         }
-        
+
         acceleration = Vector2.zero;
         SteerControl();
         ObserveEnvirontment();
@@ -84,14 +85,14 @@ public class IsoCarAI : CarGeneric
         if (maxLane <= 1) return;
         else if (lane == 0) laneDir = 1;
         else if (lane == maxLane - 1) laneDir = -1;
-        else laneDir = Random.Range(-1, 1);
+        else laneDir = 1;
 
         lane += laneDir;
         Vector2 vDir = carPM.getLocationDirection();
 
         float Dist = Vector2.SqrMagnitude(velocity) / (-1 * 2 * braking);
 
-        Vector2 laneTarget = rb2d.position + vDir * Dist - Vector2.Perpendicular(vDir) * carPM.getLaneWidth();
+        Vector2 laneTarget = rb2d.position + vDir * Dist - laneDir * Vector2.Perpendicular(vDir) * carPM.getLaneWidth();
         tempTarget.Add(laneTarget);
     }
 

@@ -146,7 +146,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1153983349}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5da64fd97a070b549985d1341d8cbf2f, type: 3}
+  m_Script: {fileID: 11500000, guid: 1de89d5b1e0853a40bab071a6373dead, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!4 &1153983351
@@ -453,8 +453,9 @@ GameObject:
   - component: {fileID: 2323477145891823107}
   - component: {fileID: 2323477145891823108}
   - component: {fileID: 2323477145891823104}
-  - component: {fileID: 2323477145891823113}
   - component: {fileID: 2323477145891823112}
+  - component: {fileID: 2323477145891823114}
+  - component: {fileID: 2323477145891823113}
   m_Layer: 0
   m_Name: car ai
   m_TagString: Untagged
@@ -471,15 +472,24 @@ MonoBehaviour:
   m_GameObject: {fileID: 2323477145891823111}
   m_Enabled: 1
   m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5da64fd97a070b549985d1341d8cbf2f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  points: {fileID: 1153983350}
+--- !u!114 &2323477145891823113
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2323477145891823111}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e23f5652e6703874ea5aefc98b3a00e5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  locs:
-  - {x: 0, y: 0}
-  - {x: 20, y: 0}
-  - {x: 21, y: 1}
-  - {x: 21, y: 20}
---- !u!114 &2323477145891823113
+  locs: []
+--- !u!114 &2323477145891823114
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
