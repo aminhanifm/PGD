@@ -104,14 +104,22 @@ public class IsoCarAI : CarGeneric
         if (hit.collider != null)
         {
             //ambil jarak sekarang
-            float distRelative = Vector3.Distance(hit.transform.position, transform.position) - wheelBase*1.5f;
+            float distRelative = Vector3.Distance(hit.transform.position, transform.position) - wheelBase * 1.5f;
 
             //cari jarak minim
             float minimumDist = Vector2.SqrMagnitude(velocity) / (-1 * 2 * braking);
 
-            //print("relative: "+distRelative+"    minimum: "+minimumDist);
-
-            if (distRelative <= minimumDist) DriveBackward();
+            if (distRelative <= minimumDist)
+            {
+                if (hit.transform.tag == "car")
+                {
+                    DriveBackward();
+                }
+                else if (hit.transform.tag == "traffic")
+                {
+                    DriveBackward();
+                }
+            }
             else DriveForward();
         }
         else

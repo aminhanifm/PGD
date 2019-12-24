@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 
 public class TrafficLight : MonoBehaviour
@@ -8,6 +9,7 @@ public class TrafficLight : MonoBehaviour
     [HideInInspector] public int traffictoyellow;
     [HideInInspector] public int traffictogreen;
     public Animator trafficanimator;
+    public Transform colliderObject;
     public int type; //set type from 1 to 4 which has time differences
     public string trafficname; //only for 2 or more traffics
     public bool isCounting; //must set to yes
@@ -15,8 +17,14 @@ public class TrafficLight : MonoBehaviour
     private bool triggeronce;
     public int firstcondition; // set 1 to make it start animating
 
+    private CircleCollider2D coll;
+    [HideInInspector]public bool isStop = true;
+    [HideInInspector]public bool isStart = false;
+
     void Start()
     {
+        coll = colliderObject.GetComponent<CircleCollider2D>();
+
         trafficanimator = gameObject.GetComponent<Animator>();
         if(type == 1)
         {
@@ -34,29 +42,52 @@ public class TrafficLight : MonoBehaviour
         {
             type4();
         }
-        trafficanimator.SetInteger("Color",firstcondition);
 
     }
 
     void Update()
     {
         //testing purpose only
-        if (Input.GetButtonDown("Jump"))
-        {
-            trafficanimator.SetInteger("Color", 1);
-            StartCoroutine(startlight());
-            //Debug.Log("Succed");
-        }
+        //if (Input.GetButtonDown("Jump"))
+        //{
+        //    trafficanimator.SetInteger("Color", 1);
+        //    StartCoroutine(startlight());
+        //    //Debug.Log("Succed");
+        //}
     }
 
     private void FixedUpdate()
     {
-        if (isCounting && !triggeronce)
-        {
-            StartCoroutine(startlight());
-            triggeronce = true;
-            //Debug.Log("Succed");
-        }
+        //if (isStart)
+        //{
+        //    if (isCounting && !triggeronce)
+        //    {
+        //        StartCoroutine(startlight());
+        //        triggeronce = true;
+        //        //Debug.Log("Succed");
+        //    }
+        //}
+    }
+
+    public void setToGreenDuration(int dur)
+    {
+        traffictogreen = dur;
+    }
+
+    public void setToYellowDuration(int dur)
+    {
+        traffictoyellow = dur;
+    }
+
+    public int getToYellowDuration()
+    {
+        return traffictoyellow;
+    }
+
+    public void setAnimatorAt(int cond)
+    {
+        trafficanimator.SetInteger("Color",cond);
+        StartCoroutine(startlight());
     }
 
     public void type1()
@@ -106,6 +137,7 @@ public class TrafficLight : MonoBehaviour
                 trafficanimator.SetInteger("Color", 3);
                 yield return new WaitForSeconds(0.5f);
                 trafficanimator.SetInteger("Color", 0);
+                isStop = true;
             }
 
             StartCoroutine(startlight());
@@ -144,4 +176,17 @@ public class TrafficLight : MonoBehaviour
             isCounting = false;
         }
     }
+
+#if UNITY_EDITOR
+    public void OnDrawGizmos()
+    {
+        //HandleUtility.Repaint();
+
+        //Gizmos.matrix = Matrix4x4.TRS(transform.position, transform.rotation, Vector3.one);
+
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(colliderObject.transform.position, 1);
+        Gizmos.DrawLine(transform.position, colliderObject.transform.position);
+    }
+#endif
 }
