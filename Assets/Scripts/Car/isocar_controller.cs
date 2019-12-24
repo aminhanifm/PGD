@@ -23,12 +23,12 @@ public class isocar_controller : MonoBehaviour
     private float enginePower = 2f;
 
     Rigidbody2D rb2d;
-    isometricCarRenderer scriptrenderer;
+    IsometricCarRenderer scriptrenderer;
 
     void Start()
     {
         rb2d = this.GetComponent<Rigidbody2D>();
-        scriptrenderer = this.GetComponentInChildren<isometricCarRenderer>();
+        scriptrenderer = this.GetComponentInChildren<IsometricCarRenderer>();
         carLocation = this.transform.position;
         velocity = Vector2.zero;
         carForward = Vector2.right;        
