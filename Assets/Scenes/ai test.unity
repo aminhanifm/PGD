@@ -167,13 +167,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   traffictoyellow: 0
   traffictogreen: 0
-  trafficanimator: {fileID: 0}
+  trafficanimator: {fileID: 173625734}
   colliderObject: {fileID: 2016928525}
   type: 1
   trafficname: 
   isCounting: 1
   ismanytraffic: 0
   firstcondition: 1
+  isStop: 0
+  isStart: 0
 --- !u!95 &173625734
 Animator:
   serializedVersion: 3
@@ -612,13 +614,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   traffictoyellow: 0
   traffictogreen: 0
-  trafficanimator: {fileID: 0}
+  trafficanimator: {fileID: 1569378393}
   colliderObject: {fileID: 2070588746}
   type: 1
   trafficname: 
   isCounting: 1
   ismanytraffic: 0
   firstcondition: 1
+  isStop: 0
+  isStart: 0
 --- !u!95 &1569378393
 Animator:
   serializedVersion: 3
@@ -749,13 +753,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   traffictoyellow: 0
   traffictogreen: 0
-  trafficanimator: {fileID: 0}
+  trafficanimator: {fileID: 1864818192}
   colliderObject: {fileID: 368255619}
   type: 1
   trafficname: 
   isCounting: 1
   ismanytraffic: 0
   firstcondition: 1
+  isStop: 0
+  isStart: 0
 --- !u!95 &1864818192
 Animator:
   serializedVersion: 3
