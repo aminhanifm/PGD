@@ -35,7 +35,7 @@ public class IsoCarAI : CarGeneric
 
         carPM = this.gameObject.GetComponent<CarPointsManager>();
 
-        lane = 0;
+           lane = 0;
         target = carPM.getCurLocation(lane);
         tempTarget = new List<Vector2>();
     }

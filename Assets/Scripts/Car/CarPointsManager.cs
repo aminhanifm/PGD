@@ -17,7 +17,7 @@ public class CarPointsManager : MonoBehaviour
         curPoint = points.myPoints[0];
         lastPoint = curPoint;
         laneStartPos = (-laneWidth + laneNum * laneWidth) / 2;       //define length from point's origin to the most left
-        print(curPoint.location);
+        //print(curPoint.location);
     }
     //public void start()
     //{
