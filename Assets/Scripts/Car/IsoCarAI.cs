@@ -9,7 +9,7 @@ public class IsoCarAI : CarGeneric
 {
     public Vector2[] locs;
     private Vector2 target;
-    private Vector2 lastTarget;
+    private List<Vector2> tempTarget;
     private new IsometricCarRenderer renderer;
 
     float cast_forward_len = 10f;
@@ -37,16 +37,34 @@ public class IsoCarAI : CarGeneric
 
         lane = 0;
         target = carPM.getCurLocation(lane);
-        lastTarget = rb2d.position;
+        tempTarget = new List<Vector2>();
     }
 
     protected override void Update()
     {
+        if (Input.anyKeyDown)
+        {
+            Debug.Log("Change Line");
+            changeCarLane();
+        }
+        if (tempTarget.Count > 0)
+        {
+            target = tempTarget[0];
+        }
+            
         float distance = (target - (Vector2)transform.position).magnitude;
+
         if (distance < wheelBase / 2)
         {
-            carPM.getNext(lane);
-            target = carPM.getCurLocation(lane);
+            if (tempTarget.Count > 0) {
+                tempTarget.RemoveAt(0);
+                target = carPM.getCurLocation(lane);
+            } 
+            else
+            {
+                carPM.getNext(lane);
+                target = carPM.getCurLocation(lane);
+            }
         }
         
         acceleration = Vector2.zero;
@@ -56,6 +74,25 @@ public class IsoCarAI : CarGeneric
         //tesajah();
         base.Update();
         renderer.setDirection(carForward);
+    }
+
+    void changeCarLane()
+    {
+        int laneDir;
+        int maxLane = carPM.getMaxLane();
+
+        if (maxLane <= 1) return;
+        else if (lane == 0) laneDir = 1;
+        else if (lane == maxLane - 1) laneDir = -1;
+        else laneDir = Random.Range(-1, 1);
+
+        lane += laneDir;
+        Vector2 vDir = carPM.getLocationDirection();
+
+        float Dist = Vector2.SqrMagnitude(velocity) / (-1 * 2 * braking);
+
+        Vector2 laneTarget = rb2d.position + vDir * Dist - Vector2.Perpendicular(vDir) * carPM.getLaneWidth();
+        tempTarget.Add(laneTarget);
     }
 
     void ObserveEnvirontment()

@@ -7,7 +7,7 @@ public class CarPointsManager : MonoBehaviour
     public Points points = new Points();
     public thePoint curPoint;
     public thePoint lastPoint;
-    private float laneWidth = 1.2f;     //width of a single lane
+    private float laneWidth = 1.5f;     //width of a single lane
     private int laneNum = 2;           //number of lanes
     private float laneStartPos;
 
@@ -31,15 +31,18 @@ public class CarPointsManager : MonoBehaviour
         curPoint = points.myPoints[0];
         lastPoint = curPoint;
 
-        laneStartPos = (laneNum * laneWidth) / 2;       //define length from point's origin to the most left
+        laneStartPos = (- laneWidth + laneNum * laneWidth) / 2;       //define length from point's origin to the most left
         //print(points.myPoints[0].location);
     }
 
     public void getNext(int index)
     {
-        index = index < points.getPointsCount() ? index : 0;
+        //print("index: "+index+"  pointnya: "+points.getPointsCount());
+        index = index < points.getNextPointsCount(curPoint) ? index : 0;
         lastPoint = curPoint;
         curPoint = points.getNextPoint(curPoint, index);
+        
+        print(lastPoint+ "  " + curPoint);
     }
 
     public void setCurPoint(int index)
@@ -50,9 +53,26 @@ public class CarPointsManager : MonoBehaviour
 
     public Vector2 getCurLocation(int laneku)
     {
-        Vector2 temp = new Vector2(curPoint.location.x - lastPoint.location.x, curPoint.location.y - lastPoint.location.y).normalized;
+        print(lastPoint.location + "  " + curPoint.location);
+        Vector2 temp = getLocationDirection();
         Vector2 vecL= Vector2.Perpendicular(temp);
         return curPoint.location + vecL*(-laneku*laneWidth + laneStartPos);
+    }
+
+    public Vector2 getLocationDirection()
+    {
+        Vector2 dir = new Vector2(curPoint.location.x - lastPoint.location.x, curPoint.location.y - lastPoint.location.y).normalized;
+        return dir;
+    }
+
+    public int getMaxLane()
+    {
+        return laneNum;
+    }
+
+    public float getLaneWidth()
+    {
+        return laneWidth;
     }
 
 #if UNITY_EDITOR

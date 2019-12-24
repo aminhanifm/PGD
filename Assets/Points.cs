@@ -53,4 +53,9 @@ public class Points
     {
         return myPoints.Count;
     }
+
+    public int getNextPointsCount(thePoint point)
+    {
+        return point.next.Count;
+    }
 }
