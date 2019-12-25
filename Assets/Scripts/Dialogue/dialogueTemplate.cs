@@ -42,6 +42,7 @@ namespace KoganeUnityLib
         private string currScenarioPosition;
 
 
+
         void Start()
         {
             scenename = SceneManager.GetActiveScene();
@@ -49,9 +50,7 @@ namespace KoganeUnityLib
             StreamReader stream = new StreamReader(introduction);
             dialogue = stream.ReadToEnd();
             scenario = JsonConvert.DeserializeObject<IList<Dialog>>(dialogue);
-
         }
-
 
 
         public void startScenarioAt(int index)

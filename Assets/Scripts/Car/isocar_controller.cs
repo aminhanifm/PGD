@@ -5,9 +5,11 @@ using UnityEngine;
 public class isocar_controller : MonoBehaviour
 {
     // Start is called before the first frame update
+    private UIcontroller uicontroller;
+
     Vector2 carLocation;  //car center location
-    Vector2 velocity;
-    Vector2 carForward;
+    [HideInInspector] public Vector2 velocity;
+    [HideInInspector] public Vector2 carForward;
 
 
     private float steerAngle;
@@ -22,11 +24,16 @@ public class isocar_controller : MonoBehaviour
     private float drag = -0.01f;
     private float enginePower = 2f;
 
+    [HideInInspector] public double curspeed;
+    [HideInInspector] public int curspeedint;
+
     Rigidbody2D rb2d;
     IsometricCarRenderer scriptrenderer;
 
     void Start()
     {
+        uicontroller = FindObjectOfType(typeof(UIcontroller)) as UIcontroller;
+
         rb2d = this.GetComponent<Rigidbody2D>();
         scriptrenderer = this.GetComponentInChildren<IsometricCarRenderer>();
         carLocation = this.transform.position;
@@ -49,24 +56,29 @@ public class isocar_controller : MonoBehaviour
     /// </summary>
     void FixedUpdate()
     {
+        curspeed = rb2d.velocity.magnitude * 3.6;
+        curspeedint = (int) curspeed;
         rb2d.velocity = velocity;
         scriptrenderer.setDirection(carForward);
     }
 
     private void get_input()
     {
-        float turn = 0;
-        if (Input.GetKey(KeyCode.RightArrow))
-            turn -=1 ;
-        else if (Input.GetKey(KeyCode.LeftArrow))
-            turn += 1;
-        steerAngle = turn * steering_angle;
+        if (uicontroller.fuelfill.fillAmount > 0)
+        {
+            float turn = 0;
+            if (Input.GetKey(KeyCode.RightArrow))
+                turn -= 1;
+            else if (Input.GetKey(KeyCode.LeftArrow))
+                turn += 1;
+            steerAngle = turn * steering_angle;
 
-        //accelerate
-        if (Input.GetKey(KeyCode.UpArrow)) 
-            acceleration = carForward * enginePower;
-        else if (Input.GetKey(KeyCode.DownArrow)) 
-            acceleration = carForward * braking;
+            //accelerate
+            if (Input.GetKey(KeyCode.UpArrow))
+                acceleration = carForward * enginePower;
+            else if (Input.GetKey(KeyCode.DownArrow))
+                acceleration = carForward * braking;
+        }
     }
 
     Vector2 Rotate(Vector2 aPoint, float aDegree)
