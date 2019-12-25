@@ -174,6 +174,8 @@ MonoBehaviour:
   isCounting: 1
   ismanytraffic: 0
   firstcondition: 1
+  orientation: 2
+  orientationDir: {x: 0, y: 0}
   isStop: 0
   isStart: 0
 --- !u!95 &173625734
@@ -614,13 +616,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   traffictoyellow: 0
   traffictogreen: 0
-  trafficanimator: {fileID: 1569378393}
+  trafficanimator: {fileID: 0}
   colliderObject: {fileID: 2070588746}
   type: 1
   trafficname: 
   isCounting: 1
   ismanytraffic: 0
   firstcondition: 1
+  orientation: 0
+  orientationDir: {x: 0, y: 0}
   isStop: 0
   isStart: 0
 --- !u!95 &1569378393
@@ -753,13 +757,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   traffictoyellow: 0
   traffictogreen: 0
-  trafficanimator: {fileID: 1864818192}
+  trafficanimator: {fileID: 0}
   colliderObject: {fileID: 368255619}
   type: 1
   trafficname: 
   isCounting: 1
   ismanytraffic: 0
   firstcondition: 1
+  orientation: 1
+  orientationDir: {x: 0, y: 0}
   isStop: 0
   isStart: 0
 --- !u!95 &1864818192
@@ -967,6 +973,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2096565994}
+  - component: {fileID: 2096565995}
   m_Layer: 0
   m_Name: Junctions
   m_TagString: Untagged
@@ -989,6 +996,22 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2096565995
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2096565993}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a4286f84bfe05b14788f5126ffe811c4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  downLeftAnimator: {fileID: 9100000, guid: 2c28778a77290f342907c28ced249117, type: 2}
+  downRightAnimator: {fileID: 9100000, guid: 3b916be0d9579cd44bbc0db393e0e3ac, type: 2}
+  upLeftAnimator: {fileID: 9100000, guid: ce6cb7c554141f948a6f02d2b3378812, type: 2}
+  upRightAnimator: {fileID: 9100000, guid: 0d92a8bbca6909647995c6336d301a50, type: 2}
 --- !u!50 &2323477145891823104
 Rigidbody2D:
   serializedVersion: 4

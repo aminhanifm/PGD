@@ -3,12 +3,15 @@ using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 
+public enum Orientation { DownLeft, DownRight, UpLeft, UpRight }
+
+
 public class TrafficLight : MonoBehaviour
 {
 
     [HideInInspector] public int traffictoyellow;
     [HideInInspector] public int traffictogreen;
-    public Animator trafficanimator;
+    [HideInInspector] public Animator trafficanimator;
     public Transform colliderObject;
     public int type; //set type from 1 to 4 which has time differences
     public string trafficname; //only for 2 or more traffics
@@ -17,28 +20,55 @@ public class TrafficLight : MonoBehaviour
     private bool triggeronce;
     public int firstcondition; // set 1 to make it start animating
 
+    public Orientation orientation;
+    [HideInInspector] public Vector2 orientationDir;
     private CircleCollider2D coll;
     [HideInInspector]public bool isStop = true;
     [HideInInspector]public bool isStart = false;
 
+    private trafficAnimatorList tal;
+
     void Start()
     {
         coll = colliderObject.GetComponent<CircleCollider2D>();
-
         trafficanimator = gameObject.GetComponent<Animator>();
+        tal = gameObject.GetComponentInParent<trafficAnimatorList>();
+
+        switch (orientation)
+        {
+            case Orientation.DownLeft:
+                orientationDir = new Vector2(2, 1).normalized;
+                trafficanimator.runtimeAnimatorController = tal.downLeftAnimator as RuntimeAnimatorController;
+                break;
+            case Orientation.DownRight:
+                orientationDir = new Vector2(-2, 1).normalized;
+                trafficanimator.runtimeAnimatorController = tal.downRightAnimator as RuntimeAnimatorController;
+                break;
+            case Orientation.UpLeft:
+                orientationDir = - new Vector2(-2, 1).normalized;
+                trafficanimator.runtimeAnimatorController = tal.upLeftAnimator as RuntimeAnimatorController;
+                break;
+            case Orientation.UpRight:
+                orientationDir = - new Vector2(2, 1).normalized;
+                trafficanimator.runtimeAnimatorController = tal.upRightAnimator as RuntimeAnimatorController;
+                break;
+            default:
+                break;
+        }
+
         if(type == 1)
         {
             type1();
         }
-        if (type == 2)
+        else if (type == 2)
         {
             type2();
         }
-        if (type == 3)
+        else if (type == 3)
         {
             type3();
         }
-        if (type == 4)
+        else if (type == 4)
         {
             type4();
         }
@@ -90,6 +120,11 @@ public class TrafficLight : MonoBehaviour
         StartCoroutine(startlight());
     }
 
+    public void stopAnimator()
+    {
+        StopAllCoroutines();
+    }
+
     public void type1()
     {
         traffictogreen = 7;
@@ -121,12 +156,14 @@ public class TrafficLight : MonoBehaviour
             //to green
             if (trafficanimator.GetInteger("Color") == 0)
             {
+                coll.enabled = true;
                 yield return new WaitForSeconds(traffictogreen);
                 trafficanimator.SetInteger("Color", 1);
             }
             //to yellow
             if (trafficanimator.GetInteger("Color") == 1)
             {
+                coll.enabled = false;
                 yield return new WaitForSeconds(traffictoyellow);
                 trafficanimator.SetInteger("Color", 2);
             }

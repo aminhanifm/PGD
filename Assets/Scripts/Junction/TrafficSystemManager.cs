@@ -34,31 +34,35 @@ public class TrafficSystemManager : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        //print(all[trafficAt].isStop);
         if (all[trafficAt].isStop)
         {
-            print("ASS");
             trafficAt = (trafficAt + 1) % trafficsCount;
+            for (int i = 0; i < trafficsCount; i++)
+            {
+                all[i].stopAnimator();
+            }
             changeTraffic();
         }
+
     }
 
     void changeTraffic()
     {
-        all[trafficAt].isStop = false;
-        //all[trafficAt].isStart = true;
-        int dur = all[trafficAt].getToYellowDuration() + 3;
-        all[trafficAt].setAnimatorAt(1);
+        int dur = all[trafficAt].getToYellowDuration() + 4;
 
         for (int i = 0; i < trafficsCount; i++)
         {
             if (i != trafficAt)
             {
                 all[i].isStop = true;
-                //all[trafficAt].isStart = true;
                 all[i].setToGreenDuration(dur);
                 all[i].setAnimatorAt(0);
 
+            }
+            else
+            {
+                all[trafficAt].isStop = false;
+                all[trafficAt].setAnimatorAt(1);
             }
         }
     }
