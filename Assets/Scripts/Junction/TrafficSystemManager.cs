@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEditor;
 
 public class TrafficSystemManager : MonoBehaviour
 {
@@ -66,4 +67,25 @@ public class TrafficSystemManager : MonoBehaviour
             }
         }
     }
+
+#if UNITY_EDITOR
+    public void OnDrawGizmos()
+    {
+        //HandleUtility.Repaint();
+
+        //Gizmos.matrix = Matrix4x4.TRS(transform.position, transform.rotation, Vector3.one);
+
+        Gizmos.color = Color.magenta;
+
+        Transform temp = null;
+
+        foreach (Transform child in traffics.transform)
+        {
+            if(temp!=null)
+                Gizmos.DrawLine(child.transform.position, temp.transform.position);
+
+            temp = child.transform;
+        }
+    }
+#endif
 }
