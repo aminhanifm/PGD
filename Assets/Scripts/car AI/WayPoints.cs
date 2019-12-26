@@ -141,7 +141,7 @@ public class CustomInspector : Editor {
         }
 
         if(GUI.Button(new Rect(60, 70, 50, 30), "Delete")){
-            Debug.Log("asoy");
+            Debug.Log("anjay");
         }
     }
 }
