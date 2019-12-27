@@ -5,6 +5,7 @@ using UnityEngine;
 public class Savemanagement : MonoBehaviour
 {
     private UIcontroller uicontroller;
+    private bool isload = true;
 
     public int money;
     public float fuel;
@@ -13,22 +14,29 @@ public class Savemanagement : MonoBehaviour
 
     void Start()
     {
+        PlayerPrefs.DeleteAll();
         money = PlayerPrefs.GetInt("Curmoney", 0);
         fuel = PlayerPrefs.GetFloat("Curfuel", 1);
-        wantedlvl = PlayerPrefs.GetFloat("Wantedlvl", 0);
+        wantedlvl = PlayerPrefs.GetFloat("Wantedlvl", 0.9f);
         repair = PlayerPrefs.GetInt("Repair", 100);
-
+       
         uicontroller = FindObjectOfType(typeof(UIcontroller)) as UIcontroller;
 
-        uicontroller.money();
-        uicontroller.loadfuel();
-        uicontroller.loadwanted();
+
     }
 
     // Update is called once per frame
     void FixedUpdate()
     {
-
+        //load
+        if (uicontroller.MMCanvas.alpha == 0 && uicontroller.fadingmm == true && isload == true)
+        {
+           
+            uicontroller.money();
+            uicontroller.loadfuel();
+            uicontroller.loadwanted();
+            isload = false;
+        }
     }
 
 

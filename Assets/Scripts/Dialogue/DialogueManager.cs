@@ -4,9 +4,12 @@ using System.Collections.Generic;
 using TMPro;
 using KoganeUnityLib;
 using System.Text.RegularExpressions;
+using UnityEngine.EventSystems;
 
-public class DialogueManager : MonoBehaviour
+public class DialogueManager : MonoBehaviour, IPointerDownHandler
 {
+    private UIcontroller uicontroller;
+
     public GameObject LEFT;
     public GameObject RIGHT;
     public GameObject dialogBox;
@@ -29,11 +32,25 @@ public class DialogueManager : MonoBehaviour
 
     void Start()
     {
+        uicontroller = FindObjectOfType(typeof(UIcontroller)) as UIcontroller;
         dialogMaster = gameObject;
         dialogLine = dialogBox.GetComponentInChildren<TextMeshProUGUI>();
         dt = gameObject.transform.GetComponentInChildren<dialogueTemplate>();
         person_image = new Dictionary<string, Sprite>();
         initScenario(0);
+    }
+
+    public void OnPointerDown(PointerEventData eventData)
+    {
+
+    }
+
+    public void onnextpress(BaseEventData input)
+    {
+        if (uicontroller.UIcanvas.interactable)
+        {
+            continueLine();
+        }
     }
 
     private void initScenario(int index)

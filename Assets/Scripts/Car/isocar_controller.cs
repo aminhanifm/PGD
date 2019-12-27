@@ -1,28 +1,36 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using UnityEngine.EventSystems;
 
-public class isocar_controller : MonoBehaviour
+public class isocar_controller : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
 {
+
     // Start is called before the first frame update
     private UIcontroller uicontroller;
+    private SteeringLogic steerlogic;
 
     Vector2 carLocation;  //car center location
     [HideInInspector] public Vector2 velocity;
     [HideInInspector] public Vector2 carForward;
 
+    private bool accelerating = false;
+    private bool breaking = false;
 
     private float steerAngle;
     private Vector2 acceleration;
+    private float steerturn;
 
     float braking = -5f;
     float max_speed_reverse = 5f;
 
-    private float  steering_angle = 25f;
+    private float  steering_angle = 20f;
     private float wheelBase = 1.5f;  //wheel base distance 
     private float friction = -0.1f;
     private float drag = -0.01f;
     private float enginePower = 5.0f;
+
 
     [HideInInspector] public double curspeed;
     [HideInInspector] public int curspeedint;
@@ -33,7 +41,7 @@ public class isocar_controller : MonoBehaviour
     void Start()
     {
         uicontroller = FindObjectOfType(typeof(UIcontroller)) as UIcontroller;
-
+        steerlogic = FindObjectOfType(typeof(SteeringLogic)) as SteeringLogic;
         rb2d = this.GetComponent<Rigidbody2D>();
         scriptrenderer = this.GetComponentInChildren<isometricCarRenderer>();
         carLocation = this.transform.position;
@@ -44,9 +52,33 @@ public class isocar_controller : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
         // Debug.Log(velocity);
         acceleration = Vector2.zero;
         get_input();
+        if (breaking)
+        {
+            acceleration = carForward * braking;
+        }
+        if (accelerating)
+        {
+            acceleration = carForward * enginePower;
+        }
+
+        if (steerlogic.wheelAngle > 0)
+        {
+            steerturn = -1;
+        }
+        else if (steerlogic.wheelAngle < 0)
+        {
+            steerturn = 1;
+        }
+        if (!steerlogic.wheelBeingHeld)
+        {
+            steerturn = 0;
+        }
+        steerAngle = steerturn * steering_angle;
+
         apply_friction();
         calculate_steering(Time.deltaTime);
     }
@@ -62,9 +94,61 @@ public class isocar_controller : MonoBehaviour
         scriptrenderer.setDirection(carForward);
     }
 
+
+    public void OnPointerDown(PointerEventData data)
+    {
+
+    }
+
+    public void OnPointerUp(PointerEventData data)
+    {
+
+    }
+
+    public void carsteeringup(BaseEventData up)
+    {
+        string name;
+
+        name = up.selectedObject.name;
+
+        if (name == "Accelerate")
+        {
+            accelerating = false;
+        }
+
+        else if (name == "Break")
+        {
+            breaking = false;
+        }
+    }
+
+    public void carsteeringdown(BaseEventData input)
+    {
+        string name;
+
+        name = input.selectedObject.name;
+
+        if (uicontroller.UIcanvas.interactable == true)
+        {
+            if (uicontroller.fuelfill.fillAmount > 0)
+            {
+                if (name == "Accelerate")
+                {
+                    accelerating = true;
+                }
+
+                else if (name == "Break")
+                {
+                    breaking = true;
+                }
+            }
+
+        }
+    }
+
     private void get_input()
     {
-        if (uicontroller.fuelfill.fillAmount > 0)
+        if (uicontroller.UIcanvas.interactable == true)
         {
             float turn = 0;
             if (Input.GetKey(KeyCode.RightArrow))
@@ -72,12 +156,13 @@ public class isocar_controller : MonoBehaviour
             else if (Input.GetKey(KeyCode.LeftArrow))
                 turn += 1;
             steerAngle = turn * steering_angle;
-
-            //accelerate
-            if (Input.GetKey(KeyCode.UpArrow))
-                acceleration = carForward * enginePower;
-            else if (Input.GetKey(KeyCode.DownArrow))
-                acceleration = carForward * braking;
+            if (uicontroller.fuelfill.fillAmount > 0)
+            {
+                if (Input.GetKey(KeyCode.UpArrow))
+                    acceleration = carForward * enginePower;
+                else if (Input.GetKey(KeyCode.DownArrow))
+                    acceleration = carForward * braking;
+            }
         }
     }
 
