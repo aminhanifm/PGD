@@ -19,20 +19,18 @@ public class PointsManager : MonoBehaviour
     
     }
 
-    private void OnDrawGizmosSelected()
-    {
-        
-    }
-
-#if UNITY_EDITOR
     private void OnDrawGizmos()
     {
+        //print("try");
         Gizmos.matrix = Matrix4x4.TRS(transform.position, transform.rotation, transform.lossyScale);
-        Gizmos.color = Color.green;
+        Gizmos.color = Color.blue;
         GUIStyle style = new GUIStyle();
         style.normal.textColor = Color.yellow;
         style.fontStyle = FontStyle.Bold;
         style.fontSize = 17;
+
+        Gizmos.DrawWireSphere(Vector3.zero, 0.5f);
+        Gizmos.color = Color.green;
 
         foreach (var pt in points.myPoints)
         {
@@ -45,7 +43,7 @@ public class PointsManager : MonoBehaviour
             }
         }
     }
-#endif
+
 
 }
 

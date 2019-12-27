@@ -14,8 +14,13 @@ public class CarPointsManager : MonoBehaviour
 
     public void Awake()
     {
+        print(points.getPointsCount());
         curPoint = points.myPoints[0];
-        lastPoint = curPoint;
+        //lastPoint = curPoint.next[0];
+        lastPoint = points.getNextPoint(curPoint, 0);
+
+        this.transform.position = curPoint.location;
+
         laneStartPos = (-laneWidth + laneNum * laneWidth) / 2;       //define length from point's origin to the most left
         //print(curPoint.location);
     }
@@ -34,9 +39,12 @@ public class CarPointsManager : MonoBehaviour
         //print("index: "+index+"  pointnya: "+points.getPointsCount());
         index = index < points.getNextPointsCount(curPoint) ? index : 0;
         lastPoint = curPoint;
-        curPoint = points.getNextPoint(curPoint, index);
-        
-        //print(lastPoint+ "  " + curPoint);
+
+        //curPoint = points.getNextPoint(lastPoint, index);
+        string name = lastPoint.next[0].obj.name;
+        curPoint =  points.getPointByName(name);
+
+        print(lastPoint + "  " + curPoint);
     }
 
     public void setCurPoint(int index)
