@@ -3,32 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
 
-[System.Serializable]
-public class tempPoint
-{
-    public string name;
-    public List<tempPoint> next;
-    public GameObject obj;
-
-    public tempPoint(string name, GameObject obj)
-    {
-        this.name = name;
-        this.obj = obj;
-        this.next = new List<tempPoint>();
-    }
-}
-
 public class PointsManager : MonoBehaviour
 {
     public GameObject obj;
     public GameObject self_obj;
     public Points points;
-    public List<tempPoint> objList = new List<tempPoint>();
 
     // Start is called before the first frame update
-    void Start()
+    void awake()
     {
-            
     }
 
     private void Update()
@@ -45,18 +28,20 @@ public class PointsManager : MonoBehaviour
     private void OnDrawGizmos()
     {
         Gizmos.matrix = Matrix4x4.TRS(transform.position, transform.rotation, transform.lossyScale);
-        Gizmos.color = Color.blue;
+        Gizmos.color = Color.green;
         GUIStyle style = new GUIStyle();
-        style.normal.textColor = Color.green;
+        style.normal.textColor = Color.yellow;
         style.fontStyle = FontStyle.Bold;
+        style.fontSize = 17;
 
-        foreach (var pt in objList)
+        foreach (var pt in points.myPoints)
         {
-            //Gizmos.DrawSphere(pt.obj.transform.position, 1);
-            Handles.Label(pt.obj.transform.position, pt.obj.name, style);
-            foreach (var pt2 in pt.next)
+            pt.location = pt.obj.transform.position;
+            Gizmos.DrawWireSphere(pt.location, 0.5f);
+            Handles.Label(pt.location, pt.obj.name, style);
+            foreach (var pt_next in pt.next)
             {
-                Gizmos.DrawLine(pt.obj.transform.position, pt2.obj.transform.position);
+                Gizmos.DrawLine(pt.obj.transform.position, pt_next.obj.transform.position);
             }
         }
     }
@@ -79,19 +64,23 @@ public class PointsInspector : Editor
     {
         ie = (PointsManager)target;
 
+        Display();
+
+        base.OnInspectorGUI();
+    }
+
+    void Display()
+    {
         GUILayout.BeginVertical();
 
         if (GUILayout.Button("Add+"))
         {
             GameObject newobj = Instantiate(ie.obj);
-            //newobj.name = newobj.GetInstanceID().ToString();
             i++;
             newobj.name = i.ToString();
             newobj.transform.SetParent(ie.self_obj.transform);
 
-
-            ie.objList.Add(new tempPoint(i.ToString(), newobj));
-            //ie.points.createPoint(newobj.transform.position);
+            ie.points.createPoint(newobj);
         }
 
         GUILayout.Space(5);
@@ -101,12 +90,12 @@ public class PointsInspector : Editor
         fromObjName = GUILayout.TextField(fromObjName);
         toObjName = GUILayout.TextField(toObjName);
         GUILayout.EndVertical();
-        if (GUILayout.Button("Add Next", GUILayout.ExpandHeight(true))) 
+        if (GUILayout.Button("Add Next", GUILayout.ExpandHeight(true)))
         {
-            tempPoint fromObj = getItem(fromObjName);
-            tempPoint toObj = getItem(toObjName);
+            thePoint fromObj = ie.points.getPointByName(fromObjName);
+            thePoint toObj = ie.points.getPointByName(toObjName);
 
-            if(fromObj==null || toObj ==null) { }
+            if (fromObj == null || toObj == null) { }
             else
             {
                 fromObj.next.Add(toObj);
@@ -117,15 +106,15 @@ public class PointsInspector : Editor
         GUILayout.Space(5);
 
         GUILayout.BeginHorizontal();
-        if(GUILayout.Button("delete", GUILayout.Width(70)))
+        if (GUILayout.Button("delete", GUILayout.Width(70)))
         {
-            tempPoint delObj = getItem(delObjName);
+            thePoint delObj = ie.points.getPointByName(delObjName);
 
-            if (delObj== null) { }
+            if (delObj == null) { }
             else
             {
-                ie.objList.Remove(delObj);
-                GameObject tempToDel=  ie.self_obj.transform.Find(delObjName).gameObject;
+                ie.points.myPoints.Remove(delObj);
+                GameObject tempToDel = ie.self_obj.transform.Find(delObjName).gameObject;
                 DestroyImmediate(tempToDel);
             }
         }
@@ -134,7 +123,7 @@ public class PointsInspector : Editor
 
         GUILayout.Space(5);
 
-        GUILayout.Label("current index: "+i.ToString());
+        GUILayout.Label("current index: " + i.ToString());
 
         GUILayout.BeginHorizontal();
         if (GUILayout.Button("reset", GUILayout.Width(70)))
@@ -149,21 +138,6 @@ public class PointsInspector : Editor
 
         GUILayout.Space(5);
         GUILayout.EndVertical();
-
-        base.OnInspectorGUI();
-    }
-
-    tempPoint getItem(string name)
-    {
-        foreach(var item in ie.objList)
-        {
-            if(item.name == name)
-            {
-                return item;
-            }
-        }
-
-        return null;
     }
 
 }

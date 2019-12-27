@@ -7,8 +7,16 @@ using System;
 [System.Serializable]
 public class thePoint
 {
+    public GameObject obj;
     public List<thePoint> next;
     public Vector2 location;
+
+    public thePoint(GameObject obj)
+    {
+        this.obj = obj;
+        this.location = obj.transform.position;
+        this.next = new List<thePoint>();
+    }
 
     public thePoint(Vector2 location)
     {
@@ -46,6 +54,13 @@ public class Points : MonoBehaviour
         return point;
     }
 
+    public thePoint createPoint(GameObject obj)
+    {
+        thePoint point = new thePoint(obj);
+        myPoints.Add(point);
+        return point;
+    }
+
     public void addNextPoint(thePoint point, thePoint[] lsPoint)
     {
         foreach(var pt in lsPoint)
@@ -78,22 +93,17 @@ public class Points : MonoBehaviour
         return point.next.Count;
     }
 
-#if UNITY_EDITOR
-    public void OnDrawGizmos()
+    public thePoint getPointByName(string name)
     {
-        //HandleUtility.Repaint();
-
-        Gizmos.matrix = Matrix4x4.TRS(transform.position, transform.rotation, transform.lossyScale);
-        Gizmos.color = Color.green;
-
-        foreach (var pt in myPoints)
+        foreach (var item in myPoints)
         {
-            Gizmos.DrawSphere(pt.location, 1);
-            foreach (var pt_next in pt.next)
+            if (item.obj.name == name)
             {
-                Gizmos.DrawLine(pt.location, pt_next.location);
+                return item;
             }
         }
+
+        return null;
     }
-#endif
+
 }
