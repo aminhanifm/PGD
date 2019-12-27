@@ -25,13 +25,13 @@ public class IsoCarAI : CarGeneric
     {
         base.Start();
         renderer = this.GetComponent<IsometricCarRenderer>();
-        braking = -2f;
+        braking = -4f;
         max_speed_reverse = 5f;
-        steering_angle = 45f;
+        steering_angle = 55f;
         wheelBase = 1.5f;         //wheel base distance 
         friction = -0.1f;
         drag = -0.01f;
-        enginePower = 2.0f;
+        enginePower = 0.5f;
 
         carPM = this.gameObject.GetComponent<CarPointsManager>();
 
