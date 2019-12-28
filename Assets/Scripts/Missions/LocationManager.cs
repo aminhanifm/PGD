@@ -15,6 +15,12 @@ public class LocationManager : MonoBehaviour
 {
     [SerializeField] public List<Location> locations;
 
+    public void MakeLocationPair(int mFrom, int mTo, out Location from, out Location to)
+    {
+        from = locations[mFrom];
+        to = locations[mTo];
+    }
+
     public void GenerateLocationPair(out Location from, out Location to)
     {
         int id = Random.Range(0, locations.Count);

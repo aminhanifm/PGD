@@ -7,8 +7,8 @@ using UnityEngine;
 public class MissionManager : MonoBehaviour
 {
     public GameObject locationTrigger;
-    [HideInInspector] public LocationManager LM;
-    [HideInInspector] public List<Tuple<Location, Location>> objective;
+    public LocationManager LM;
+    public List<Tuple<Location, Location>> objective;
     private List<Location> curObjective;
     bool success;
     Location curDestination;
@@ -19,26 +19,43 @@ public class MissionManager : MonoBehaviour
         objective= new List<Tuple<Location, Location>>();
         curObjective = new List<Location>();
 
-        init();
+        //demo
+        //init();
+    }
+
+    private void Update()
+    {
+        //demo
+        //if (Input.GetKeyDown(KeyCode.J))
+        //{
+        //    getNextDestination();
+        //    print(curDestination.name);
+        //}
     }
 
     public void init()
     {
         success = false;
         generateObjective(3);
-
     }
 
     public void getNextDestination()
     {
-        curDestination = curObjective[0];
-        locationTrigger.transform.position = curDestination.position;
-        curObjective.RemoveAt(0);
-
         if (curObjective.Count < 1)
         {
             setCurObjective();
         }
+
+        curDestination = curObjective[0];
+        locationTrigger.transform.position = curDestination.position;
+        curObjective.RemoveAt(0);
+    }
+
+    //untuk membuat misi kustom
+    public void AddCustomObjective(int mFrom, int mTo)
+    {
+        LM.MakeLocationPair(mFrom, mTo, out Location from, out Location to);
+        objective.Add(Tuple.Create(from, to));
     }
 
     public void generateObjective(int totalObjective)
@@ -62,6 +79,7 @@ public class MissionManager : MonoBehaviour
         catch(Exception e)
         {
             //trigger objective selesai
+            print("aman gan");
             success = true;
         }
     }
