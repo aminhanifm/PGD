@@ -59,3 +59,7 @@ sysinfo.txt
 # Crashlytics generated file
 crashlytics-build.properties
 
+.gitattributes
+Assets/Scripts/Junction.meta
+
+Assets/Animations/lawas.meta
