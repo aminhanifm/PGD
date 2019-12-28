@@ -30,7 +30,8 @@ public abstract class CarGeneric : MonoBehaviour
 
     protected virtual void Update()
     {
-        apply_friction();
+        //apply_friction();
+        //print("velocity: "+velocity.magnitude);
         calculate_steering(Time.deltaTime);
     }
 
@@ -54,8 +55,14 @@ public abstract class CarGeneric : MonoBehaviour
         Vector2 rearWheel = new Vector2(transform.position.x, transform.position.y) - wheelLen;
 
         rearWheel += delta * velocity;
+
+        float dist = velocity.magnitude;
         velocity = Rotate(velocity, steerAngle);
+        velocity.Normalize();
+        velocity *= dist;
         frontWheel += velocity * delta;
+
+        print("vel: " + velocity.magnitude + "   steerAngle: " + steerAngle);
 
         // debug line
         Vector3 ls = Vector3.zero;
@@ -77,7 +84,7 @@ public abstract class CarGeneric : MonoBehaviour
         Vector2 drag_force = velocity * v_magnitude * drag;
 
         if (v_magnitude < 100f)
-            friction_force *= 3;
+            friction_force *= 1.5f;
 
         acceleration += drag_force + friction_force;
     }

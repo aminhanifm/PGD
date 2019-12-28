@@ -59,3 +59,6 @@ TagManager:
   - name: Objects
     uniqueID: 3376206067
     locked: 0
+  - name: Waypoints
+    uniqueID: 2264804703
+    locked: 0

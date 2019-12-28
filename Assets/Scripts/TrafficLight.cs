@@ -185,6 +185,7 @@ public class TrafficLight : MonoBehaviour
             //to green
             if (trafficanimator.GetInteger("Color") == 0)
             {
+                coll.enabled = true;
                 yield return new WaitForSeconds(traffictogreen);
                 trafficanimator.SetInteger("Color", 1);
             }
@@ -196,6 +197,7 @@ public class TrafficLight : MonoBehaviour
             //to yellow
             if (trafficanimator.GetInteger("Color") == 1)
             {
+                coll.enabled = false;
                 yield return new WaitForSeconds(traffictoyellow);
                 trafficanimator.SetInteger("Color", 2);
             }

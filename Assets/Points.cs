@@ -4,10 +4,19 @@ using UnityEngine;
 using UnityEditor;
 using System;
 
+[System.Serializable]
 public class thePoint
 {
+    public GameObject obj;
     public List<thePoint> next;
     public Vector2 location;
+
+    public thePoint(GameObject obj)
+    {
+        this.obj = obj;
+        this.location = obj.transform.position;
+        this.next = new List<thePoint>();
+    }
 
     public thePoint(Vector2 location)
     {
@@ -18,29 +27,36 @@ public class thePoint
 
 public class Points : MonoBehaviour
 {
-    public List<thePoint> myPoints = new List<thePoint>();
+    [SerializeField] public List<thePoint> myPoints = new List<thePoint>();
 
     public void Awake()
     {
-        thePoint one = createPoint(new Vector2(0, 0));
-        thePoint two = createPoint(new Vector2(20, 10));
-        thePoint three = createPoint(new Vector2(0, 20));
-        thePoint four = createPoint(new Vector2(-20, 10));
+        //thePoint one = createPoint(new Vector2(0, 0));
+        //thePoint two = createPoint(new Vector2(20, 10));
+        //thePoint three = createPoint(new Vector2(0, 20));
+        //thePoint four = createPoint(new Vector2(-20, 10));
 
-        thePoint five = createPoint(new Vector2(40, 0));
-        thePoint six = createPoint(new Vector2(20, -10));
+        //thePoint five = createPoint(new Vector2(40, 0));
+        //thePoint six = createPoint(new Vector2(20, -10));
 
-        addNextPoint(one, new thePoint[] { two });
-        addNextPoint(two, new thePoint[] { three, five });
-        addNextPoint(three, new thePoint[] { four });
-        addNextPoint(four, new thePoint[] { one });
-        addNextPoint(five, new thePoint[] { six });
-        addNextPoint(six, new thePoint[] { one });
+        //addNextPoint(one, new thePoint[] { two });
+        //addNextPoint(two, new thePoint[] { three, five });
+        //addNextPoint(three, new thePoint[] { four });
+        //addNextPoint(four, new thePoint[] { one });
+        //addNextPoint(five, new thePoint[] { six });
+        //addNextPoint(six, new thePoint[] { one });
     }
 
     public thePoint createPoint(Vector2 loc)
     {
         thePoint point = new thePoint(loc);
+        myPoints.Add(point);
+        return point;
+    }
+
+    public thePoint createPoint(GameObject obj)
+    {
+        thePoint point = new thePoint(obj);
         myPoints.Add(point);
         return point;
     }
@@ -67,6 +83,19 @@ public class Points : MonoBehaviour
         return nextPoint;
     }
 
+    public Vector2 getNextPointLocation(thePoint point, int idx = 0)
+    {
+        try
+        {
+            //print(point.next[idx].obj.name);
+            return point.next[idx].location;
+        }
+        catch (Exception e)
+        {
+            return Vector2.zero;
+        }
+    }
+
     public int getPointsCount()
     {
         return myPoints.Count;
@@ -77,22 +106,17 @@ public class Points : MonoBehaviour
         return point.next.Count;
     }
 
-#if UNITY_EDITOR
-    public void OnDrawGizmos()
+    public thePoint getPointByName(string name)
     {
-        //HandleUtility.Repaint();
-
-        Gizmos.matrix = Matrix4x4.TRS(transform.position, transform.rotation, transform.lossyScale);
-        Gizmos.color = Color.green;
-
-        foreach (var pt in myPoints)
+        foreach (var item in myPoints)
         {
-            Gizmos.DrawSphere(pt.location, 1);
-            foreach (var pt_next in pt.next)
+            if (item.obj.name == name)
             {
-                Gizmos.DrawLine(pt.location, pt_next.location);
+                return item;
             }
         }
+
+        return null;
     }
-#endif
+
 }

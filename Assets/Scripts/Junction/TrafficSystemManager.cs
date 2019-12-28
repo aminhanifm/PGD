@@ -37,12 +37,16 @@ public class TrafficSystemManager : MonoBehaviour
     {
         if (all[trafficAt].isStop)
         {
-            trafficAt = (trafficAt + 1) % trafficsCount;
-            for (int i = 0; i < trafficsCount; i++)
+            int newidx =(trafficAt + 1) % trafficsCount;
+            if(newidx != trafficAt)
             {
-                all[i].stopAnimator();
+                trafficAt = newidx;
+                for (int i = 0; i < trafficsCount; i++)
+                {
+                    all[i].stopAnimator();
+                }
+                changeTraffic();
             }
-            changeTraffic();
         }
 
     }
