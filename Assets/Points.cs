@@ -83,6 +83,19 @@ public class Points : MonoBehaviour
         return nextPoint;
     }
 
+    public Vector2 getNextPointLocation(thePoint point, int idx = 0)
+    {
+        try
+        {
+            //print(point.next[idx].obj.name);
+            return point.next[idx].location;
+        }
+        catch (Exception e)
+        {
+            return Vector2.zero;
+        }
+    }
+
     public int getPointsCount()
     {
         return myPoints.Count;

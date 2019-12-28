@@ -8,6 +8,7 @@ public class CarPointsManager : MonoBehaviour
     public Points points;
     public thePoint curPoint;
     public thePoint lastPoint;
+    public thePoint nextPoint;
     private float laneWidth = 1.5f;     //width of a single lane
     private int laneNum = 2;           //number of lanes
     private float laneStartPos;
@@ -41,10 +42,11 @@ public class CarPointsManager : MonoBehaviour
         lastPoint = curPoint;
 
         //curPoint = points.getNextPoint(lastPoint, index);
-        string name = lastPoint.next[0].obj.name;
+        string name = lastPoint.next[index].obj.name;
         curPoint =  points.getPointByName(name);
+        nextPoint = points.getPointByName(curPoint.next[index].obj.name);
 
-        print(lastPoint + "  " + curPoint);
+        print(nextPoint.location);
     }
 
     public void setCurPoint(int index)
@@ -61,10 +63,31 @@ public class CarPointsManager : MonoBehaviour
         return curPoint.location + vecL*(-laneku*laneWidth + laneStartPos);
     }
 
+    public Vector2 getRawCurLocation()
+    {
+        return curPoint.location;
+    }
+
+    public Vector2 getRawNextLocationDir()
+    {
+        Vector2 mDir = new Vector2(nextPoint.location.x - curPoint.location.x, nextPoint.location.y - curPoint.location.y).normalized;
+        return mDir;
+    }
+
     public Vector2 getLocationDirection()
     {
         Vector2 dir = new Vector2(curPoint.location.x - lastPoint.location.x, curPoint.location.y - lastPoint.location.y).normalized;
         return dir;
+    }
+
+    public Vector2 getNextLocationDir(int laneku)
+    {
+        Vector2 mDir = points.getNextPointLocation(curPoint, laneNum);
+        print(mDir);
+        if (mDir == Vector2.zero) return mDir;
+
+        mDir = new Vector2(mDir.x - curPoint.location.x, mDir.y - curPoint.location.y).normalized;
+        return mDir;
     }
 
     public int getMaxLane()

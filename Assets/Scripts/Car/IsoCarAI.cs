@@ -21,20 +21,22 @@ public class IsoCarAI : CarGeneric
 
     private CarPointsManager carPM;
 
+    private float maxVelocity;
+
     protected override void Start()
     {
         base.Start();
         renderer = this.GetComponent<IsometricCarRenderer>();
         braking = -4f;
         max_speed_reverse = 5f;
-        steering_angle = 55f;
+        steering_angle = 65f;
         wheelBase = 1.5f;         //wheel base distance 
         friction = -0.1f;
         drag = -0.01f;
-        enginePower = 0.5f;
+        enginePower = 2f;
 
         carPM = this.gameObject.GetComponent<CarPointsManager>();
-
+        maxVelocity = 7f;
         lane = 0;
         target = carPM.getCurLocation(lane);
         tempTarget = new List<Vector2>();
@@ -54,7 +56,8 @@ public class IsoCarAI : CarGeneric
 
         float distance = (target - (Vector2)transform.position).magnitude;
 
-        if (distance < wheelBase / 2)
+        print(Mathf.FloorToInt(distance));
+        if (Mathf.FloorToInt(distance) < wheelBase )
         {
             if (tempTarget.Count > 0)
             {
@@ -71,8 +74,7 @@ public class IsoCarAI : CarGeneric
         acceleration = Vector2.zero;
         SteerControl();
         ObserveEnvirontment();
-        //DriveForward();
-        //tesajah();
+        
         base.Update();
         renderer.setDirection(carForward);
     }
@@ -119,6 +121,7 @@ public class IsoCarAI : CarGeneric
                 {
                     DriveBackward();
                 }
+                return;
             }
             else DriveForward();
         }
@@ -126,6 +129,42 @@ public class IsoCarAI : CarGeneric
         {
             DriveForward();
         }
+
+        //Vector2 mDir = carPM.getRawNextLocationDir();
+        //if (mDir == Vector2.zero) DriveForward();
+        //else
+        //{
+        //    int mAngle = (int) Vector2.SignedAngle(carForward, mDir);
+        //    mAngle = Mathf.Abs(mAngle);
+        //    Vector2 vDir = carPM.getRawCurLocation();
+
+        //    //print(mAngle);
+
+        //    //ambil jarak sekarang
+        //    float distRelative = Vector3.Distance(new Vector3(vDir.x, vDir.y, 0), transform.position) - wheelBase * 1.5f;
+
+        //    //cari jarak minim
+        //    float minimumDist = Vector2.SqrMagnitude(velocity) / (-1 * 2 * braking *2);
+
+        //    if (distRelative < minimumDist || mAngle>4)
+        //    {
+        //        if(velocity.magnitude > 10f)
+        //        {
+        //            print("aye");
+        //            DriveBackward();
+        //        }
+        //        else
+        //        {
+        //            print("aye2");
+        //            DriveForward();
+        //        }
+
+        //    }
+        //    else
+        //    {
+        //        DriveForward();
+        //    }
+        //}
     }
 
     protected override void calculate_steering(float delta)
@@ -152,10 +191,7 @@ public class IsoCarAI : CarGeneric
             velocity = carForward * velocity.magnitude;
         }
 
-        //print(needToMaintain +" "+ maintain_velocity);
-        if (needToMaintain)
-            velocity = maintain_velocity * carForward;
-            //velocity = Mathf.Min(velocity.magnitude, maintain_velocity) * carForward;
+        if (velocity.magnitude > maxVelocity) velocity = carForward*maxVelocity;
     }
 
     protected override void FixedUpdate()
@@ -164,9 +200,10 @@ public class IsoCarAI : CarGeneric
         base.FixedUpdate();
     }
 
-    void DriveForward()
+    void DriveForward(float factor=1)
     {
-        acceleration = carForward * enginePower;
+        acceleration = carForward * enginePower * factor;
+        //print(acceleration);
     }
 
     void DriveBackward()
@@ -224,11 +261,12 @@ public class IsoCarAI : CarGeneric
 
         //print(myangle);
 
-        if (myangle < -1)
-            turn += 1;
-        else if (myangle > 1)
-            turn -= 1;
+        if (myangle < -4)
+            turn += Mathf.Abs(myangle) / steering_angle;
+        else if (myangle > 4)
+            turn -= Mathf.Abs(myangle) / steering_angle;
 
         steerAngle = turn * steering_angle;
+        steerAngle = Mathf.Min(steerAngle, 80);
     }
 }

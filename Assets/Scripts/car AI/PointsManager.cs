@@ -1,7 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+#if UNITY_EDITOR
 using UnityEditor;
+#endif
 
 public class PointsManager : MonoBehaviour
 {
@@ -9,16 +11,8 @@ public class PointsManager : MonoBehaviour
     public GameObject self_obj;
     public Points points;
 
-    // Start is called before the first frame update
-    void awake()
-    {
-    }
 
-    private void Update()
-    {
-    
-    }
-
+#if UNITY_EDITOR
     private void OnDrawGizmos()
     {
         //print("try");
@@ -43,7 +37,7 @@ public class PointsManager : MonoBehaviour
             }
         }
     }
-
+#endif
 
 }
 
@@ -130,6 +124,22 @@ public class PointsInspector : Editor
         }
         string inya = GUILayout.TextField(i.ToString());
         int.TryParse(inya, out i);
+        GUILayout.EndHorizontal();
+
+        GUILayout.Space(5);
+
+        GUILayout.BeginHorizontal();
+        if (GUILayout.Button("delete next", GUILayout.Width(70)))
+        {
+            thePoint delObj = ie.points.getPointByName(delObjName);
+
+            if (delObj == null) { }
+            else
+            {
+                delObj.next = new List<thePoint>();
+            }
+        }
+        delObjName = GUILayout.TextField(delObjName, GUILayout.ExpandHeight(true));
         GUILayout.EndHorizontal();
 
         EditorGUILayout.HelpBox("Please use this inpector's fields to add, delete points", MessageType.Info);
