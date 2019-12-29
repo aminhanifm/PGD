@@ -7,19 +7,30 @@ public class CarSpawner : MonoBehaviour
     public Points points;
     public GameObject carAi;
 
-    [SerializeField] private int max_car;
+    public int max_car;
     private int pointSize;
-    public int cur_car;
+    private int cur_car;
 
     float timeToSpawn = 0;
+
+    //private List<GameObject> cars;
 
     // Start is called before the first frame update
     void Awake()
     {
+        //cars = new List<GameObject>();
         pointSize = points.getPointsCount();
         cur_car = 0;
         timeToSpawn = 0;
-        randomSpawnerAtStart();
+        //randomSpawnerAtStart();
+
+        //foreach (Transform child in this.transform)
+        //{
+        //    //print(child.name);
+        //    cars.Add(child.gameObject);
+        //}
+        //max_car = cars.Count;
+        StartCoroutine(spawnSequentially());
     }
 
     // Update is called once per frame
@@ -56,4 +67,27 @@ public class CarSpawner : MonoBehaviour
             spawnCar(idx);
         }
     }
+
+    IEnumerator spawnSequentially()
+    {
+        while (cur_car < max_car)
+        {
+            spawnCar();
+            yield return new WaitForSeconds(4);
+        }
+        
+    }
+
+    //IEnumerator initSequentially()
+    //{
+    //    while (cur_car < max_car)
+    //    {
+    //        //int idx = Random.Range(0, pointSize - 1);
+    //        cars[cur_car].GetComponent<CarPointsManager>().init(0);
+    //        cars[cur_car].GetComponent<IsoCarAI>().aktif = true;
+    //        cur_car++;
+    //        yield return new WaitForSeconds(3);
+    //    }
+
+    //}
 }

@@ -23,6 +23,8 @@ public class IsoCarAI : CarGeneric
 
     private float maxVelocity;
 
+    //[HideInInspector]public bool aktif = false;
+
     protected override void Start()
     {
         base.Start();
@@ -47,6 +49,7 @@ public class IsoCarAI : CarGeneric
 
     protected override void Update()
     {
+        //if (!aktif) return;
 
         if (tempTarget.Count > 0)
         {
@@ -73,7 +76,7 @@ public class IsoCarAI : CarGeneric
         acceleration = Vector2.zero;
         SteerControl();
         ObserveEnvirontment();
-        
+
         base.Update();
         renderer.setDirection(carForward);
     }
@@ -99,6 +102,9 @@ public class IsoCarAI : CarGeneric
 
     void ObserveEnvirontment()
     {
+        //DriveForward();
+        //return;
+
         Vector2 st = Vector2.zero;
         st = transform.position;
         RaycastHit2D hit = Physics2D.Raycast(st, carForward, cast_forward_len);

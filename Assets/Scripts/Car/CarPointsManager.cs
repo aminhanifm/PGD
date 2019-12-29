@@ -20,7 +20,10 @@ public class CarPointsManager : MonoBehaviour
         //lastPoint = points.getNextPoint(curPoint, 0);
         points = GameObject.Find("Car Way Points").GetComponent<Points>();
         laneStartPos = (-laneWidth + laneNum * laneWidth) / 2;       //define length from point's origin to the most left
-        //print(curPoint.location);
+
+        //sementara
+        //int idx = UnityEngine.Random.Range(0, points.myPoints.Count - 1);
+        //init(idx);
     }
     //public void start()
     //{
@@ -60,6 +63,7 @@ public class CarPointsManager : MonoBehaviour
         catch (Exception e)
         {
             //Destroy(this.gameObject);
+            print("rusak");
             int idx = UnityEngine.Random.Range(0, points.myPoints.Count - 1);
             init(idx);
         }
