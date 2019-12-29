@@ -32,7 +32,7 @@ public class SteeringLogic : MonoBehaviour, IPointerDownHandler, IDragHandler, I
 
     private void Update()
     {
-        if (uicontroller.UIcanvas.interactable)
+        if (uicontroller.UIcanvas.interactable && !uicontroller.iswanted)
         {
             if (!wheelBeingHeld && !Mathf.Approximately(0f, wheelAngle))
             {
@@ -83,31 +83,35 @@ public class SteeringLogic : MonoBehaviour, IPointerDownHandler, IDragHandler, I
 
     public void OnPointerDown(PointerEventData eventData)
     {
-        Vector2 pointerPos = ((PointerEventData)eventData).position;
-        wheelBeingHeld = true;
-        wheelPrevAngle = Vector2.Angle(Vector2.up, pointerPos - centerPoint);
-
+        if (uicontroller.UIcanvas.interactable && !uicontroller.iswanted)
+        {
+            Vector2 pointerPos = ((PointerEventData)eventData).position;
+            wheelBeingHeld = true;
+            wheelPrevAngle = Vector2.Angle(Vector2.up, pointerPos - centerPoint);
+        }
     }
     public void OnDrag(PointerEventData eventData)
     {
-        Vector2 pointerPos = ((PointerEventData)eventData).position;
-
-        float wheelNewAngle = Vector2.Angle(Vector2.up, pointerPos - centerPoint);
-
-
-
-        // Do nothing if the pointer is too close to the center of the wheel
-        if (Vector2.Distance(pointerPos, centerPoint) > 20f)
+        if (uicontroller.UIcanvas.interactable && !uicontroller.iswanted)
         {
-            if (pointerPos.x > centerPoint.x)
-                wheelAngle += wheelNewAngle - wheelPrevAngle;
-            else
-                wheelAngle -= wheelNewAngle - wheelPrevAngle;
-        }
-        // Make sure wheel angle never exceeds maximumSteeringAngle
-        wheelAngle = Mathf.Clamp(wheelAngle, -maximumSteeringAngle, maximumSteeringAngle);
-        wheelPrevAngle = wheelNewAngle;
+            Vector2 pointerPos = ((PointerEventData)eventData).position;
 
+            float wheelNewAngle = Vector2.Angle(Vector2.up, pointerPos - centerPoint);
+
+
+
+            // Do nothing if the pointer is too close to the center of the wheel
+            if (Vector2.Distance(pointerPos, centerPoint) > 20f)
+            {
+                if (pointerPos.x > centerPoint.x)
+                    wheelAngle += wheelNewAngle - wheelPrevAngle;
+                else
+                    wheelAngle -= wheelNewAngle - wheelPrevAngle;
+            }
+            // Make sure wheel angle never exceeds maximumSteeringAngle
+            wheelAngle = Mathf.Clamp(wheelAngle, -maximumSteeringAngle, maximumSteeringAngle);
+            wheelPrevAngle = wheelNewAngle;
+        }
     }
 
     public void OnPointerUp(PointerEventData eventData)

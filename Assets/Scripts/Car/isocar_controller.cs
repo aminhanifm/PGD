@@ -3,9 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
+using DG.Tweening;
 
 public class isocar_controller : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
 {
+    private Transform repairimg;
+    private Savemanagement savemanagement;
+    private VolumeManager volmanager;
+    [HideInInspector] public AudioSource caraudio;
+    private bool isaudioplay;
 
     // Start is called before the first frame update
     private UIcontroller uicontroller;
@@ -15,8 +21,8 @@ public class isocar_controller : MonoBehaviour, IPointerDownHandler, IPointerUpH
     [HideInInspector] public Vector2 velocity;
     [HideInInspector] public Vector2 carForward;
 
-    private bool accelerating = false;
-    private bool breaking = false;
+    [HideInInspector] public bool accelerating = false;
+    [HideInInspector] public bool breaking = false;
 
     private float steerAngle;
     private Vector2 acceleration;
@@ -25,7 +31,7 @@ public class isocar_controller : MonoBehaviour, IPointerDownHandler, IPointerUpH
     float braking = -1f;
     float max_speed_reverse = 5f;
 
-    private float  steering_angle = 20f;
+    private float  steering_angle = 25f;
     private float wheelBase = 1.5f;  //wheel base distance 
     private float friction = -0.1f;
     private float drag = -0.01f;
@@ -38,23 +44,31 @@ public class isocar_controller : MonoBehaviour, IPointerDownHandler, IPointerUpH
     Rigidbody2D rb2d;
     IsometricCarRenderer scriptrenderer;
 
+    private bool ishitten = false;
+
     void Start()
     {
+        repairimg = GameObject.Find("Repair Icon").GetComponent<Transform>();
         uicontroller = FindObjectOfType(typeof(UIcontroller)) as UIcontroller;
         steerlogic = FindObjectOfType(typeof(SteeringLogic)) as SteeringLogic;
+        savemanagement = FindObjectOfType(typeof(Savemanagement)) as Savemanagement;
+        volmanager = FindObjectOfType(typeof(VolumeManager)) as VolumeManager;
+
+        caraudio = gameObject.GetComponent<AudioSource>();
         rb2d = this.GetComponent<Rigidbody2D>();
         scriptrenderer = this.GetComponentInChildren<IsometricCarRenderer>();
         carLocation = this.transform.position;
         velocity = Vector2.zero;
-        carForward = Vector2.right;        
+        carForward = Vector2.right;
     }
         
     // Update is called once per frame
     void Update()
     {
-
+        caraudio.volume = volmanager.audiosrc.volume;
         // Debug.Log(velocity);
         acceleration = Vector2.zero;
+
         get_input();
         if (breaking)
         {
@@ -88,12 +102,69 @@ public class isocar_controller : MonoBehaviour, IPointerDownHandler, IPointerUpH
     /// </summary>
     void FixedUpdate()
     {
+        
         curspeed = rb2d.velocity.magnitude * 3.6;
         curspeedint = (int) curspeed;
         rb2d.velocity = velocity;
         scriptrenderer.setDirection(carForward);
+        if (savemanagement.repair <= 30 && savemanagement.repair != 0)
+        {
+            steering_angle = 20f;
+            enginePower = 1.2f;
+        }
+        else if (savemanagement.repair > 30)
+        {
+            steering_angle = 25f;
+            enginePower = 2f;
+        }
+        if (savemanagement.repair <= 0)
+        {
+            steering_angle = 15f;
+            enginePower = 1f;
+        }
+        if (curspeedint > 0 && !isaudioplay)
+        {
+            isaudioplay = true;
+            caraudio.Play();
+        }
+        if (curspeedint == 0 && isaudioplay)
+        {
+            print("iswork");
+            isaudioplay = false;
+            caraudio.pitch = 1f;
+            caraudio.Stop();
+        }
     }
 
+    public void OnCollisionEnter2D(Collision2D collision)
+    {
+
+        if(collision.collider.CompareTag("Collisiontorepair") && !ishitten)
+        {
+            ishitten = true;
+            SoundsManager.PlaySound("Car Hit");
+            if (savemanagement.repair > 0)
+            {
+                savemanagement.repair -= 1;
+                repairimg.DOScale(1.3f, 0.25f);
+                print(savemanagement.repair);
+            }
+            if(savemanagement.repair <= 0)
+            {
+                uicontroller.repairimg.DOColor(Color.black, 1f);
+            }
+        }
+    }
+
+    public void OnCollisionExit2D(Collision2D collision)
+    {
+        if (collision.collider.CompareTag("Collisiontorepair") && ishitten)
+        {
+            ishitten = false;
+            repairimg.DOScale(1f, 0.5f);
+            print("exit");
+        }
+    }
 
     public void OnPointerDown(PointerEventData data)
     {
@@ -103,47 +174,6 @@ public class isocar_controller : MonoBehaviour, IPointerDownHandler, IPointerUpH
     public void OnPointerUp(PointerEventData data)
     {
 
-    }
-
-    public void carsteeringup(BaseEventData up)
-    {
-        string name;
-
-        name = up.selectedObject.name;
-
-        if (name == "Accelerate")
-        {
-            accelerating = false;
-        }
-
-        else if (name == "Break")
-        {
-            breaking = false;
-        }
-    }
-
-    public void carsteeringdown(BaseEventData input)
-    {
-        string name;
-
-        name = input.selectedObject.name;
-
-        if (uicontroller.UIcanvas.interactable == true)
-        {
-            if (uicontroller.fuelfill.fillAmount > 0)
-            {
-                if (name == "Accelerate")
-                {
-                    accelerating = true;
-                }
-
-                else if (name == "Break")
-                {
-                    breaking = true;
-                }
-            }
-
-        }
     }
 
     private void get_input()
@@ -217,6 +247,7 @@ public class isocar_controller : MonoBehaviour, IPointerDownHandler, IPointerUpH
 
         if(v_magnitude < 100f)
             friction_force *= 3;
+
 
         acceleration += drag_force + friction_force;
     }

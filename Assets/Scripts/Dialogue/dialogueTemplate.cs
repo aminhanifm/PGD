@@ -22,16 +22,15 @@ namespace KoganeUnityLib
     public class dialogueTemplate : MonoBehaviour
     {
         private Scene scenename;
-        
-        const String introduction = "Assets/Files/intro.json";
-        const String tilang = "Assets/Files/tilang.json";
-        const String mission_1 = "Assets/Files/mission_1.json";
-        const String mission_2 = "Assets/Files/mission_2.json";
-        const String mission_3 = "Assets/Files/mission_3.json";
+
+        private DialogueManager dialogueManager;
+        private UIcontroller uicontroller;
+
+        const String Dialogue = "Assets/Files/dialogue.json";
 
         string dialogue;
 
-        private IList<Dialog> scenario;
+        [HideInInspector] public IList<Dialog> scenario;
 
         private Dictionary<string, string> persons;
         private Dictionary<string, string> sprites;
@@ -41,17 +40,21 @@ namespace KoganeUnityLib
         private string currScenarioKey;
         private string currScenarioPosition;
 
+        private bool isdialog;
+
 
 
         void Start()
         {
+            dialogueManager = FindObjectOfType(typeof(DialogueManager)) as DialogueManager;
+            uicontroller = FindObjectOfType(typeof(UIcontroller)) as UIcontroller;
+
             scenename = SceneManager.GetActiveScene();
 
-            StreamReader stream = new StreamReader(introduction);
+            StreamReader stream = new StreamReader(Dialogue);
             dialogue = stream.ReadToEnd();
             scenario = JsonConvert.DeserializeObject<IList<Dialog>>(dialogue);
         }
-
 
         public void startScenarioAt(int index)
         {
@@ -62,6 +65,7 @@ namespace KoganeUnityLib
 
         public string getNextLine()
         {
+
             try
             {
                 currScenario.MoveNext();
