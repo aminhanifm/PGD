@@ -9,6 +9,7 @@ using UnityEngine.EventSystems;
 public class DialogueManager : MonoBehaviour, IPointerDownHandler
 {
     private UIcontroller uicontroller;
+    private MissionManager mission;
 
     public GameObject LEFT;
     public GameObject RIGHT;
@@ -33,6 +34,7 @@ public class DialogueManager : MonoBehaviour, IPointerDownHandler
     void Start()
     {
         uicontroller = FindObjectOfType(typeof(UIcontroller)) as UIcontroller;
+        mission = FindObjectOfType(typeof(MissionManager)) as MissionManager;
         dialogMaster = gameObject;
         dialogLine = dialogBox.GetComponentInChildren<TextMeshProUGUI>();
         dt = gameObject.transform.GetComponentInChildren<dialogueTemplate>();

@@ -8,6 +8,10 @@ TagManager:
   - traffic
   - car
   - Volume
+  - Mission Point
+  - Bengkel
+  - Fuel
+  - Environtment
   layers:
   - Default
   - TransparentFX

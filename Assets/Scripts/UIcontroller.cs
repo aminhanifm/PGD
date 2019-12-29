@@ -26,7 +26,7 @@ public class UIcontroller : MonoBehaviour, IPointerDownHandler
     //wantedlvl
     public Image wantedfill;
     private bool melanggar = false;
-    private float curtotalwanted;
+    public float curtotalwanted;
     private bool isdecreasingwantedlevel = false;
 
     //fuel

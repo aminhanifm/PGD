@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class SoundsManager : MonoBehaviour
 {
-    public static AudioClip button, carhit, wanted;
+    public static AudioClip button, carhit, wanted, missionacc, missiondone, money;
     static AudioSource audioSrc;
     private VolumeManager volmanager;
 
@@ -13,6 +13,9 @@ public class SoundsManager : MonoBehaviour
         button = Resources.Load<AudioClip>("Button");
         carhit = Resources.Load<AudioClip>("Car Hit");
         wanted = Resources.Load<AudioClip>("Wanted");
+        missionacc = Resources.Load<AudioClip>("Mission Accepted");
+        missiondone = Resources.Load<AudioClip>("Mission Done");
+        money = Resources.Load<AudioClip>("Money");
 
         volmanager = FindObjectOfType(typeof(VolumeManager)) as VolumeManager;
 
@@ -32,6 +35,15 @@ public class SoundsManager : MonoBehaviour
                 break;
             case "Wanted":
                 audioSrc.PlayOneShot(wanted);
+                break;
+            case "Mission Accepted":
+                audioSrc.PlayOneShot(missionacc);
+                break;
+            case "Mission Done":
+                audioSrc.PlayOneShot(missiondone);
+                break;
+            case "Money":
+                audioSrc.PlayOneShot(money);
                 break;
         }
     }
