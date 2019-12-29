@@ -149,7 +149,6 @@ public class DialogueManager : MonoBehaviour, IPointerDownHandler
             default:
                 dialogMaster.SetActive(isShow);
                 uicontroller.isplayingdialogue = isdisplaying;
-                print(isdisplaying);
                 LEFT.SetActive(true);
                 RIGHT.SetActive(true);
                 break;

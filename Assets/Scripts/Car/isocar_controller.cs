@@ -55,7 +55,6 @@ public class isocar_controller : MonoBehaviour, IPointerDownHandler, IPointerUpH
         carLocation = this.transform.position;
         velocity = Vector2.zero;
         carForward = Vector2.right;
-        print(scriptrenderer);
     }
         
     // Update is called once per frame

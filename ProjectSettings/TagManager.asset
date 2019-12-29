@@ -7,6 +7,7 @@ TagManager:
   - Collisiontorepair
   - traffic
   - car
+  - Volume
   layers:
   - Default
   - TransparentFX

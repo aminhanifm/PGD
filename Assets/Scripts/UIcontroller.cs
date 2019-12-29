@@ -134,7 +134,6 @@ public class UIcontroller : MonoBehaviour, IPointerDownHandler
     // Update is called once per frame
     void Update()
     {
-        print(curtotalwanted);
         currentrepair = save.repair;
         currotation = carcontroller.curspeedint;
         curspeed = carcontroller.curspeed.ToString("0");
@@ -479,11 +478,11 @@ public class UIcontroller : MonoBehaviour, IPointerDownHandler
                 if (pengaturan)
                 {
                     Vol.alpha = 1;
-                    bool volslider = GameObject.Find("VolSlider").GetComponent<Slider>().enabled = true;
+                    bool volslider = GameObject.Find("VolSliderMM").GetComponent<Slider>().enabled = true;
                 }
                 else
                 {
-                    bool volslider = GameObject.Find("VolSlider").GetComponent<Slider>().enabled = false;
+                    bool volslider = GameObject.Find("VolSliderMM").GetComponent<Slider>().enabled = false;
                     Vol.alpha = 0;
                 }
             }
