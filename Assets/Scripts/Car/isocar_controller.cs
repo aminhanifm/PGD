@@ -9,6 +9,9 @@ public class isocar_controller : MonoBehaviour, IPointerDownHandler, IPointerUpH
 {
     private Transform repairimg;
     private Savemanagement savemanagement;
+    private VolumeManager volmanager;
+    [HideInInspector] public AudioSource caraudio;
+    private bool isaudioplay;
 
     // Start is called before the first frame update
     private UIcontroller uicontroller;
@@ -18,8 +21,8 @@ public class isocar_controller : MonoBehaviour, IPointerDownHandler, IPointerUpH
     [HideInInspector] public Vector2 velocity;
     [HideInInspector] public Vector2 carForward;
 
-    private bool accelerating = false;
-    private bool breaking = false;
+    [HideInInspector] public bool accelerating = false;
+    [HideInInspector] public bool breaking = false;
 
     private float steerAngle;
     private Vector2 acceleration;
@@ -49,7 +52,9 @@ public class isocar_controller : MonoBehaviour, IPointerDownHandler, IPointerUpH
         uicontroller = FindObjectOfType(typeof(UIcontroller)) as UIcontroller;
         steerlogic = FindObjectOfType(typeof(SteeringLogic)) as SteeringLogic;
         savemanagement = FindObjectOfType(typeof(Savemanagement)) as Savemanagement;
+        volmanager = FindObjectOfType(typeof(VolumeManager)) as VolumeManager;
 
+        caraudio = gameObject.GetComponent<AudioSource>();
         rb2d = this.GetComponent<Rigidbody2D>();
         scriptrenderer = this.GetComponentInChildren<IsometricCarRenderer>();
         carLocation = this.transform.position;
@@ -60,9 +65,10 @@ public class isocar_controller : MonoBehaviour, IPointerDownHandler, IPointerUpH
     // Update is called once per frame
     void Update()
     {
-
+        caraudio.volume = volmanager.audiosrc.volume;
         // Debug.Log(velocity);
         acceleration = Vector2.zero;
+
         get_input();
         if (breaking)
         {
@@ -116,6 +122,18 @@ public class isocar_controller : MonoBehaviour, IPointerDownHandler, IPointerUpH
             steering_angle = 15f;
             enginePower = 1f;
         }
+        if (curspeedint > 0 && !isaudioplay)
+        {
+            isaudioplay = true;
+            caraudio.Play();
+        }
+        if (curspeedint == 0 && isaudioplay)
+        {
+            print("iswork");
+            isaudioplay = false;
+            caraudio.pitch = 1f;
+            caraudio.Stop();
+        }
     }
 
     public void OnCollisionEnter2D(Collision2D collision)
@@ -124,7 +142,7 @@ public class isocar_controller : MonoBehaviour, IPointerDownHandler, IPointerUpH
         if(collision.collider.CompareTag("Collisiontorepair") && !ishitten)
         {
             ishitten = true;
-            
+            SoundsManager.PlaySound("Car Hit");
             if (savemanagement.repair > 0)
             {
                 savemanagement.repair -= 1;
@@ -156,47 +174,6 @@ public class isocar_controller : MonoBehaviour, IPointerDownHandler, IPointerUpH
     public void OnPointerUp(PointerEventData data)
     {
 
-    }
-
-    public void carsteeringup(BaseEventData up)
-    {
-        string name;
-
-        name = up.selectedObject.name;
-
-        if (name == "Accelerate")
-        {
-            accelerating = false;
-        }
-
-        else if (name == "Break")
-        {
-            breaking = false;
-        }
-    }
-
-    public void carsteeringdown(BaseEventData input)
-    {
-        string name;
-
-        name = input.selectedObject.name;
-
-        if (uicontroller.UIcanvas.interactable == true && !uicontroller.iswanted)
-        {
-            if (uicontroller.fuelfill.fillAmount > 0)
-            {
-                if (name == "Accelerate")
-                {
-                    accelerating = true;
-                }
-
-                else if (name == "Break")
-                {
-                    breaking = true;
-                }
-            }
-
-        }
     }
 
     private void get_input()
@@ -270,6 +247,7 @@ public class isocar_controller : MonoBehaviour, IPointerDownHandler, IPointerUpH
 
         if(v_magnitude < 100f)
             friction_force *= 3;
+
 
         acceleration += drag_force + friction_force;
     }

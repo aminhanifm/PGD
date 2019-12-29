@@ -4,17 +4,16 @@ using UnityEngine;
 
 public class SoundsManager : MonoBehaviour
 {
-    public static AudioClip playerjumpsound, playerhitsound, playerdeathsound, playershotsound, powerupsound;
+    public static AudioClip button, carhit, wanted;
     static AudioSource audioSrc;
     private VolumeManager volmanager;
 
     void Start()
     {
-        playerjumpsound = Resources.Load<AudioClip>("jump");
-        playerhitsound = Resources.Load<AudioClip>("hit");
-        playerdeathsound = Resources.Load<AudioClip>("death");
-        playershotsound = Resources.Load<AudioClip>("gun");
-        powerupsound = Resources.Load<AudioClip>("powerup");
+        button = Resources.Load<AudioClip>("Button");
+        carhit = Resources.Load<AudioClip>("Car Hit");
+        wanted = Resources.Load<AudioClip>("Wanted");
+
         volmanager = FindObjectOfType(typeof(VolumeManager)) as VolumeManager;
 
         audioSrc = GetComponent<AudioSource> ();
@@ -25,20 +24,14 @@ public class SoundsManager : MonoBehaviour
     {
         switch (clip) 
         {
-            case "jump":
-                audioSrc.PlayOneShot(playerjumpsound);
+            case "Button":
+                audioSrc.PlayOneShot(button);
                 break;
-            case "hit":
-                audioSrc.PlayOneShot(playerhitsound);
+            case "Car Hit":
+                audioSrc.PlayOneShot(carhit);
                 break;
-            case "death":
-                audioSrc.PlayOneShot(playerdeathsound);
-                break;
-            case "gun":
-                audioSrc.PlayOneShot(playershotsound);
-                break;
-            case "powerup":
-                audioSrc.PlayOneShot(powerupsound);
+            case "Wanted":
+                audioSrc.PlayOneShot(wanted);
                 break;
         }
     }

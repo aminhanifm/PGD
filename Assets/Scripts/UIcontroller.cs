@@ -238,6 +238,7 @@ public class UIcontroller : MonoBehaviour, IPointerDownHandler
                 {
                     Wantedbox.interactable = true;
                     iswanted = true;
+                    SoundsManager.PlaySound("Wanted");
                 }
                 if (iswanted)
                 {
@@ -425,11 +426,12 @@ public class UIcontroller : MonoBehaviour, IPointerDownHandler
                     Time.timeScale = 1;
                     print("unpaused");
                 }
-
+                SoundsManager.PlaySound("Button");
             }
 
             if (name == "P_MainMenu")
             {
+                SoundsManager.PlaySound("Button");
                 GameObject.Find("MainCamera").GetComponent<CameraEvent>().enabled = false;
                 dialogmanager.showHide("dialog", false, false);
                 stopcoroutine();
@@ -440,6 +442,7 @@ public class UIcontroller : MonoBehaviour, IPointerDownHandler
                 ispaused = false;
                 isbackfromgame = true;
                 fadingui = false;
+
             }
         }
     }
@@ -463,6 +466,7 @@ public class UIcontroller : MonoBehaviour, IPointerDownHandler
                 UIcanvas.interactable = true;
                 fadingmm = true;
                 isbackfromgame = false;
+                SoundsManager.PlaySound("Button");
             }
 
             if (name == "Credit")
@@ -470,6 +474,7 @@ public class UIcontroller : MonoBehaviour, IPointerDownHandler
                 credit = true;
                 StartCoroutine(creditfade(false));
                 StartCoroutine(mmcontent(true));
+                SoundsManager.PlaySound("Button");
             }
 
             if (name == "Pengaturan")
@@ -485,10 +490,12 @@ public class UIcontroller : MonoBehaviour, IPointerDownHandler
                     bool volslider = GameObject.Find("VolSliderMM").GetComponent<Slider>().enabled = false;
                     Vol.alpha = 0;
                 }
+                SoundsManager.PlaySound("Button");
             }
 
             if (name == "Keluar")
             {
+                SoundsManager.PlaySound("Button");
                 Application.Quit();
             }
 
