@@ -62,7 +62,7 @@ public abstract class CarGeneric : MonoBehaviour
         velocity *= dist;
         frontWheel += velocity * delta;
 
-        print("vel: " + velocity.magnitude + "   steerAngle: " + steerAngle);
+        //print("vel: " + velocity.magnitude + "   steerAngle: " + steerAngle);
 
         // debug line
         Vector3 ls = Vector3.zero;

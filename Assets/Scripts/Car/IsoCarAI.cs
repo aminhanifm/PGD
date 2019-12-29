@@ -23,6 +23,8 @@ public class IsoCarAI : CarGeneric
 
     private float maxVelocity;
 
+    //[HideInInspector]public bool aktif = false;
+
     protected override void Start()
     {
         base.Start();
@@ -36,19 +38,19 @@ public class IsoCarAI : CarGeneric
         enginePower = 2f;
 
         carPM = this.gameObject.GetComponent<CarPointsManager>();
-        maxVelocity = 7f;
+        maxVelocity = 5f;
         lane = 0;
         target = carPM.getCurLocation(lane);
         tempTarget = new List<Vector2>();
+
+        carForward = carPM.getLocationDirection();
     }
+
 
     protected override void Update()
     {
-        //if (Input.anyKeyDown)
-        //{
-        //    Debug.Log("Change Line");
-        //    changeCarLane();
-        //}
+        //if (!aktif) return;
+
         if (tempTarget.Count > 0)
         {
             target = tempTarget[0];
@@ -56,8 +58,8 @@ public class IsoCarAI : CarGeneric
 
         float distance = (target - (Vector2)transform.position).magnitude;
 
-        print(Mathf.FloorToInt(distance));
-        if (Mathf.FloorToInt(distance) < wheelBase )
+        //print(Mathf.FloorToInt(distance));
+        if (Mathf.FloorToInt(distance) < wheelBase/2)
         {
             if (tempTarget.Count > 0)
             {
@@ -74,7 +76,7 @@ public class IsoCarAI : CarGeneric
         acceleration = Vector2.zero;
         SteerControl();
         ObserveEnvirontment();
-        
+
         base.Update();
         renderer.setDirection(carForward);
     }
@@ -100,11 +102,20 @@ public class IsoCarAI : CarGeneric
 
     void ObserveEnvirontment()
     {
+        //DriveForward();
+        //return;
+
         Vector2 st = Vector2.zero;
         st = transform.position;
         RaycastHit2D hit = Physics2D.Raycast(st, carForward, cast_forward_len);
         if (hit.collider != null)
         {
+            string excludeName = hit.collider.gameObject.name;
+            if (excludeName=="KiriAI" || excludeName == "KananAI" || excludeName == "DepanAI" || excludeName == "BelakangAI")
+            {
+                DriveForward();
+            }
+
             //ambil jarak sekarang
             float distRelative = Vector3.Distance(hit.transform.position, transform.position) - wheelBase * 1.5f;
 
