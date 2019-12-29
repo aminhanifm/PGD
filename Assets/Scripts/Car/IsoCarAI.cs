@@ -36,18 +36,19 @@ public class IsoCarAI : CarGeneric
         enginePower = 2f;
 
         carPM = this.gameObject.GetComponent<CarPointsManager>();
-        maxVelocity = 5f;
+        maxVelocity = 7f;
         lane = 0;
         target = carPM.getCurLocation(lane);
         tempTarget = new List<Vector2>();
-
-        carForward = carPM.getLocationDirection();
     }
-
 
     protected override void Update()
     {
-
+        //if (Input.anyKeyDown)
+        //{
+        //    Debug.Log("Change Line");
+        //    changeCarLane();
+        //}
         if (tempTarget.Count > 0)
         {
             target = tempTarget[0];
@@ -55,8 +56,8 @@ public class IsoCarAI : CarGeneric
 
         float distance = (target - (Vector2)transform.position).magnitude;
 
-        //print(Mathf.FloorToInt(distance));
-        if (Mathf.FloorToInt(distance) < wheelBase/2)
+        print(Mathf.FloorToInt(distance));
+        if (Mathf.FloorToInt(distance) < wheelBase )
         {
             if (tempTarget.Count > 0)
             {
@@ -104,12 +105,6 @@ public class IsoCarAI : CarGeneric
         RaycastHit2D hit = Physics2D.Raycast(st, carForward, cast_forward_len);
         if (hit.collider != null)
         {
-            string excludeName = hit.collider.gameObject.name;
-            if (excludeName=="KiriAI" || excludeName == "KananAI" || excludeName == "DepanAI" || excludeName == "BelakangAI")
-            {
-                DriveForward();
-            }
-
             //ambil jarak sekarang
             float distRelative = Vector3.Distance(hit.transform.position, transform.position) - wheelBase * 1.5f;
 

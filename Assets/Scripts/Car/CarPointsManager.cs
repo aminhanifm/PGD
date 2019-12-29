@@ -15,10 +15,13 @@ public class CarPointsManager : MonoBehaviour
 
     public void Awake()
     {
-        //curPoint = points.myPoints[0];
-        ////lastPoint = curPoint.next[0];
-        //lastPoint = points.getNextPoint(curPoint, 0);
-        points = GameObject.Find("Car Way Points").GetComponent<Points>();
+        print(points.getPointsCount());
+        curPoint = points.myPoints[0];
+        //lastPoint = curPoint.next[0];
+        lastPoint = points.getNextPoint(curPoint, 0);
+
+        this.transform.position = curPoint.location;
+
         laneStartPos = (-laneWidth + laneNum * laneWidth) / 2;       //define length from point's origin to the most left
         //print(curPoint.location);
     }
@@ -32,19 +35,6 @@ public class CarPointsManager : MonoBehaviour
     //    laneStartPos = (- laneWidth + laneNum * laneWidth) / 2;       //define length from point's origin to the most left
     //}
 
-    public void init(int idx)
-    {
-        lastPoint = points.myPoints[idx];
-        curPoint = points.getNextPoint(lastPoint, 0);
-        if (curPoint == null)
-        {
-            init(idx);
-            return;
-        }
-
-        this.transform.position = lastPoint.location;
-    }
-
     public void getNext(int index)
     {
         //print("index: "+index+"  pointnya: "+points.getPointsCount());
@@ -52,20 +42,11 @@ public class CarPointsManager : MonoBehaviour
         lastPoint = curPoint;
 
         //curPoint = points.getNextPoint(lastPoint, index);
-        try
-        {
-            string name = lastPoint.next[index].obj.name;
-            curPoint = points.getPointByName(name);
-        }
-        catch (Exception e)
-        {
-            //Destroy(this.gameObject);
-            int idx = UnityEngine.Random.Range(0, points.myPoints.Count - 1);
-            init(idx);
-        }
+        string name = lastPoint.next[index].obj.name;
+        curPoint =  points.getPointByName(name);
+        nextPoint = points.getPointByName(curPoint.next[index].obj.name);
 
-        //if (curPoint == null) 
-            
+        print(nextPoint.location);
     }
 
     public void setCurPoint(int index)
@@ -79,9 +60,6 @@ public class CarPointsManager : MonoBehaviour
         //print(lastPoint.location + "  " + curPoint.location);
         Vector2 temp = getLocationDirection();
         Vector2 vecL= Vector2.Perpendicular(temp);
-
-        //if (lastPoint.obj.name == curPoint.obj.name) Destroy(this.gameObject);
-
         return curPoint.location + vecL*(-laneku*laneWidth + laneStartPos);
     }
 
