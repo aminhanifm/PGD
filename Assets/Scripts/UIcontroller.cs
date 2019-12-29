@@ -8,13 +8,19 @@ using UnityEngine.EventSystems;
 
 public class UIcontroller : MonoBehaviour, IPointerDownHandler
 {
+    KoganeUnityLib.dialogueTemplate dt;
+    GameObject dialogmanagerobj;
+    DialogueManager dialogmanager;
+
+    private Transform moneyimg;
+
     //seatbelt
     private bool seatbeltbool;
     public Image seatbeltimg;
     private bool seatwanted = false;
 
     //repair
-    private int currentrepair;
+    public int currentrepair;
     public Image repairimg;
 
     //wantedlvl
@@ -46,6 +52,7 @@ public class UIcontroller : MonoBehaviour, IPointerDownHandler
     public CanvasGroup CreditCanvas;
     public CanvasGroup PausedCanvas;
     public CanvasGroup Wantedbox;
+    public CanvasGroup dialogueCanvas;
 
     public GameObject UIobj;
     public GameObject MainMenuObj;
@@ -58,6 +65,10 @@ public class UIcontroller : MonoBehaviour, IPointerDownHandler
     private bool pengaturan = false;
     private bool ispaused = false;
     private bool iswantedbox = false;
+    private bool islost = false;
+    [HideInInspector] public bool iswanted = false;
+    private bool needrepair = false;
+    [HideInInspector] public bool isplayingdialogue = false;
     [HideInInspector] public bool isbackfromgame = false;
 
     public Transform camtransform;
@@ -68,6 +79,12 @@ public class UIcontroller : MonoBehaviour, IPointerDownHandler
 
     private Vector3 lastvectorcam;
     private float lasttcamsize;
+
+    private int currentmission;
+
+    private string subwantedC;
+    private string wantedC;
+    private string moneyC;
 
     void Start()
     {
@@ -89,6 +106,15 @@ public class UIcontroller : MonoBehaviour, IPointerDownHandler
         MainMenuObj = GameObject.Find("MainMenu");
         UIobj = GameObject.Find("UI");
         Wantedbox = GameObject.Find("WantedWindow").GetComponent<CanvasGroup>();
+        moneyimg = GameObject.Find("Money").GetComponent<Transform>();
+
+        subwantedC = "substractwanted";
+        wantedC = "addwanted";
+        moneyC = "Addmoney";
+
+        dt = FindObjectOfType(typeof(KoganeUnityLib.dialogueTemplate)) as KoganeUnityLib.dialogueTemplate;
+        dialogmanager = FindObjectOfType(typeof(DialogueManager)) as DialogueManager;
+        dialogmanagerobj = GameObject.Find("dialogueMaster");
 
         initvectorcam = new Vector3(camtransform.position.x, camtransform.position.y, camtransform.position.z);
         initcamsize = camsize.orthographicSize;
@@ -97,10 +123,9 @@ public class UIcontroller : MonoBehaviour, IPointerDownHandler
         MMContent = GameObject.Find("Main_Obj").GetComponent<CanvasGroup>();
         UIcanvas = GameObject.Find("UI").GetComponent<CanvasGroup>();
         CreditCanvas = GameObject.Find("CreditContent").GetComponent<CanvasGroup>();
-        
+        dialogueCanvas = GameObject.Find("dialogueMaster").GetComponent<CanvasGroup>();
 
         StartCoroutine(Fader(true));
-        StartCoroutine(BlinkRepair());
 
         UIcanvas.interactable = false;
         i_pausedcanvas.SetActive(false);
@@ -109,10 +134,43 @@ public class UIcontroller : MonoBehaviour, IPointerDownHandler
     // Update is called once per frame
     void Update()
     {
+        print(curtotalwanted);
+        currentrepair = save.repair;
         currotation = carcontroller.curspeedint;
         curspeed = carcontroller.curspeed.ToString("0");
         speedtxt.SetText(curspeed.ToString() + "Km/h");
-        speedmeter.rotation = Quaternion.Euler(0, 0, currotation * -4);
+        speedmeter.rotation = Quaternion.Euler(0, 0, currotation * -6);
+        if (fadingmm && UIcanvas.interactable)
+        {
+            print(needrepair);
+            if (save.repair <= 30 && !needrepair)
+            {
+                needrepair = true;
+                StartCoroutine(BlinkRepair(false));
+            }
+
+            if (!needrepair)
+            {
+                StopCoroutine("BlinkRepair");
+                repairimg.DOColor(Color.white, 1f);
+            }
+
+        }
+
+        if (seatbeltbool == false && seatwanted == false && fadingui == true)
+        {
+            seatwanted = true;
+            curtotalwanted += 0.05f;
+        }
+
+        if (!isplayingdialogue)
+        {
+            dialogueCanvas.interactable = false;
+        }
+        else
+        {
+            dialogueCanvas.interactable = true;
+        }
 
         if (currotation > 0 && ismoving == false)
         {
@@ -133,6 +191,9 @@ public class UIcontroller : MonoBehaviour, IPointerDownHandler
                 fadingui = true;
                 GameObject.Find("MainCamera").GetComponent<CameraEvent>().enabled = true;
                 MainMenuObj.SetActive(false);
+                money();
+                seatbeltbool = false;
+                StartCoroutine(subwantedC);
                 StartCoroutine("BlinkSeatbelt", false);
             }
         }
@@ -168,12 +229,27 @@ public class UIcontroller : MonoBehaviour, IPointerDownHandler
             camsize.orthographicSize = Mathf.Lerp(lasttcamsize, initcamsize, 0.5f * Time.deltaTime);
         }
 
-        if (wantedfill.fillAmount == 1 && !iswantedbox)
+        if (wantedfill.fillAmount == 1 && !iswanted)
         {
-            Wantedbox.alpha += 1f * Time.deltaTime;
-            UIcanvas.interactable = false;
-            Wantedbox.interactable = true;
+            if (!iswantedbox && Wantedbox.alpha < 1)
+            {
+                Wantedbox.alpha += 1f * Time.deltaTime;
+                Wantedbox.interactable = true;
+                if(Wantedbox.alpha == 1f)
+                {
+                    Wantedbox.interactable = true;
+                    iswanted = true;
+                }
+                if (iswanted)
+                {
+                    //print("start tilang");
+                    dialogmanagerobj.SetActive(true);
+                    dialog(1);
+                }
+            }
         }
+
+
         if (iswantedbox && Wantedbox.alpha > 0)
         {
             TextMeshProUGUI wantedtxt = GameObject.Find("TextWantedBox").GetComponent<TextMeshProUGUI>();
@@ -181,6 +257,7 @@ public class UIcontroller : MonoBehaviour, IPointerDownHandler
             if (Wantedbox.alpha == 0)
             {
                 wantedtxt.SetText("Anda dikenakan denda sebesar rp. 100.000,- dikarenakan melanggar lalu lintas");
+                Wantedbox.interactable = false;
                 iswantedbox = false;
             }
         }
@@ -188,43 +265,50 @@ public class UIcontroller : MonoBehaviour, IPointerDownHandler
 
     private void FixedUpdate()
     {
+        
         moneytxt.text = "Rp. " + save.money.ToString() + ",-";
         lastvectorcam = new Vector3(camtransform.position.x, camtransform.position.y, camtransform.position.z);
         lasttcamsize = camsize.orthographicSize;
 
-        if (melanggar == false && curtotalwanted > 0)
+        if (fadingmm && UIcanvas.interactable)
         {
-            melanggar = true;
-            StartCoroutine(addwanted());
+
+            if (melanggar == false && curtotalwanted > 0)
+            {
+                melanggar = true;
+                StartCoroutine(wantedC);
+            }
+
+            else if (melanggar == true && curtotalwanted == 0)
+            {
+                melanggar = false;
+                StopCoroutine(wantedC);
+            }
+
+            if (curtotalwanted > 0 && isdecreasingwantedlevel == false)
+            {
+                isdecreasingwantedlevel = true;
+                StartCoroutine(subwantedC);
+            }
             
         }
+        
 
-        else if (melanggar == true && curtotalwanted == 0)
-        {
-            melanggar = false;
-            StopCoroutine("addwanted");
-        }
-
-        if (curtotalwanted > 0 && isdecreasingwantedlevel == false)
-        {
-            isdecreasingwantedlevel = true;
-            StartCoroutine(substractwanted());
-        }
-
-        else if (curtotalwanted == 0 && isdecreasingwantedlevel == true)
-        {
-            StopCoroutine("substractwanted");
-        }
-
-        if (seatbeltbool == false && seatwanted == false && fadingui == true)
-        {
-            seatwanted = true;
-            curtotalwanted += 0.05f;
-        }
-
-
+        PlayerPrefs.SetInt("Repair", save.repair);
         PlayerPrefs.SetInt("Curmoney", save.money);
         PlayerPrefs.SetFloat("Wantedlvl", wantedfill.fillAmount);
+    }
+
+
+    public void dialog(int index)
+    {
+        dialogmanager.initScenario(index);
+        dialogmanager.continueLine();
+    }
+
+    public void carrepaired()
+    {
+        needrepair = false;
     }
 
     public void loadfuel()
@@ -238,9 +322,14 @@ public class UIcontroller : MonoBehaviour, IPointerDownHandler
         wantedfill.fillAmount = save.wantedlvl;
     }
 
+    public void loadrepair()
+    {
+        currentrepair = save.repair;
+    }
+
     public void money()
     {
-        StartCoroutine(Addmoney());
+        StartCoroutine(moneyC);
     }
 
     public void OnPointerDown(PointerEventData eventData)
@@ -260,6 +349,18 @@ public class UIcontroller : MonoBehaviour, IPointerDownHandler
         }
     }
 
+    public void repaired()
+    {
+        if(UIcanvas.interactable)
+        {
+            carrepaired();
+            save.repair = 100;
+            StopCoroutine("BlinkRepair");
+            repairimg.DOColor(Color.white, 1f);
+            
+        }
+    }
+
     public void setvolume()
     {
 
@@ -267,13 +368,18 @@ public class UIcontroller : MonoBehaviour, IPointerDownHandler
 
     public void removebox(BaseEventData input)
     {
-        if (save.money < 100000)
+        if (Wantedbox.interactable)
         {
-            boxremoved(false);
-        }
-        else if (save.money > 100000)
-        {
-            boxremoved(true);
+            if (save.money < 100000)
+            {
+                boxremoved(false);
+            }
+            else if (save.money > 100000)
+            {
+                boxremoved(true);
+            }
+            
+            Wantedbox.interactable = false;
         }
     }
 
@@ -285,15 +391,14 @@ public class UIcontroller : MonoBehaviour, IPointerDownHandler
         {
             save.money -= 100000;
             wantedtxt.SetText("Uang Anda telah dikurangi untuk membayar denda Rp. 100.000,-");
-            wantedfill.fillAmount = 0;
-            melanggar = false;
-            StartCoroutine(Fadewantedbox());
+            wantedfill.fillAmount = 0f;
+            StartCoroutine(Fadewantedbox(true));
 
         }
         else
         {
-            wantedtxt.SetText("Anda Tidak memiliki cukup uang untuk membayar denda Rp. 100.000,-");
-            StartCoroutine(Fadewantedbox());
+            wantedtxt.SetText("Anda Tidak memiliki cukup uang untuk membayar denda Rp. 100.000,- Permainan Berakhir");
+            StartCoroutine(Fadewantedbox(false));
         }
     }
 
@@ -304,7 +409,7 @@ public class UIcontroller : MonoBehaviour, IPointerDownHandler
 
         name = input.selectedObject.name;
 
-        if (fadingui == true)
+        if (fadingui == true && !iswanted)
         {
             if (name == "Pause Icon")
             {
@@ -327,13 +432,15 @@ public class UIcontroller : MonoBehaviour, IPointerDownHandler
             if (name == "P_MainMenu")
             {
                 GameObject.Find("MainCamera").GetComponent<CameraEvent>().enabled = false;
+                dialogmanager.showHide("dialog", false, false);
+                stopcoroutine();
+                melanggar = false;
                 UIcanvas.interactable = false;
                 MainMenuObj.SetActive(true);
                 Time.timeScale = 1;
                 ispaused = false;
                 isbackfromgame = true;
                 fadingui = false;
-                StopAllCoroutines();
             }
         }
     }
@@ -343,11 +450,17 @@ public class UIcontroller : MonoBehaviour, IPointerDownHandler
         string name;
 
         name = input.selectedObject.name;
-        print(name);
+        //print(name);
         if (fadingmm == false && credit == false)
         {
             if (name == "Mulai")
             {
+                if (islost)
+                {
+                    islost = false;
+                    needrepair = false;
+                    dialogmanager.initScenario(0);
+                }
                 UIcanvas.interactable = true;
                 fadingmm = true;
                 isbackfromgame = false;
@@ -427,19 +540,33 @@ public class UIcontroller : MonoBehaviour, IPointerDownHandler
 
     IEnumerator Addmoney()
     {
-        yield return new WaitForSeconds(60);
-        save.money += 10;
-        Debug.Log("Money added");
-        StartCoroutine(Addmoney());
+        //if (wantedfill.fillAmount)
+        //if (fadingmm)
+        {
+            yield return new WaitForSeconds(1);
+            moneyimg.DOScale(1.5f, 0.5f);
+            save.money += 10;
+            Debug.Log("Money added");
+            moneyimg.DOScale(1, 0.5f);
+            StartCoroutine(moneyC);
+        }
     }
 
-    IEnumerator BlinkRepair()
+    IEnumerator BlinkRepair(bool ison)
     {
-        repairimg.enabled = false;
-        yield return new WaitForSeconds(0.5f);
-        repairimg.enabled = true;
-        yield return new WaitForSeconds(0.5f);
-        StartCoroutine(BlinkRepair());
+        if (!ison)
+        {
+            repairimg.enabled = false;
+            yield return new WaitForSeconds(0.5f);
+            repairimg.enabled = true;
+            yield return new WaitForSeconds(0.5f);
+            StartCoroutine("BlinkRepair", false);
+        }
+        else
+        {
+            print("stopped");
+        }
+        
     }
 
     IEnumerator BlinkSeatbelt(bool ison)
@@ -452,24 +579,23 @@ public class UIcontroller : MonoBehaviour, IPointerDownHandler
             yield return new WaitForSeconds(0.5f);
             StartCoroutine("BlinkSeatbelt", false);
         }
-        else
-        {
-            Debug.Log("Stopped");
-        }
     }
 
     IEnumerator addwanted()
     {
-        yield return new WaitForSeconds(2f);
-        wantedfill.fillAmount += curtotalwanted;
-        StartCoroutine(addwanted());
+        //if (fadingmm)
+        {
+            yield return new WaitForSeconds(2f);
+            wantedfill.fillAmount += curtotalwanted;
+            StartCoroutine(wantedC);
+        }
     }
 
     IEnumerator substractwanted()
     {
         yield return new WaitForSeconds(3f);
         wantedfill.fillAmount -= 0.01f;
-        StartCoroutine(substractwanted());
+        StartCoroutine(subwantedC);
     }
 
     IEnumerator creditfade(bool Fading)
@@ -521,12 +647,43 @@ public class UIcontroller : MonoBehaviour, IPointerDownHandler
         }
     }
 
-    IEnumerator Fadewantedbox()
+    IEnumerator Fadewantedbox(bool ispaid)
     {
-        yield return new WaitForSeconds(1f);
-        iswantedbox = true;
-        yield return new WaitForSeconds(1f);
-        UIcanvas.interactable = true;
-        Wantedbox.interactable = false;
+        if (ispaid)
+        {
+            yield return new WaitForSeconds(1f);
+            iswantedbox = true;
+            iswanted = false;
+            yield return new WaitForSeconds(1f);
+            UIcanvas.interactable = true;
+        }
+        else
+        {
+            yield return new WaitForSeconds(2f);
+            GameObject.Find("MainCamera").GetComponent<CameraEvent>().enabled = false;
+            islost = true;
+            melanggar = false;
+            dialogmanager.showHide("dialog", false, false);
+            iswanted = false;
+            iswantedbox = true;
+            //StopAllCoroutines();
+            UIcanvas.interactable = false;
+            MainMenuObj.SetActive(true);
+            isbackfromgame = true;
+            fadingui = false;
+            PlayerPrefs.DeleteAll();
+            save.Newgame();
+            stopcoroutine();
+            loadfuel();
+            loadwanted();
+            loadrepair();
+        }
+    }
+
+    public void stopcoroutine()
+    {
+        StopCoroutine(wantedC);
+        StopCoroutine(subwantedC);
+        StopCoroutine(moneyC);
     }
 }

@@ -14,10 +14,10 @@ public class Savemanagement : MonoBehaviour
 
     void Start()
     {
-        PlayerPrefs.DeleteAll();
+        //PlayerPrefs.DeleteAll();
         money = PlayerPrefs.GetInt("Curmoney", 0);
         fuel = PlayerPrefs.GetFloat("Curfuel", 1);
-        wantedlvl = PlayerPrefs.GetFloat("Wantedlvl", 0.9f);
+        wantedlvl = PlayerPrefs.GetFloat("Wantedlvl", 0);
         repair = PlayerPrefs.GetInt("Repair", 100);
        
         uicontroller = FindObjectOfType(typeof(UIcontroller)) as UIcontroller;
@@ -31,13 +31,25 @@ public class Savemanagement : MonoBehaviour
         //load
         if (uicontroller.MMCanvas.alpha == 0 && uicontroller.fadingmm == true && isload == true)
         {
-           
-            uicontroller.money();
             uicontroller.loadfuel();
             uicontroller.loadwanted();
+            uicontroller.loadrepair();
             isload = false;
         }
+
+        if(repair < 0)
+        {
+            repair = 0;
+        }
+
     }
 
+    public void Newgame()
+    {
+        money = PlayerPrefs.GetInt("Curmoney", 0);
+        fuel = PlayerPrefs.GetFloat("Curfuel", 1);
+        wantedlvl = PlayerPrefs.GetFloat("Wantedlvl", 0);
+        repair = PlayerPrefs.GetInt("Repair", 100);
+    }
 
 }

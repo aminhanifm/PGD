@@ -14,7 +14,7 @@ public class DialogueManager : MonoBehaviour, IPointerDownHandler
     public GameObject RIGHT;
     public GameObject dialogBox;
     
-    GameObject dialogMaster;
+    public GameObject dialogMaster;
     TextMeshProUGUI dialogLine;
 
     public TMP_Typewriter m_typewriter;
@@ -53,7 +53,7 @@ public class DialogueManager : MonoBehaviour, IPointerDownHandler
         }
     }
 
-    private void initScenario(int index)
+    public void initScenario(int index)
     {
         dt.startScenarioAt(index);
 
@@ -63,11 +63,18 @@ public class DialogueManager : MonoBehaviour, IPointerDownHandler
         foreach(KeyValuePair<string,string> path in spritesPath)
         {
             Sprite image = Resources.Load<Sprite>(path.Value);
-            person_image.Add(path.Key, image);
+            if(person_image.ContainsKey(path.Key))
+            {
+                person_image[path.Key] = image;
+            }
+            else
+            {
+                person_image.Add(path.Key, image);
+            }
         }
         
 
-        showHide("dialog", true);
+        showHide("dialog", true, true);
         continueLine();
     }
 
@@ -93,10 +100,9 @@ public class DialogueManager : MonoBehaviour, IPointerDownHandler
 
             string line = dt.getNextLine();
 
-            if (string.IsNullOrEmpty(line) && dialoguecomplete == false)
+            if (string.IsNullOrEmpty(line))
             {
-                showHide("dialog", false);
-                dialoguecomplete = true;
+                showHide("dialog", false, false);
                 m_typewriter.nextobj.SetActive(false);
                 return;
             }
@@ -117,20 +123,20 @@ public class DialogueManager : MonoBehaviour, IPointerDownHandler
             case "LEFT":
                 LEFT.transform.GetChild(0).GetComponent<UnityEngine.UI.Image>().sprite = person_image[person_key];
                 LEFT.GetComponentInChildren<TMP_Text>().text = dt.getCurrPerson();
-                showHide("LEFT", true);
-                showHide("RIGHT", false);
+                showHide("LEFT", true, true);
+                showHide("RIGHT", false, true);
                 break;
             case "RIGHT":
                 RIGHT.transform.GetChild(0).GetComponent<UnityEngine.UI.Image>().sprite = person_image[person_key];
                 RIGHT.GetComponentInChildren<TMP_Text>().text = dt.getCurrPerson();
-                showHide("RIGHT", true);
-                showHide("LEFT", false);
+                showHide("RIGHT", true, true);
+                showHide("LEFT", false, true);
                 break;
         }
 
     }
 
-    private void showHide(string thing, bool isShow)
+    public void showHide(string thing, bool isShow, bool isdisplaying)
     {
         switch (thing)
         {
@@ -142,6 +148,8 @@ public class DialogueManager : MonoBehaviour, IPointerDownHandler
                 break;
             default:
                 dialogMaster.SetActive(isShow);
+                uicontroller.isplayingdialogue = isdisplaying;
+                print(isdisplaying);
                 LEFT.SetActive(true);
                 RIGHT.SetActive(true);
                 break;
