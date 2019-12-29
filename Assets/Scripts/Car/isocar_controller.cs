@@ -4,12 +4,20 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using DG.Tweening;
+using TMPro;
+using UnityEngine.Rendering;
 
 public class isocar_controller : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
 {
     private Transform repairimg;
     private Savemanagement savemanagement;
     private VolumeManager volmanager;
+    private MissionManager mission;
+    private DialogueManager dm;
+    public Image buttonfb;
+    public TextMeshProUGUI fbtext;
+    public string type;
+
     [HideInInspector] public AudioSource caraudio;
     private bool isaudioplay;
 
@@ -44,6 +52,8 @@ public class isocar_controller : MonoBehaviour, IPointerDownHandler, IPointerUpH
     Rigidbody2D rb2d;
     IsometricCarRenderer scriptrenderer;
 
+    private SortingGroup carsorting;
+    private int currentmission;
     private bool ishitten = false;
 
     void Start()
@@ -53,7 +63,10 @@ public class isocar_controller : MonoBehaviour, IPointerDownHandler, IPointerUpH
         steerlogic = FindObjectOfType(typeof(SteeringLogic)) as SteeringLogic;
         savemanagement = FindObjectOfType(typeof(Savemanagement)) as Savemanagement;
         volmanager = FindObjectOfType(typeof(VolumeManager)) as VolumeManager;
+        mission = FindObjectOfType(typeof(MissionManager)) as MissionManager;
+        dm = FindObjectOfType(typeof(DialogueManager)) as DialogueManager;
 
+        carsorting = gameObject.GetComponent<SortingGroup>();
         caraudio = gameObject.GetComponent<AudioSource>();
         rb2d = this.GetComponent<Rigidbody2D>();
         scriptrenderer = this.GetComponentInChildren<IsometricCarRenderer>();
@@ -102,7 +115,7 @@ public class isocar_controller : MonoBehaviour, IPointerDownHandler, IPointerUpH
     /// </summary>
     void FixedUpdate()
     {
-        
+        //currentmission = savemanagement.mission;
         curspeed = rb2d.velocity.magnitude * 3.6;
         curspeedint = (int) curspeed;
         rb2d.velocity = velocity;
@@ -163,6 +176,59 @@ public class isocar_controller : MonoBehaviour, IPointerDownHandler, IPointerUpH
             ishitten = false;
             repairimg.DOScale(1f, 0.5f);
             print("exit");
+        }
+    }
+
+    public void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Mission Point"))
+        {
+            mission.getNextDestination();
+            dm.initScenario(savemanagement.mission);
+            dm.continueLine();
+            SoundsManager.PlaySound("Mission Accepted");
+        }
+
+        if (collision.CompareTag("Bengkel"))
+        {
+            buttonfb.enabled = true;
+            fbtext.SetText("Reparasi Rp.5000,-");
+            type = "Bengkel";
+            print("masukb");
+        }
+
+        if (collision.CompareTag("Fuel"))
+        {
+            buttonfb.enabled = true;
+            fbtext.SetText("Isi Bensin Rp.5000,-");
+            type = "Bensin";
+            print("masukf");
+        }
+
+        if (collision.CompareTag("Environtment"))
+        {
+            carsorting.sortingLayerName = "Objects";
+            carsorting.sortingOrder = 2;
+        }
+    }
+
+    public void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.CompareTag("traffic"))
+        {
+            uicontroller.wantedfill.fillAmount += 0.01f;
+        }
+        if (collision.CompareTag("Bengkel") || collision.CompareTag("Fuel"))
+        {
+            buttonfb.enabled = false;
+            fbtext.SetText("");
+            type = "";
+            print("keluar fb");
+        }
+        if (collision.CompareTag("Environtment"))
+        {
+            carsorting.sortingLayerName = "Car";
+            carsorting.sortingOrder = 0;
         }
     }
 
