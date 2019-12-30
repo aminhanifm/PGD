@@ -89,7 +89,7 @@ public class MissionManager : MonoBehaviour
         {
             //trigger objective selesai
             print("LAH");
-            save.money += 50000;
+            save.money += 15000;
             SoundsManager.PlaySound("Mission Done");
             success = true;
             save.indexmission += 1;
@@ -105,15 +105,39 @@ public class MissionManager : MonoBehaviour
     {
         if (index == 1)
         {
-            AddCustomObjective(12, 18);
+            AddCustomObjective(12, 13);
             //getNextDestination();
             print("Misi 1");
         }
         if (index == 2)
         {
-            AddCustomObjective(13, 6);
+            AddCustomObjective(6, 15);
             //getNextDestination();
             print("Misi 2");
+        }
+        if (index == 3)
+        {
+            AddCustomObjective(3, 4);
+            //getNextDestination();
+            print("Misi 3");
+        }
+        if (index == 4)
+        {
+            AddCustomObjective(9, 20);
+            //getNextDestination();
+            print("Misi 4");
+        }
+        if (index == 5)
+        {
+            AddCustomObjective(2, 12);
+            //getNextDestination();
+            print("Misi 5");
+        }
+        if (index == 6)
+        {
+            AddCustomObjective(5, 21);
+            //getNextDestination();
+            print("Misi 6");
         }
     }
 }

@@ -53,11 +53,8 @@
 		},
 		'dialogue': [
 			{'person1,LEFT': 'Hei kak vero, apa yang kakak lakukan ?'},
-			{'person2,RIGHT': 'Oh.. ini kakak lagi selesai masak sup untuk makan siang kakek.'},
-			{'person1,LEFT': 'Ada yang bisa aku bantu kak ?'},
-			{'person2,RIGHT': 'Boleh antarkan makanan ini untuk kakek dik ?'},
-			{'person1,LEFT': 'Boleh kak sini aku antarkan.'},
-			{'person2,RIGHT': 'Makasih ya dik.. Hati - hati dijalan.'}
+			{'person2,RIGHT': 'Oh.. Akhirnya kamu kembali juga, kalau berkendara hati-hati ya dik !'},
+			{'person1,LEFT': 'Haha.. iya kak'}
 		]
 	},
 	
