@@ -12,7 +12,7 @@ PlayerSettings:
   targetDevice: 2
   useOnDemandResources: 0
   accelerometerFrequency: 60
-  companyName: DefaultCompany
+  companyName: Unixcorp
   productName: SIDO Safe Drive
   defaultCursor: {fileID: 0}
   cursorHotspot: {x: 0, y: 0}
@@ -282,7 +282,7 @@ PlayerSettings:
   - m_BuildTarget: 
     m_Icons:
     - serializedVersion: 2
-      m_Icon: {fileID: 2800000, guid: 241a54475f4a5a94fb523da3a594d27a, type: 3}
+      m_Icon: {fileID: 2800000, guid: 7d794c76b7a58be42b91a52a5877c372, type: 3}
       m_Width: 128
       m_Height: 128
       m_Kind: 0

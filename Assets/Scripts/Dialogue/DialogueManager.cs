@@ -39,6 +39,9 @@ public class DialogueManager : MonoBehaviour, IPointerDownHandler
         dialogLine = dialogBox.GetComponentInChildren<TextMeshProUGUI>();
         dt = gameObject.transform.GetComponentInChildren<dialogueTemplate>();
         person_image = new Dictionary<string, Sprite>();
+
+        dt.dialoguePath = "Files/Dialogue";
+        dt.init();
         initScenario(0);
     }
 
