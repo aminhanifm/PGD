@@ -10,6 +10,7 @@ public class MissionManager : MonoBehaviour
     DialogueManager dialogmanager;
     KoganeUnityLib.dialogueTemplate dt;
     UIcontroller ui;
+    isocar_controller iso;
 
     public GameObject locationTrigger;
     public LocationManager LM;
@@ -25,6 +26,7 @@ public class MissionManager : MonoBehaviour
         dialogmanager = FindObjectOfType(typeof(DialogueManager)) as DialogueManager;
         dt = FindObjectOfType(typeof(KoganeUnityLib.dialogueTemplate)) as KoganeUnityLib.dialogueTemplate;
         ui = FindObjectOfType(typeof(UIcontroller)) as UIcontroller;
+        iso = FindObjectOfType(typeof(isocar_controller)) as isocar_controller;
         LM = gameObject.GetComponent<LocationManager>();
         objective= new List<Tuple<Location, Location>>();
         curObjective = new List<Location>();
@@ -58,6 +60,7 @@ public class MissionManager : MonoBehaviour
         curDestination = curObjective[0];
         locationTrigger.transform.position = curDestination.position;
         curObjective.RemoveAt(0);
+        
     }
 
     //untuk membuat misi kustom

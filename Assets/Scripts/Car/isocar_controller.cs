@@ -55,6 +55,7 @@ public class isocar_controller : MonoBehaviour, IPointerDownHandler, IPointerUpH
     private SortingGroup carsorting;
     private int currentmission;
     private bool ishitten = false;
+    public bool iscollidingmissionpoint = false;
 
     void Start()
     {
@@ -78,6 +79,7 @@ public class isocar_controller : MonoBehaviour, IPointerDownHandler, IPointerUpH
     // Update is called once per frame
     void Update()
     {
+        print(iscollidingmissionpoint);
         caraudio.volume = volmanager.audiosrc.volume;
         // Debug.Log(velocity);
         acceleration = Vector2.zero;
@@ -160,7 +162,6 @@ public class isocar_controller : MonoBehaviour, IPointerDownHandler, IPointerUpH
             {
                 savemanagement.repair -= 1;
                 repairimg.DOScale(1.3f, 0.25f);
-                print(savemanagement.repair);
             }
             if(savemanagement.repair <= 0)
             {
@@ -197,8 +198,10 @@ public class isocar_controller : MonoBehaviour, IPointerDownHandler, IPointerUpH
 
     public void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.CompareTag("Mission Point"))
+        if (collision.name == "Mission Point" && !iscollidingmissionpoint)
         {
+            iscollidingmissionpoint = true;
+            print("Berapa");
             mission.getNextDestination();
             dm.initScenario(savemanagement.mission);
             dm.continueLine();
@@ -209,6 +212,8 @@ public class isocar_controller : MonoBehaviour, IPointerDownHandler, IPointerUpH
         {
             buttonfb.enabled = true;
             fbtext.SetText("Reparasi Rp.5000,-");
+            carsorting.sortingLayerName = "Objects";
+            carsorting.sortingOrder = 2;
             type = "Bengkel";
             print("masukb");
         }
@@ -217,6 +222,8 @@ public class isocar_controller : MonoBehaviour, IPointerDownHandler, IPointerUpH
         {
             buttonfb.enabled = true;
             fbtext.SetText("Isi Bensin Rp.5000,-");
+            carsorting.sortingLayerName = "Objects";
+            carsorting.sortingOrder = 2;
             type = "Bensin";
             print("masukf");
         }
@@ -230,6 +237,12 @@ public class isocar_controller : MonoBehaviour, IPointerDownHandler, IPointerUpH
 
     public void OnTriggerExit2D(Collider2D collision)
     {
+        if(collision.name == "Mission Point")
+        {
+            iscollidingmissionpoint = false;
+            print("exit");
+        }
+
         if (collision.CompareTag("traffic"))
         {
             uicontroller.wantedfill.fillAmount += 0.01f;
@@ -242,6 +255,16 @@ public class isocar_controller : MonoBehaviour, IPointerDownHandler, IPointerUpH
             print("keluar fb");
         }
         if (collision.CompareTag("Environtment"))
+        {
+            carsorting.sortingLayerName = "Car";
+            carsorting.sortingOrder = 0;
+        }
+        if (collision.CompareTag("Fuel"))
+        {
+            carsorting.sortingLayerName = "Car";
+            carsorting.sortingOrder = 0;
+        }
+        if (collision.CompareTag("Bengkel"))
         {
             carsorting.sortingLayerName = "Car";
             carsorting.sortingOrder = 0;
