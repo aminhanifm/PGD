@@ -5,10 +5,11 @@ using UnityEngine.UI;
 using TMPro;
 using DG.Tweening;
 using UnityEngine.EventSystems;
+using KoganeUnityLib;
 
 public class UIcontroller : MonoBehaviour, IPointerDownHandler
 {
-    KoganeUnityLib.dialogueTemplate dt;
+    dialogueTemplate dt;
     GameObject dialogmanagerobj;
     DialogueManager dialogmanager;
 
@@ -112,7 +113,7 @@ public class UIcontroller : MonoBehaviour, IPointerDownHandler
         wantedC = "addwanted";
         moneyC = "Addmoney";
 
-        dt = FindObjectOfType(typeof(KoganeUnityLib.dialogueTemplate)) as KoganeUnityLib.dialogueTemplate;
+        dt = FindObjectOfType(typeof(dialogueTemplate)) as dialogueTemplate;
         dialogmanager = FindObjectOfType(typeof(DialogueManager)) as DialogueManager;
         dialogmanagerobj = GameObject.Find("dialogueMaster");
 
@@ -141,7 +142,6 @@ public class UIcontroller : MonoBehaviour, IPointerDownHandler
         speedmeter.rotation = Quaternion.Euler(0, 0, currotation * -6);
         if (fadingmm && UIcanvas.interactable)
         {
-            print(needrepair);
             if (save.repair <= 30 && !needrepair)
             {
                 needrepair = true;

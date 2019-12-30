@@ -18,7 +18,7 @@ public class Savemanagement : MonoBehaviour
 
     void Start()
     {
-        //PlayerPrefs.DeleteAll();
+        PlayerPrefs.DeleteAll();
         mission = PlayerPrefs.GetInt("Mission", 2);
         indexmission = PlayerPrefs.GetInt("IndexMission", 1);
         money = PlayerPrefs.GetInt("Curmoney", 0);
