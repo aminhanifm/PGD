@@ -8,12 +8,20 @@ PlayerSettings:
   AndroidProfiler: 0
   AndroidFilterTouchesWhenObscured: 0
   AndroidEnableSustainedPerformanceMode: 0
+<<<<<<< HEAD
   defaultScreenOrientation: 3
+=======
+  defaultScreenOrientation: 2
+>>>>>>> ai_Dict
   targetDevice: 2
   useOnDemandResources: 0
   accelerometerFrequency: 60
   companyName: Unixcorp
+<<<<<<< HEAD
   productName: SIDO Safe Drive
+=======
+  productName: PGD
+>>>>>>> ai_Dict
   defaultCursor: {fileID: 0}
   cursorHotspot: {x: 0, y: 0}
   m_SplashScreenBackgroundColor: {r: 0.13725491, g: 0.12156863, b: 0.1254902, a: 1}
@@ -41,7 +49,7 @@ PlayerSettings:
     height: 1
   m_SplashScreenLogos:
   - logo: {fileID: 10404, guid: 0000000000000000e000000000000000, type: 0}
-    duration: 4
+    duration: 2
   m_VirtualRealitySplashScreen: {fileID: 0}
   m_HolographicTrackingLossScreen: {fileID: 0}
   defaultScreenWidth: 1024
@@ -169,7 +177,7 @@ PlayerSettings:
     Standalone: com.Company.ProductName
   buildNumber: {}
   AndroidBundleVersionCode: 1
-  AndroidMinSdkVersion: 16
+  AndroidMinSdkVersion: 21
   AndroidTargetSdkVersion: 0
   AndroidPreferredInstallLocation: 1
   aotOptions: 
@@ -282,7 +290,11 @@ PlayerSettings:
   - m_BuildTarget: 
     m_Icons:
     - serializedVersion: 2
+<<<<<<< HEAD
       m_Icon: {fileID: 2800000, guid: 7d794c76b7a58be42b91a52a5877c372, type: 3}
+=======
+      m_Icon: {fileID: 2800000, guid: 241a54475f4a5a94fb523da3a594d27a, type: 3}
+>>>>>>> ai_Dict
       m_Width: 128
       m_Height: 128
       m_Kind: 0
@@ -627,7 +639,11 @@ PlayerSettings:
   scriptingDefineSymbols: {}
   platformArchitecture: {}
   scriptingBackend:
+<<<<<<< HEAD
     Android: 0
+=======
+    Android: 1
+>>>>>>> ai_Dict
   il2cppCompilerConfiguration: {}
   managedStrippingLevel: {}
   incrementalIl2cppBuild: {}
@@ -638,6 +654,10 @@ PlayerSettings:
   gcWBarrierValidation: 0
   apiCompatibilityLevelPerPlatform:
     Android: 3
+<<<<<<< HEAD
+=======
+    Standalone: 3
+>>>>>>> ai_Dict
   m_RenderingPath: 1
   m_MobileRenderingPath: 1
   metroPackageName: Template_2D

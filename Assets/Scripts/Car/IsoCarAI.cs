@@ -1,9 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-#if UNITY_EDITOR
-using UnityEditor;
-#endif
 
 public class IsoCarAI : CarGeneric
 {
@@ -107,14 +104,14 @@ public class IsoCarAI : CarGeneric
 
         Vector2 st = Vector2.zero;
         st = transform.position;
-        RaycastHit2D hit = Physics2D.Raycast(st, carForward, cast_forward_len);
+        RaycastHit2D hit = Physics2D.Raycast(st + carForward * wheelBase, carForward, cast_forward_len);
         if (hit.collider != null)
         {
-            string excludeName = hit.collider.gameObject.name;
-            if (excludeName=="KiriAI" || excludeName == "KananAI" || excludeName == "DepanAI" || excludeName == "BelakangAI")
-            {
-                DriveForward();
-            }
+            //string excludeName = hit.collider.gameObject.name;
+            //if (hit.collider)
+            //{
+            //    DriveForward();
+            //}
 
             //ambil jarak sekarang
             float distRelative = Vector3.Distance(hit.transform.position, transform.position) - wheelBase * 1.5f;
@@ -124,7 +121,7 @@ public class IsoCarAI : CarGeneric
 
             if (distRelative <= minimumDist)
             {
-                if (hit.transform.tag == "car")
+                if (hit.transform.tag == "ai")
                 {
                     DriveBackward();
                 }

@@ -14,8 +14,8 @@ public class MissionManager : MonoBehaviour
 
     public GameObject locationTrigger;
     public LocationManager LM;
-    public List<Tuple<Location, Location>> objective;
-    private List<Location> curObjective;
+    [SerializeField]public List<Tuple<Location, Location>> objective;
+    public List<Location> curObjective;
 
     bool success;
     Location curDestination;
@@ -40,7 +40,7 @@ public class MissionManager : MonoBehaviour
         //demo
         if (Input.GetKeyDown(KeyCode.J))
         {
-            currentmission(save.indexmission);
+            getNextDestination();
         }
     }
 
@@ -84,9 +84,11 @@ public class MissionManager : MonoBehaviour
         try
         {
             Tuple<Location, Location> mCur = objective[0];
+            print(mCur.Item1.name + " " + mCur.Item2.name);
             curObjective.Add(mCur.Item1);
             curObjective.Add(mCur.Item2);
             objective.RemoveAt(0);
+            print("berhasil masukno");
         }
         catch(Exception e)
         {
@@ -101,6 +103,7 @@ public class MissionManager : MonoBehaviour
             PlayerPrefs.SetInt("Mission", save.mission);
             PlayerPrefs.SetInt("Curmoney", save.money);
             currentmission(save.indexmission);
+            //getNextDestination();
         }
     }
 
@@ -112,7 +115,7 @@ public class MissionManager : MonoBehaviour
             //getNextDestination();
             print("Misi 1");
         }
-        if (index == 2)
+        else if (index == 2)
         {
             AddCustomObjective(6, 15);
             //getNextDestination();
