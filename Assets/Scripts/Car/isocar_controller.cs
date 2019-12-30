@@ -167,6 +167,22 @@ public class isocar_controller : MonoBehaviour, IPointerDownHandler, IPointerUpH
                 uicontroller.repairimg.DOColor(Color.black, 1f);
             }
         }
+
+        if (collision.collider.CompareTag("car"))
+        {
+            SoundsManager.PlaySound("Car Hit");
+            if (savemanagement.repair > 0)
+            {
+                savemanagement.repair -= 1;
+                repairimg.DOScale(1.3f, 0.25f);
+                uicontroller.wantedfill.fillAmount += 0.02f;
+                print(savemanagement.repair);
+            }
+            if (savemanagement.repair <= 0)
+            {
+                uicontroller.repairimg.DOColor(Color.black, 1f);
+            }
+        }
     }
 
     public void OnCollisionExit2D(Collision2D collision)
