@@ -31,7 +31,7 @@ public class Savemanagement : MonoBehaviour
 
 
         missionmanager.currentmission(indexmission);
-        missionmanager.getNextDestination();
+        //missionmanager.getNextDestination();
     }
 
     // Update is called once per frame

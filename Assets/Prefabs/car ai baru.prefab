@@ -11,8 +11,8 @@ GameObject:
   - component: {fileID: 2199744668567094614}
   - component: {fileID: 2199744668567094615}
   m_Layer: 0
-  m_Name: BelakangAI
-  m_TagString: Untagged
+  m_Name: Belakang
+  m_TagString: ai
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -78,7 +78,7 @@ GameObject:
   - component: {fileID: 4638144588789052991}
   m_Layer: 0
   m_Name: car ai baru
-  m_TagString: Untagged
+  m_TagString: ai
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -216,16 +216,10 @@ MonoBehaviour:
   points: {fileID: 0}
   curPoint:
     obj: {fileID: 0}
-    next: []
-    location: {x: 0, y: 0}
+    nextKey: []
   lastPoint:
     obj: {fileID: 0}
-    next: []
-    location: {x: 0, y: 0}
-  nextPoint:
-    obj: {fileID: 0}
-    next: []
-    location: {x: 0, y: 0}
+    nextKey: []
 --- !u!114 &8768597492416979300
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -274,8 +268,8 @@ GameObject:
   - component: {fileID: 1030788804302789946}
   - component: {fileID: 5199413188871257485}
   m_Layer: 0
-  m_Name: KiriAI
-  m_TagString: Untagged
+  m_Name: Kiri
+  m_TagString: ai
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -333,8 +327,8 @@ GameObject:
   - component: {fileID: 9030997308652489754}
   - component: {fileID: 8089370419650620015}
   m_Layer: 0
-  m_Name: DepanAI
-  m_TagString: Untagged
+  m_Name: Depan
+  m_TagString: ai
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -392,8 +386,8 @@ GameObject:
   - component: {fileID: 3297917123341656815}
   - component: {fileID: 5181227627265341055}
   m_Layer: 0
-  m_Name: KananAI
-  m_TagString: Untagged
+  m_Name: Kanan
+  m_TagString: ai
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

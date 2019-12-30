@@ -1,81 +1,79 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEditor;
 using System;
 
 [System.Serializable]
-public class thePoint
-{
+public class LocPoint {
     public GameObject obj;
-    public List<thePoint> next;
-    public Vector2 location;
+    public List<string> nextKey;
 
-    public thePoint(GameObject obj)
+    public LocPoint(GameObject obj)
     {
         this.obj = obj;
-        this.location = obj.transform.position;
-        this.next = new List<thePoint>();
-    }
-
-    public thePoint(Vector2 location)
-    {
-        this.location = location;
-        this.next = new List<thePoint>();
+        this.nextKey = new List<string>();
     }
 }
 
+[Serializable] 
+public class LocPointsDictionary : SerializableDictionary<string, LocPoint> { }
+
 public class Points : MonoBehaviour
 {
-    [SerializeField] public List<thePoint> myPoints = new List<thePoint>();
-
-    public void Awake()
+    [SerializeField]
+    private LocPointsDictionary lockeystore = LocPointsDictionary.New<LocPointsDictionary>();
+    public Dictionary<string, LocPoint> lockeys
     {
-        //thePoint one = createPoint(new Vector2(0, 0));
-        //thePoint two = createPoint(new Vector2(20, 10));
-        //thePoint three = createPoint(new Vector2(0, 20));
-        //thePoint four = createPoint(new Vector2(-20, 10));
-
-        //thePoint five = createPoint(new Vector2(40, 0));
-        //thePoint six = createPoint(new Vector2(20, -10));
-
-        //addNextPoint(one, new thePoint[] { two });
-        //addNextPoint(two, new thePoint[] { three, five });
-        //addNextPoint(three, new thePoint[] { four });
-        //addNextPoint(four, new thePoint[] { one });
-        //addNextPoint(five, new thePoint[] { six });
-        //addNextPoint(six, new thePoint[] { one });
+        get { return lockeystore.dictionary; }
     }
 
-    public thePoint createPoint(Vector2 loc)
-    {
-        thePoint point = new thePoint(loc);
-        myPoints.Add(point);
-        return point;
-    }
 
-    public thePoint createPoint(GameObject obj)
-    {
-        thePoint point = new thePoint(obj);
-        myPoints.Add(point);
-        return point;
-    }
+    //?Eventual script
+    //public void GenerateLocPoints()
+    //{
+    //    foreach (var pt in myPoints)
+    //    {
+    //        LocPoint baru = new LocPoint(pt.obj);
 
-    public void addNextPoint(thePoint point, thePoint[] lsPoint)
-    {
-        foreach(var pt in lsPoint)
-        {
-            point.next.Add(pt);
-        }
-    }
+    //        for (var i=0; i<pt.next.Count; i++)
+    //        {
+    //            baru.nextKey.Add(pt.next[i].obj.name);
+    //        }
 
-    public thePoint getNextPoint(thePoint point, int idx=0)
+    //        lockeys.Add(pt.obj.name, baru);
+    //    }
+    //}
+
+    //public thePoint createPoint(Vector2 loc)
+    //{
+    //    thePoint point = new thePoint(loc);
+    //    myPoints.Add(point);
+    //    return point;
+    //}
+
+    //public thePoint createPoint(GameObject obj)
+    //{
+    //    thePoint point = new thePoint(obj);
+    //    myPoints.Add(point);
+    //    return point;
+    //}
+
+    //public void addNextPoint(thePoint point, thePoint[] lsPoint)
+    //{
+    //    foreach(var pt in lsPoint)
+    //    {
+    //        point.next.Add(pt);
+    //    }
+    //}
+
+    public LocPoint getNextPoint(LocPoint point, int idx = 0)
     {
-        thePoint nextPoint;
+        LocPoint nextPoint;
         try
         {
-            nextPoint = point.next[idx];
-        }catch(Exception e)
+            nextPoint = lockeys[point.nextKey[idx]];
+        }
+        catch (Exception e)
         {
             return null;
         }
@@ -83,39 +81,35 @@ public class Points : MonoBehaviour
         return nextPoint;
     }
 
-    public Vector2 getNextPointLocation(thePoint point, int idx = 0)
-    {
-        try
-        {
-            //print(point.next[idx].obj.name);
-            return point.next[idx].location;
-        }
-        catch (Exception e)
-        {
-            return Vector2.zero;
-        }
-    }
+    //public Vector2 getNextPointLocation(thePoint point, int idx = 0)
+    //{
+    //    try
+    //    {
+    //        //print(point.next[idx].obj.name);
+    //        return point.next[idx].location;
+    //    }
+    //    catch (Exception e)
+    //    {
+    //        return Vector2.zero;
+    //    }
+    //}
 
     public int getPointsCount()
     {
-        return myPoints.Count;
+        return lockeys.Count;
     }
 
-    public int getNextPointsCount(thePoint point)
+    public int getNextPointsCount(LocPoint point)
     {
-        return point.next.Count;
+        return point.nextKey.Count;
     }
 
-    public thePoint getPointByName(string name)
+    public LocPoint getPointByKey(string key)
     {
-        foreach (var item in myPoints)
+        if(lockeys.TryGetValue(key, out LocPoint result))
         {
-            if (item.obj.name == name)
-            {
-                return item;
-            }
+            return result;
         }
-
         return null;
     }
 

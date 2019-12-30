@@ -26,14 +26,15 @@ public class PointsManager : MonoBehaviour
         Gizmos.DrawWireSphere(Vector3.zero, 0.5f);
         Gizmos.color = Color.green;
 
-        foreach (var pt in points.myPoints)
+        foreach (var pt in points.lockeys)
         {
-            pt.location = pt.obj.transform.position;
-            Gizmos.DrawWireSphere(pt.location, 0.5f);
-            Handles.Label(pt.location, pt.obj.name, style);
-            foreach (var pt_next in pt.next)
+            Vector3 pos = pt.Value.obj.transform.position;
+            Gizmos.DrawWireSphere(pos , 0.5f);
+            Handles.Label(pos, pt.Key, style);
+            foreach (var pt_next in pt.Value.nextKey)
             {
-                Gizmos.DrawLine(pt.obj.transform.position, pt_next.obj.transform.position);
+                Vector3 pos2 = points.getPointByKey(pt_next).obj.transform.position;
+                Gizmos.DrawLine(pos, pos2);
             }
         }
     }
@@ -42,111 +43,116 @@ public class PointsManager : MonoBehaviour
 }
 
 
-#if UNITY_EDITOR
-[CustomEditor(typeof(PointsManager))]
-public class PointsInspector : Editor
-{
-    string fromObjName = "";
-    string toObjName = "";
-    string delObjName = "";
-    PointsManager ie;
-    int i = 0;
+//#if UNITY_EDITOR
+//[CustomEditor(typeof(PointsManager))]
+//public class PointsInspector : Editor
+//{
+//    string fromObjName = "";
+//    string toObjName = "";
+//    string delObjName = "";
+//    PointsManager ie;
+//    int i = 0;
 
-    public override void OnInspectorGUI()
-    {
-        ie = (PointsManager)target;
+//    public override void OnInspectorGUI()
+//    {
+//        ie = (PointsManager)target;
 
-        Display();
+//        Display();
 
-        base.OnInspectorGUI();
-    }
+//        base.OnInspectorGUI();
+//    }
 
-    void Display()
-    {
-        GUILayout.BeginVertical();
+//    void Display()
+//    {
+//        GUILayout.BeginVertical();
 
-        if (GUILayout.Button("Add+"))
-        {
-            GameObject newobj = Instantiate(ie.obj);
-            i++;
-            newobj.name = i.ToString();
-            newobj.transform.SetParent(ie.self_obj.transform);
+//        if (GUILayout.Button("Add+"))
+//        {
+//            GameObject newobj = Instantiate(ie.obj);
+//            i++;
+//            newobj.name = i.ToString();
+//            newobj.transform.SetParent(ie.self_obj.transform);
 
-            ie.points.createPoint(newobj);
-        }
+//            ie.points.createPoint(newobj);
+//        }
 
-        GUILayout.Space(5);
+//        GUILayout.Space(5);
 
-        GUILayout.BeginHorizontal();
-        GUILayout.BeginVertical(GUILayout.MaxWidth(180));
-        fromObjName = GUILayout.TextField(fromObjName);
-        toObjName = GUILayout.TextField(toObjName);
-        GUILayout.EndVertical();
-        if (GUILayout.Button("Add Next", GUILayout.ExpandHeight(true)))
-        {
-            thePoint fromObj = ie.points.getPointByName(fromObjName);
-            thePoint toObj = ie.points.getPointByName(toObjName);
+//        GUILayout.BeginHorizontal();
+//        GUILayout.BeginVertical(GUILayout.MaxWidth(180));
+//        fromObjName = GUILayout.TextField(fromObjName);
+//        toObjName = GUILayout.TextField(toObjName);
+//        GUILayout.EndVertical();
+//        if (GUILayout.Button("Add Next", GUILayout.ExpandHeight(true)))
+//        {
+//            thePoint fromObj = ie.points.getPointByName(fromObjName);
+//            thePoint toObj = ie.points.getPointByName(toObjName);
 
-            if (fromObj == null || toObj == null) { }
-            else
-            {
-                fromObj.next.Add(toObj);
-            }
-        }
-        GUILayout.EndHorizontal();
+//            if (fromObj == null || toObj == null) { }
+//            else
+//            {
+//                fromObj.next.Add(toObj);
+//            }
+//        }
+//        GUILayout.EndHorizontal();
 
-        GUILayout.Space(5);
+//        GUILayout.Space(5);
 
-        GUILayout.BeginHorizontal();
-        if (GUILayout.Button("delete", GUILayout.Width(70)))
-        {
-            thePoint delObj = ie.points.getPointByName(delObjName);
+//        GUILayout.BeginHorizontal();
+//        if (GUILayout.Button("delete", GUILayout.Width(70)))
+//        {
+//            thePoint delObj = ie.points.getPointByName(delObjName);
 
-            if (delObj == null) { }
-            else
-            {
-                ie.points.myPoints.Remove(delObj);
-                GameObject tempToDel = ie.self_obj.transform.Find(delObjName).gameObject;
-                DestroyImmediate(tempToDel);
-            }
-        }
-        delObjName = GUILayout.TextField(delObjName, GUILayout.ExpandHeight(true));
-        GUILayout.EndHorizontal();
+//            if (delObj == null) { }
+//            else
+//            {
+//                ie.points.myPoints.Remove(delObj);
+//                GameObject tempToDel = ie.self_obj.transform.Find(delObjName).gameObject;
+//                DestroyImmediate(tempToDel);
+//            }
+//        }
+//        delObjName = GUILayout.TextField(delObjName, GUILayout.ExpandHeight(true));
+//        GUILayout.EndHorizontal();
 
-        GUILayout.Space(5);
+//        GUILayout.Space(5);
 
-        GUILayout.Label("current index: " + i.ToString());
+//        GUILayout.Label("current index: " + i.ToString());
 
-        GUILayout.BeginHorizontal();
-        if (GUILayout.Button("reset", GUILayout.Width(70)))
-        {
-            i = 0;
-        }
-        string inya = GUILayout.TextField(i.ToString());
-        int.TryParse(inya, out i);
-        GUILayout.EndHorizontal();
+//        GUILayout.BeginHorizontal();
+//        if (GUILayout.Button("reset", GUILayout.Width(70)))
+//        {
+//            i = 0;
+//        }
+//        string inya = GUILayout.TextField(i.ToString());
+//        int.TryParse(inya, out i);
+//        GUILayout.EndHorizontal();
 
-        GUILayout.Space(5);
+//        GUILayout.Space(5);
 
-        GUILayout.BeginHorizontal();
-        if (GUILayout.Button("delete next", GUILayout.Width(70)))
-        {
-            thePoint delObj = ie.points.getPointByName(delObjName);
+//        GUILayout.BeginHorizontal();
+//        if (GUILayout.Button("delete next", GUILayout.Width(70)))
+//        {
+//            thePoint delObj = ie.points.getPointByName(delObjName);
 
-            if (delObj == null) { }
-            else
-            {
-                delObj.next = new List<thePoint>();
-            }
-        }
-        delObjName = GUILayout.TextField(delObjName, GUILayout.ExpandHeight(true));
-        GUILayout.EndHorizontal();
+//            if (delObj == null) { }
+//            else
+//            {
+//                delObj.next = new List<thePoint>();
+//            }
+//        }
+//        delObjName = GUILayout.TextField(delObjName, GUILayout.ExpandHeight(true));
+//        GUILayout.EndHorizontal();
 
-        EditorGUILayout.HelpBox("Please use this inpector's fields to add, delete points", MessageType.Info);
+//        if (GUILayout.Button("Generate dong", GUILayout.Width(70)))
+//        {
+//            ie.points.GenerateLocPoints();
+//        }
 
-        GUILayout.Space(5);
-        GUILayout.EndVertical();
-    }
+//            EditorGUILayout.HelpBox("Please use this inpector's fields to add, delete points", MessageType.Info);
 
-}
-#endif
+//        GUILayout.Space(5);
+//        GUILayout.EndVertical();
+//    }
+
+//}
+//#endif
