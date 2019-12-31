@@ -126,10 +126,10 @@
 						else if (i.uv1.y > 1 + direction.y || i.uv1.y < direction.y)  return col;
 						else
 						{
-							col.r = 0;
-							col.g = 0;
-							col.b = 0;
-							col.a = 0;
+							col.r *= _Fade;
+							col.g *= _Fade;
+							col.b *= _Fade;
+							col.a = _Fade;
 						}
 					}
 

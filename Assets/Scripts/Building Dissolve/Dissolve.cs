@@ -64,12 +64,12 @@ public class Dissolve : MonoBehaviour
     }
 
 
-    private void OnRenderImage(RenderTexture source, RenderTexture destination)
-    {
+    //private void OnRenderImage(RenderTexture source, RenderTexture destination)
+    //{
 
-        if(dissolvemat != null)
-        {
-            Graphics.Blit(source, destination, dissolvemat);
-        }
-    }
+    //    if(dissolvemat != null)
+    //    {
+    //        Graphics.Blit(source, destination, dissolvemat);
+    //    }
+    //}
 }
