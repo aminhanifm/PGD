@@ -6,8 +6,8 @@ using UnityEngine;
 [RequireComponent(typeof(LocationManager))]
 public class MissionManager : MonoBehaviour
 {
-    Savemanagement save;
-    DialogueManager dialogmanager;
+    Savemanagement savemanagement;
+    DialogueManager dm;
     KoganeUnityLib.dialogueTemplate dt;
     UIcontroller ui;
     isocar_controller iso;
@@ -16,14 +16,15 @@ public class MissionManager : MonoBehaviour
     public LocationManager LM;
     public List<Tuple<Location, Location>> objective;
     private List<Location> curObjective;
+    
 
     bool success;
     Location curDestination;
 
     void Start()
     {
-        save = FindObjectOfType(typeof(Savemanagement)) as Savemanagement;
-        dialogmanager = FindObjectOfType(typeof(DialogueManager)) as DialogueManager;
+        savemanagement = FindObjectOfType(typeof(Savemanagement)) as Savemanagement;
+        dm = FindObjectOfType(typeof(DialogueManager)) as DialogueManager;
         dt = FindObjectOfType(typeof(KoganeUnityLib.dialogueTemplate)) as KoganeUnityLib.dialogueTemplate;
         ui = FindObjectOfType(typeof(UIcontroller)) as UIcontroller;
         iso = FindObjectOfType(typeof(isocar_controller)) as isocar_controller;
@@ -40,7 +41,7 @@ public class MissionManager : MonoBehaviour
         //demo
         if (Input.GetKeyDown(KeyCode.J))
         {
-            currentmission(save.indexmission);
+            currentmission(savemanagement.indexmission);
         }
     }
 
@@ -52,10 +53,10 @@ public class MissionManager : MonoBehaviour
 
     public void getNextDestination()
     {
-        if (curObjective.Count < 1)
-        {
-            setCurObjective();
-        }
+        //if (curObjective.Count < 1)
+        //{
+        //    setCurObjective();
+        //}
 
         curDestination = curObjective[0];
         locationTrigger.transform.position = curDestination.position;
@@ -92,53 +93,70 @@ public class MissionManager : MonoBehaviour
         {
             //trigger objective selesai
             print("LAH");
-            save.money += 15000;
+            savemanagement.money += 15000;
             SoundsManager.PlaySound("Mission Done");
             success = true;
-            save.indexmission += 1;
-            save.mission += 1;
-            PlayerPrefs.SetInt("IndexMission", save.indexmission);
-            PlayerPrefs.SetInt("Mission", save.mission);
-            PlayerPrefs.SetInt("Curmoney", save.money);
-            currentmission(save.indexmission);
+            savemanagement.indexmission += 1;
+            savemanagement.mission += 1;
+            PlayerPrefs.SetInt("IndexMission", savemanagement.indexmission);
+            PlayerPrefs.SetInt("Mission", savemanagement.mission);
+            PlayerPrefs.SetInt("Curmoney", savemanagement.money);
+            currentmission(savemanagement.indexmission);
+            dm.initScenario(savemanagement.mission);
+            dm.continueLine();
+
         }
     }
+
 
     public void currentmission(int index)
     {
         if (index == 1)
         {
-            AddCustomObjective(12, 13);
-            //getNextDestination();
+            AddCustomObjective(12, 18);
+            setCurObjective();
+            getNextDestination();
             print("Misi 1");
         }
         if (index == 2)
         {
-            AddCustomObjective(6, 15);
-            //getNextDestination();
+            AddCustomObjective(13, 6);
+            getNextDestination();
             print("Misi 2");
         }
         if (index == 3)
         {
-            AddCustomObjective(3, 4);
+            AddCustomObjective(14, 2);
             //getNextDestination();
             print("Misi 3");
         }
         if (index == 4)
         {
-            AddCustomObjective(9, 20);
+            AddCustomObjective(3, 8);
             //getNextDestination();
             print("Misi 4");
         }
         if (index == 5)
         {
-            AddCustomObjective(2, 12);
+            AddCustomObjective(19, 1);
             //getNextDestination();
             print("Misi 5");
         }
         if (index == 6)
         {
-            AddCustomObjective(5, 21);
+            AddCustomObjective(12, 6);
+            //getNextDestination();
+            print("Misi 6");
+        }
+        if (index == 7)
+        {
+            AddCustomObjective(11, 3);
+            //getNextDestination();
+            print("Misi 6");
+        }
+        if (index == 8)
+        {
+            AddCustomObjective(9, 16);
             //getNextDestination();
             print("Misi 6");
         }

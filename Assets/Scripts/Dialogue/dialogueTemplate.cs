@@ -26,7 +26,7 @@ namespace KoganeUnityLib
         private DialogueManager dialogueManager;
         private UIcontroller uicontroller;
 
-        const String Dialogue = "Assets/Files/dialogue.json";
+        const String Dialogue = "Assets/Resources/dialogue.json";
 
         string dialogue;
 
@@ -42,7 +42,8 @@ namespace KoganeUnityLib
 
         private bool isdialog;
 
-
+        string dialogcontent;
+        TextAsset dialog;
 
         void Start()
         {
@@ -54,6 +55,8 @@ namespace KoganeUnityLib
             StreamReader stream = new StreamReader(Dialogue);
             dialogue = stream.ReadToEnd();
             scenario = JsonConvert.DeserializeObject<IList<Dialog>>(dialogue);
+            Debug.Log(Dialogue);
+            Debug.Log(scenario);
         }
 
         public void startScenarioAt(int index)
