@@ -51,7 +51,7 @@ public class IsometricCarRenderer : MonoBehaviour
 
         float step = 360f/sliceCount;
 
-        float halfStep = step/2;
+        float halfStep = step/1.5f;
 
         float angle = Vector2.SignedAngle(Vector2.up, normDir);
 

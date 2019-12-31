@@ -79,7 +79,7 @@ public class isocar_controller : MonoBehaviour, IPointerDownHandler, IPointerUpH
     // Update is called once per frame
     void Update()
     {
-        print(iscollidingmissionpoint);
+        //print(iscollidingmissionpoint);
         caraudio.volume = volmanager.audiosrc.volume;
         // Debug.Log(velocity);
         acceleration = Vector2.zero;
@@ -144,7 +144,6 @@ public class isocar_controller : MonoBehaviour, IPointerDownHandler, IPointerUpH
         }
         if (curspeedint == 0 && isaudioplay)
         {
-            print("iswork");
             isaudioplay = false;
             caraudio.pitch = 1f;
             caraudio.Stop();
@@ -167,6 +166,7 @@ public class isocar_controller : MonoBehaviour, IPointerDownHandler, IPointerUpH
             {
                 uicontroller.repairimg.DOColor(Color.black, 1f);
             }
+            accelerating = false;
         }
 
         if (collision.collider.CompareTag("car"))
@@ -192,7 +192,6 @@ public class isocar_controller : MonoBehaviour, IPointerDownHandler, IPointerUpH
         {
             ishitten = false;
             repairimg.DOScale(1f, 0.5f);
-            print("exit");
         }
     }
 
@@ -201,10 +200,8 @@ public class isocar_controller : MonoBehaviour, IPointerDownHandler, IPointerUpH
         if (collision.name == "Mission Point" && !iscollidingmissionpoint)
         {
             iscollidingmissionpoint = true;
-            print("Berapa");
+            mission.setCurObjective();
             mission.getNextDestination();
-            dm.initScenario(savemanagement.mission);
-            dm.continueLine();
             SoundsManager.PlaySound("Mission Accepted");
         }
 
@@ -237,7 +234,7 @@ public class isocar_controller : MonoBehaviour, IPointerDownHandler, IPointerUpH
 
     public void OnTriggerExit2D(Collider2D collision)
     {
-        if(collision.name == "Mission Point")
+        if(collision.name == "Mission Point" && iscollidingmissionpoint)
         {
             iscollidingmissionpoint = false;
             print("exit");
@@ -245,7 +242,7 @@ public class isocar_controller : MonoBehaviour, IPointerDownHandler, IPointerUpH
 
         if (collision.CompareTag("traffic"))
         {
-            uicontroller.wantedfill.fillAmount += 0.01f;
+            uicontroller.wantedfill.fillAmount += 0.05f;
         }
         if (collision.CompareTag("Bengkel") || collision.CompareTag("Fuel"))
         {
