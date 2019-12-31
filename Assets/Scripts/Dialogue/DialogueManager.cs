@@ -41,6 +41,7 @@ public class DialogueManager : MonoBehaviour, IPointerDownHandler
         person_image = new Dictionary<string, Sprite>();
 
         dt.dialoguePath = "Files/Dialogue";
+        print("path: " + dt.dialoguePath);
         dt.init();
         initScenario(0);
     }

@@ -70,6 +70,10 @@ namespace KoganeUnityLib
             //StreamReader stream = new StreamReader(dialoguePath);
             //dialogue = stream.ReadToEnd();
             dialogue = Resources.Load<TextAsset>(dialoguePath).ToString();
+            if (dialogue!=null)
+            {
+                print("path: berhasil init");
+            }
             scenario = JsonConvert.DeserializeObject<IList<Dialog>>(dialogue);
         }
 
