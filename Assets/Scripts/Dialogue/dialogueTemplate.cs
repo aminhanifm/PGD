@@ -44,6 +44,8 @@ namespace KoganeUnityLib
 
         private bool isdialog;
 
+        string dialogcontent;
+        TextAsset dialog;
 
         void Start()
         {

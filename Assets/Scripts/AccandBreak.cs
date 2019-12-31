@@ -20,6 +20,7 @@ public class AccandBreak : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
         string name;
 
         name = eventdata.selectedObject.name;
+
         if (name == "Accelerate")
         {
             isocontroller.accelerating = false;

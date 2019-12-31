@@ -345,7 +345,6 @@ public class UIcontroller : MonoBehaviour, IPointerDownHandler
             seatwanted = false;
             StopCoroutine("BlinkSeatbelt");
             curtotalwanted -= 0.05f;
-            Debug.Log(seatbeltbool);
         }
     }
 
