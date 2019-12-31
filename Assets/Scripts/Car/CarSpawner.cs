@@ -28,7 +28,7 @@ public class CarSpawner : MonoBehaviour
         //    cars.Add(child.gameObject);
         //}
         //max_car = cars.Count;
-        StartCoroutine(spawnSequentially());
+        //StartCoroutine(spawnSequentially());
     }
 
     // Update is called once per frame
