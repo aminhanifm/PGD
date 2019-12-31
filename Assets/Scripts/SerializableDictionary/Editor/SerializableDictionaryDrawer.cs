@@ -1,8 +1,10 @@
 using System.Collections.Generic;
  
 using UnityEngine;
+#if UNITY_EDITOR
 using UnityEditor;
- 
+#endif
+
 public abstract class SerializableKeyValueTemplate<K, V> : ScriptableObject {
     public K key;
     public V value;
