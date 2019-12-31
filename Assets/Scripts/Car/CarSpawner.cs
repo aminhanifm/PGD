@@ -11,7 +11,6 @@ public class CarSpawner : MonoBehaviour
     private int pointSize;
     private int cur_car;
 
-    float timeToSpawn = 0;
 
     //private List<GameObject> cars;
 
@@ -21,7 +20,6 @@ public class CarSpawner : MonoBehaviour
         //cars = new List<GameObject>();
         pointSize = points.getPointsCount();
         cur_car = 0;
-        timeToSpawn = 0;
         //randomSpawnerAtStart();
 
         //foreach (Transform child in this.transform)
@@ -30,7 +28,7 @@ public class CarSpawner : MonoBehaviour
         //    cars.Add(child.gameObject);
         //}
         //max_car = cars.Count;
-        StartCoroutine(spawnSequentially());
+        //StartCoroutine(spawnSequentially());
     }
 
     // Update is called once per frame
@@ -48,13 +46,13 @@ public class CarSpawner : MonoBehaviour
 
     void spawnCar(int idx = -1)
     {
-        if (idx == -1)
-        {
-            idx = Random.Range(0, pointSize - 1);
-        }
+        //if (idx == -1)
+        //{
+        //    idx = Random.Range(0, pointSize - 1);
+        //}
 
         GameObject carAI_new = Instantiate(carAi);
-        carAI_new.GetComponent<CarPointsManager>().init(idx);
+        //carAI_new.GetComponent<CarPointsManager>().init(idx);
         cur_car++;
     }
 

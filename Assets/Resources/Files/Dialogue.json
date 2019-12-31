@@ -53,8 +53,13 @@
 		},
 		'dialogue': [
 			{'person1,LEFT': 'Hei kak vero, apa yang kakak lakukan ?'},
-			{'person2,RIGHT': 'Oh.. Akhirnya kamu kembali juga, kalau berkendara hati-hati ya dik !'},
-			{'person1,LEFT': 'Haha.. iya kak'}
+			{'person2,RIGHT': 'Oh.. Akhirnya kamu kembali juga, kalau berkendara hati-hati ya dik ! kakak lagi masakin sup buat nenek'},
+			{'person1,LEFT': 'Haha.. iya kak'},
+			{'person2,RIGHT': 'Boleh minta tolong dik ?'},
+			{'person1,LEFT': 'tolong apa tuh kak ?'},
+			{'person2,RIGHT': 'antarkan sup ini ke tempat nenek ya..'},
+			{'person1,LEFT': 'Oh beres kak..'},
+			{'person2,RIGHT': 'makasih ya dik..'}
 		]
 	},
 	
@@ -128,9 +133,9 @@
 			{'person2,RIGHT': 'Wah.. iya nih aku mau ngambil uang di Bank dulu tapi gak ada kendaraan.'},
 			{'person1,LEFT': 'Oh boleh sini aku antarin ke Bank.'},
 			{'person2,RIGHT': 'Bener nih ?'},
-			{'person2,RIGHT': 'Iya dong.. Buruan masuk mobil'},
-			{'person1,LEFT': 'Siap makasih bro..'},
-			{'person2,RIGHT': 'Sama-sama Bim'}
+			{'person1,LEFT': 'Iya dong.. Buruan masuk mobil'},
+			{'person2,RIGHT': 'Siap makasih bro..'},
+			{'person1,LEFT': 'Sama-sama Bim'}
 		]
 	},
 
@@ -217,12 +222,11 @@
 			'person2': 'Characters/Perempuan_7'
 		},
 		'dialogue': [
-			{'person1,LEFT': 'Farhan?'},
-			{'person2,RIGHT': 'Oh halo bro, lama nggak jumpa ya..'},
-			{'person1,LEFT': 'iya nih, mau ikut aku ke kantor pos nggak ?'},
-			{'person2,RIGHT': 'boleh lah, aku juga lagi gak ada jadwal hari ini..'},
-			{'person1,LEFT': 'oh siap.. langsung masuk han'},
-			{'person2,RIGHT': 'oke bro..'}
+			{'person2,RIGHT': 'Mas boleh minta tolong ?'},
+			{'person1,LEFT': 'Tolong apa tuh mbak luc ?'},
+			{'person2,RIGHT': 'Bisa antar saya ke toko buku ? saya mau membelikan buku untuk anak-anak ke sekolahan'},
+			{'person1,LEFT': 'boleh mbak masuk mobil aja, saya anterin'},
+			{'person2,RIGHT': 'oke makasih ya mas'}
 		]
 	}
 

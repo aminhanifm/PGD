@@ -18,8 +18,8 @@ public class Savemanagement : MonoBehaviour
 
     void Start()
     {
-        PlayerPrefs.DeleteAll();
-        mission = PlayerPrefs.GetInt("Mission", 2);
+        //PlayerPrefs.DeleteAll();
+        mission = PlayerPrefs.GetInt("Mission", 1);
         indexmission = PlayerPrefs.GetInt("IndexMission", 1);
         money = PlayerPrefs.GetInt("Curmoney", 0);
         fuel = PlayerPrefs.GetFloat("Curfuel", 1);
@@ -31,13 +31,12 @@ public class Savemanagement : MonoBehaviour
 
 
         missionmanager.currentmission(indexmission);
-        missionmanager.getNextDestination();
     }
 
     // Update is called once per frame
     void FixedUpdate()
     {
-        print(indexmission);
+        //print(indexmission);
         //load
         if (uicontroller.MMCanvas.alpha == 0 && uicontroller.fadingmm == true && isload == true)
         {
@@ -57,11 +56,12 @@ public class Savemanagement : MonoBehaviour
     public void Newgame()
     {
         indexmission = PlayerPrefs.GetInt("IndexMission", 1);
-        mission = PlayerPrefs.GetInt("Mission", 2);
+        mission = PlayerPrefs.GetInt("Mission", 1);
         money = PlayerPrefs.GetInt("Curmoney", 0);
         fuel = PlayerPrefs.GetFloat("Curfuel", 1);
         wantedlvl = PlayerPrefs.GetFloat("Wantedlvl", 0);
         repair = PlayerPrefs.GetInt("Repair", 100);
+        missionmanager.currentmission(indexmission);
     }
 
 }
